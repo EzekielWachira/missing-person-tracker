@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "644642269356",
+    "project_id": "missing-person-tracker",
+    "storage_bucket": "missing-person-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644642269356:android:d80ebd86aef7136d6a9709",
+        "android_client_info": {
+          "package_name": "com.ezzy.missingpersontracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644642269356-rs7u3uu7rghvmhonlnf79bgnpd034is6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeSK5zgVMEBewwc-1O8m2jKTv4tdMl29c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644642269356-rs7u3uu7rghvmhonlnf79bgnpd034is6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
