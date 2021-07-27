@@ -1,7 +1,8 @@
-package com.ezzy.missingpersontracker
+package com.ezzy.missingpersontracker.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ezzy.missingpersontracker.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

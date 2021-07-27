@@ -14,4 +14,5 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
     implementation(Dependencies.coroutines)
+    implementation(Dependencies.coroutinesCore)
 }
