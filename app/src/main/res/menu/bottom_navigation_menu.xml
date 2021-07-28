@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/home"
+        android:icon="@drawable/ic_home_outline"
+        android:id="@+id/homeFragment" />
+    <item android:id="@+id/foundPersonsFragment"
+        android:title="@string/found_people"
+        android:icon="@drawable/ic_account_check_outline"/>
+    <item android:id="@+id/notificationFragment"
+        android:title="@string/notifications"
+        android:icon="@drawable/ic_bell_ring_outline"/>
+    <item android:id="@+id/accountFragment"
+        android:icon="@drawable/ic_account_circle_outline"
+        android:title="@string/account"/>
+</menu>

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Missing Person Tracker</string>
+    <string name="app_name">MPTracker</string>
+    <string name="account">Account</string>
+    <string name="notifications">Notifications</string>
+    <string name="found_people">Found people</string>
+    <string name="home">Home</string>
 </resources>
