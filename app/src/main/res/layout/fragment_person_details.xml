@@ -1,14 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/_10sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.report.PersonDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
 
-</FrameLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/enter_person_details"
+              android:layout_gravity="center"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:textSize="@dimen/_12ssp"/>
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/first_name"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:hint="@string/first_name"
+              app:counterEnabled="true"
+              app:counterMaxLength="50"
+              app:endIconMode="clear_text"
+              app:startIconDrawable="@drawable/ic_file_rename">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/firstname"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionNext" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/last_name"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:hint="@string/last_name"
+              app:counterEnabled="true"
+              app:counterMaxLength="50"
+              app:endIconMode="clear_text"
+              app:startIconDrawable="@drawable/ic_file_rename">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/lastname"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionNext" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:hint="@string/age"
+              app:endIconMode="clear_text"
+              app:startIconDrawable="@drawable/ic_file_rename">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/age"
+                  android:inputType="numberDecimal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionNext" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/projectStageHolder"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:hint="@string/gender"
+              app:startIconDrawable="@drawable/ic_accessibility">
+
+              <AutoCompleteTextView
+                  android:id="@+id/gender"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:imeOptions="actionNext"
+                  android:inputType="none"
+                  android:text="@string/gender" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:weightSum="100"
+              android:layout_marginTop="@dimen/_10sdp">
+
+              <com.google.android.material.textfield.TextInputLayout
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="0dp"
+                  android:layout_weight="50"
+                  android:layout_marginEnd="@dimen/_2sdp"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/height"
+                  app:endIconMode="clear_text"
+                  app:startIconDrawable="@drawable/ic_file_rename">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/height"
+                      android:inputType="numberDecimal"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:imeOptions="actionNext" />
+              </com.google.android.material.textfield.TextInputLayout>
+
+              <com.google.android.material.textfield.TextInputLayout
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="0dp"
+                  android:layout_weight="50"
+                  android:layout_marginStart="@dimen/_2sdp"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/height"
+                  app:endIconMode="clear_text"
+                  app:startIconDrawable="@drawable/ic_file_rename">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/weight"
+                      android:inputType="numberDecimal"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:imeOptions="actionNext" />
+              </com.google.android.material.textfield.TextInputLayout>
+
+          </LinearLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:hint="@string/person_state"
+              app:startIconDrawable="@drawable/ic_accessibility">
+
+              <AutoCompleteTextView
+                  android:id="@+id/personStatus"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:imeOptions="actionNext"
+                  android:inputType="none"
+                  android:text="@string/person_status" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:hint="@string/person_description"
+              app:endIconMode="clear_text"
+              app:startIconDrawable="@drawable/ic_file_rename">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/description"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionNext" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <Button
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:background="@drawable/button_bg"
+              android:text="@string/next"
+              app:icon="@drawable/ic_double_arrow"
+              android:id="@+id/btnNext"/>
+
+      </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
