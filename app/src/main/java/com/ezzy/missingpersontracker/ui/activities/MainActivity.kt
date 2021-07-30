@@ -1,5 +1,6 @@
 package com.ezzy.missingpersontracker.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -21,6 +22,17 @@ class MainActivity : AppCompatActivity() {
 
         val navController = this.findNavController(R.id.mainNavHostContainer)
         binding.bottomNavigation.setupWithNavController(navController)
+
+        setUpUI()
+    }
+
+    private fun setUpUI() {
+        binding.fab.setOnClickListener {
+            startActivity(Intent(
+                this,
+                ReportMissingPersonActivity::class.java
+            ))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
