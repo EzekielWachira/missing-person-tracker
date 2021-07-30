@@ -18,6 +18,12 @@
     <string name="next">Next</string>
     <string name="enter_person_details">Enter person details</string>
     <string name="select_atleast_3_images">Select atleast 3 images</string>
+    <string name="add_contact_details">Add contact details</string>
+    <string name="contact_name_1">Contact name (1)</string>
+    <string name="contact_name_2">Contact name (2)</string>
+    <string name="contact_phone_number_1">Contact phone number (1)</string>
+    <string name="contact_phone_number_2">Contact phone number (2)</string>
+    <string name="report">Report</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>
