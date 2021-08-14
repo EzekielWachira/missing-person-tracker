@@ -24,7 +24,7 @@ object BuildPlugins {
 }
 
 object AndroidSDK {
-    const val minSdk = 19
+    const val minSdk = 26
     const val targetSdk = 30
     const val compileSdk = targetSdk
 }
@@ -90,4 +90,5 @@ object Dependencies {
     const val kmProgress = "com.github.krishnanmuthaiahpillai:ProgressBar:${Versions.kmProgressVersion}"
     const val skydoveProgress = "com.github.skydoves:progressview:${Versions.skydoveVersion}"
     const val mpCharts = "com.github.PhilJay:MPAndroidChart:${Versions.mpChartVersion}"
+    const val imagePicker = "com.erikagtierrez.multiple_media_picker:multiple-media-picker:1.0.5"
 }

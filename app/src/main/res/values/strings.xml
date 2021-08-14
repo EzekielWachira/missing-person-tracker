@@ -23,7 +23,18 @@
     <string name="contact_name_2">Contact name (2)</string>
     <string name="contact_phone_number_1">Contact phone number (1)</string>
     <string name="contact_phone_number_2">Contact phone number (2)</string>
+    <string name="lorem">Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit
+        amet consectur lorem ipsum dolor sit amet consectur amet consectur lorem ipsum dolor sit amet consectur  </string>
     <string name="report">Report</string>
+    <string name="settings">Settings</string>
+    <string name="help_amp_feedback"><![CDATA[Help & Feedback]]></string>
+    <string name="share_this_app">Share this app</string>
+    <string name="rate_us">Rate us</string>
+    <string name="follow_us">Follow us</string>
+    <string name="about">About</string>
+    <string name="open_source_licenses">Open Source Licences</string>
+    <string name="weight">Weight</string>
+    <string name="type_to_search">Type to search…</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>

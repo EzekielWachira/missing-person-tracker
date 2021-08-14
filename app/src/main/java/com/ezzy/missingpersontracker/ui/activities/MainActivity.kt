@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.ActivityMainBinding
+import com.ezzy.missingpersontracker.ui.activities.search.SearchMissingPersonActivity
 import com.ezzy.missingpersontracker.util.showToast
 
 class MainActivity : AppCompatActivity() {
@@ -28,10 +29,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpUI() {
         binding.fab.setOnClickListener {
-            startActivity(Intent(
-                this,
-                ReportMissingPersonActivity::class.java
-            ))
+            startActivity(
+                Intent(
+                    this,
+                    ReportMissingPersonActivity::class.java
+                )
+            )
         }
     }
 
@@ -41,8 +44,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.action_search -> this.showToast("Search selected")
+        when (item.itemId) {
+            R.id.action_search -> startActivity(
+                Intent(
+                    this,
+                    SearchMissingPersonActivity::class.java
+                )
+            )
             R.id.action_logout -> this.showToast("Logout selected")
         }
         return super.onOptionsItemSelected(item)

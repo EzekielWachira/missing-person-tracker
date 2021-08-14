@@ -14,6 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.ezzy.missingpersontracker"
         minSdkVersion(AndroidSDK.minSdk)
+
         targetSdkVersion(AndroidSDK.targetSdk)
         versionCode = 1
         versionName = "1.0"
@@ -56,6 +57,7 @@ dependencies {
     implementation(Dependencies.appCompat)
     implementation(Dependencies.materialComponents)
     implementation("androidx.preference:preference:1.1.1")
+    implementation("androidx.test:monitor:1.3.0")
     testImplementation(TestLibraries.jUnit)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.espresso)
@@ -124,5 +126,9 @@ dependencies {
     implementation(Dependencies.mpCharts)
 
     implementation(Dependencies.skydoveProgress)
+
+    implementation(Dependencies.imagePicker)
+//    implementation("io.github.ParkSangGwon:tedpermission:x.y.z")
+//    implementation("gun0912.ted:tedbottompicker:x.y.z")
 
 }

@@ -74,10 +74,27 @@
               android:layout_marginTop="@dimen/_5sdp"
               android:hint="@string/age"
               app:endIconMode="clear_text"
-              app:startIconDrawable="@drawable/ic_file_rename">
+              app:startIconDrawable="@drawable/ic_calendar_account_outline">
 
               <com.google.android.material.textfield.TextInputEditText
                   android:id="@+id/age"
+                  android:inputType="numberDecimal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionNext" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:hint="Color"
+              app:endIconMode="clear_text"
+              app:startIconDrawable="@drawable/ic_color_lens">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/color"
                   android:inputType="numberDecimal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -91,7 +108,7 @@
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_10sdp"
               android:hint="@string/gender"
-              app:startIconDrawable="@drawable/ic_accessibility">
+              app:startIconDrawable="@drawable/ic_gender">
 
               <AutoCompleteTextView
                   android:id="@+id/gender"
@@ -119,7 +136,7 @@
                   android:layout_height="wrap_content"
                   android:hint="@string/height"
                   app:endIconMode="clear_text"
-                  app:startIconDrawable="@drawable/ic_file_rename">
+                  app:startIconDrawable="@drawable/ic_height">
 
                   <com.google.android.material.textfield.TextInputEditText
                       android:id="@+id/height"
@@ -135,9 +152,9 @@
                   android:layout_weight="50"
                   android:layout_marginStart="@dimen/_2sdp"
                   android:layout_height="wrap_content"
-                  android:hint="@string/height"
+                  android:hint="@string/weight"
                   app:endIconMode="clear_text"
-                  app:startIconDrawable="@drawable/ic_file_rename">
+                  app:startIconDrawable="@drawable/ic_dumbbell">
 
                   <com.google.android.material.textfield.TextInputEditText
                       android:id="@+id/weight"

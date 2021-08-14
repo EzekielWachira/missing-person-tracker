@@ -2,4 +2,6 @@
 <resources>
     <color name="grey">#CACACA</color>
     <color name="whear">#F3F3F3</color>
+    <color name="white_copy">#FFFFFFFF</color>
+    <color name="blue_copy">#0C0C0C</color>
 </resources>
