@@ -38,10 +38,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
-                android:drawableStart="@drawable/ic_face_recognition"
                 android:layout_weight="15"
                 android:padding="@dimen/_5sdp"
-                android:drawablePadding="@dimen/_5sdp"/>
+                android:id="@+id/run_face"
+                android:drawableTint="@color/white"
+                android:drawablePadding="@dimen/_5sdp"
+                app:drawableStartCompat="@drawable/ic_face_recognition" />
 
         </LinearLayout>
 

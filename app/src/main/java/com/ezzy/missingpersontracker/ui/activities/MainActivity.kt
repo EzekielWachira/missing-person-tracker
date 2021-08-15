@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.ActivityMainBinding
+import com.ezzy.missingpersontracker.ui.activities.person_details.PersonDetailsActivity
 import com.ezzy.missingpersontracker.ui.activities.search.SearchMissingPersonActivity
 import com.ezzy.missingpersontracker.util.showToast
 
@@ -51,7 +52,9 @@ class MainActivity : AppCompatActivity() {
                     SearchMissingPersonActivity::class.java
                 )
             )
-            R.id.action_logout -> this.showToast("Logout selected")
+            R.id.action_logout -> startActivity(Intent(
+                this, PersonDetailsActivity::class.java
+            ))
         }
         return super.onOptionsItemSelected(item)
     }

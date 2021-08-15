@@ -3,18 +3,37 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/button_bg_2.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_account.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_account_circle.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_account_phone.xml" value="0.2194871794871795" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_building_marker.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_calendar_account_outline.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_category.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_contact_phone.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_dumbbell.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_email_outline.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_gender.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_height.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_home_city.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_location_city.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_map.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/ic_marker_radius.xml" value="0.22291666666666668" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/textview_bg.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/account_fragment.xml" value="0.16666666666666666" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/activity_face_identification.xml" value="0.25" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/activity_person_details.xml" value="0.33" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/activity_report_found_person.xml" value="0.33" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/activity_search_missing_person.xml" value="0.1634963768115942" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/details_fragment.xml" value="0.41354166666666664" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/fragment_person_details.xml" value="0.33" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/fragment_person_images.xml" value="0.15307971014492755" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/home_fragment.xml" value="0.15307971014492755" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/login_fragment.xml" value="0.33" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/msp_item.xml" value="0.33" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/sign_up_fragment.xml" value="0.25" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/menu/top_menu.xml" value="0.20358974358974358" />
       </map>
     </option>
   </component>

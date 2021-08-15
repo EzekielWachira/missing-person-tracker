@@ -10,7 +10,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:id="@+id/missing_pple_recyclerview"
-       tools:listitem="@layout/layout_person_item"
+       tools:listitem="@layout/msp_item"
        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Search"
+    <item android:title="@string/search"
         android:icon="@drawable/ic_account_search_outline"
         android:id="@+id/action_search"
         app:showAsAction="always"/>
     <item android:id="@+id/action_logout"
         android:icon="@drawable/ic_logout"
         app:showAsAction="never"
-        android:title="Logout"/>
+        android:title="@string/logout"/>
 
 </menu>

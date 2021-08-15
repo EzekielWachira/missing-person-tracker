@@ -14,9 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MissingPersonTracker">
         <activity
+            android:name=".ui.activities.report_found_person.ReportFoundPersonActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.person_details.PersonDetailsActivity"
+            android:exported="true"
+            android:parentActivityName=".ui.activities.MainActivity" />
+        <activity
+            android:name=".ui.activities.run_face_identification.FaceIdentificationActivity"
+            android:exported="true"
+            android:parentActivityName=".ui.activities.search.SearchMissingPersonActivity" />
+        <activity
             android:name=".ui.activities.search.SearchMissingPersonActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:parentActivityName=".ui.activities.MainActivity"/>
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".ui.activities.ReportMissingPersonActivity"
             android:parentActivityName=".ui.activities.MainActivity"
