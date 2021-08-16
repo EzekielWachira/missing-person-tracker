@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/whear"
     tools:context=".ui.activities.person_details.PersonDetailsActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -16,113 +16,303 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="@dimen/_10sdp">
 
 
-            <TextView
-                android:id="@+id/person_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="John Doe Sample"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/person_properties_chip_grp"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                >
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp">
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Age: 30 Years"
-                    app:chipIcon="@drawable/ic_calendar_account_outline" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:orientation="vertical">
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gender: Male"
-                    app:chipIcon="@drawable/ic_gender" />
+                    <TextView
+                        android:id="@+id/person_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="John Doe Sample"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Height: 1.7 Metres"
-                    app:chipIcon="@drawable/ic_height" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight: 70 Pounds"
-                    app:chipIcon="@drawable/ic_dumbbell" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="60"
+                            android:drawableStart="@drawable/ic_calendar_account_outline"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:text="Age"
+                            android:textSize="@dimen/_12ssp" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Color: Brown|Chocolate"
-                    app:chipIcon="@drawable/ic_color_lens" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:layout_weight="40"
+                            android:gravity="center_vertical"
+                            android:text="31 Years" />
 
-            </com.google.android.material.chip.ChipGroup>
+                    </LinearLayout>
 
-            <TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="60"
+                            android:drawableStart="@drawable/ic_gender"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:text="Gender"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:layout_weight="40"
+                            android:gravity="center_vertical"
+                            android:text="Male" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="60"
+                            android:drawableStart="@drawable/ic_height"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:text="Height"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:layout_weight="40"
+                            android:gravity="center_vertical"
+                            android:text="1.7 Metres" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="60"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:text="Weight"
+                            android:textSize="@dimen/_12ssp"
+                            app:drawableStartCompat="@drawable/ic_dumbbell" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:layout_weight="40"
+                            android:gravity="center_vertical"
+                            android:text="70 Pounds" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="60"
+                            android:drawableStart="@drawable/ic_color_lens"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:text="Color"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:layout_weight="40"
+                            android:gravity="center_vertical"
+                            android:text="Brown" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/lorem_copy"
-                android:id="@+id/person_description"/>
+                android:layout_marginEnd="@dimen/_2sdp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="Images"
-                android:textStyle="bold"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
 
-            <androidx.recyclerview.widget.RecyclerView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:text="@string/lorem_copy" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:spanCount="3"
-                android:id="@+id/photoRecyclerView"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+                android:layout_marginEnd="@dimen/_2sdp">
 
-            <TextView
-                android:id="@+id/reporter_text"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Images"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/photoRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="3" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:drawablePadding="@dimen/_10sdp"
-                android:gravity="center_vertical"
-                android:text="Reported by: Jane Goe Dow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_person_pin" />
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_2sdp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:drawablePadding="@dimen/_10sdp"
-                app:drawableStartCompat="@drawable/ic_account_phone"
-                android:text="+254 0123456789"
-                android:gravity="center_vertical"
-                android:id="@+id/reporter_contact_phone"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:gravity="center_vertical"
-                android:drawablePadding="@dimen/_10sdp"
-                app:drawableStartCompat="@drawable/ic_email_outline"
-                android:text="janegoedoe@gmail.com"
-                android:id="@+id/reporter_contact_email"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reporter"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:text="Jane Goe Doe"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        app:drawableStartCompat="@drawable/ic_person_pin" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="+254 0123456789"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        app:drawableStartCompat="@drawable/ic_account_phone" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="janegoedoe@gmail.com"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        app:drawableStartCompat="@drawable/ic_email_outline" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

@@ -91,6 +91,7 @@ dependencies {
     implementation(Dependencies.workerKtx)
     implementation(Dependencies.circleImageView)
     implementation(Dependencies.multiDex)
+    implementation("com.google.android.material:material:1.5.0-alpha01")
 
     implementation(Dependencies.sdpAndroid)
     implementation(Dependencies.sspAndroid)
