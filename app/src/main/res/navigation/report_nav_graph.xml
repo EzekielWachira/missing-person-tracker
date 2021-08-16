@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/report_nav_graph"
+    app:startDestination="@id/personDetailsFragment">
+
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.ezzy.missingpersontracker.ui.fragments.report.PersonDetailsFragment"
+        android:label="fragment_person_details"
+        tools:layout="@layout/fragment_person_details" >
+        <action
+            android:id="@+id/action_personDetailsFragment_to_personImagesFragment"
+            app:destination="@id/personImagesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personImagesFragment"
+        android:name="com.ezzy.missingpersontracker.ui.fragments.report.PersonImagesFragment"
+        android:label="fragment_person_images"
+        tools:layout="@layout/fragment_person_images" >
+        <action
+            android:id="@+id/action_personImagesFragment_to_personContactsFragment"
+            app:destination="@id/personContactsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/personImagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personContactsFragment"
+        android:name="com.ezzy.missingpersontracker.ui.fragments.report.PersonContactsFragment"
+        android:label="fragment_person_contacts"
+        tools:layout="@layout/fragment_person_contacts" />
+</navigation>

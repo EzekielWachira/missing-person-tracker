@@ -7,4 +7,5 @@ class User(
     val lastName: String? = null,
     val middleName: String? = null,
     val email: String? = null,
+    userName: String? = null
 ): Serializable

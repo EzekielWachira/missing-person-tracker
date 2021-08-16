@@ -8,7 +8,8 @@ data class MissingPerson(
     val gender: Gender? =  null,
     val height: Long? = null,
     val weight: Long? = null,
-    val description: String? = null
+    val description: String? = null,
+    val reporterId: String? = null
 ): Serializable
 
 enum class Gender {

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.LoginFragmentBinding
 import com.ezzy.missingpersontracker.ui.activities.MainActivity
@@ -28,8 +29,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun setUpUI() {
-        binding.btnLogin.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             startActivity(Intent(activity, MainActivity::class.java))
+        }
+
+        binding.registerTxt.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
     }
 

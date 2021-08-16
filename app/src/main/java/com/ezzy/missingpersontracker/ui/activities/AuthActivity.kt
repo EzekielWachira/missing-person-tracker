@@ -19,36 +19,36 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpTabs()
+
 
     }
 
-    private fun setUpTabs() {
-        binding.viewPager.adapter = ViewPagerAdapter(this)
-        TabLayoutMediator(
-            binding.tabLayout, binding.viewPager
-        ) { tab: TabLayout.Tab, position: Int ->
-            tab.text = TAB_TITLES[position]
-        }.attach()
-
-        binding.tabLayout.addOnTabSelectedListener(tabSelectedListener)
-    }
-
-    private val tabSelectedListener = object : TabLayout.OnTabSelectedListener {
-        override fun onTabSelected(tab: TabLayout.Tab?) {
-            tab?.let {
-                binding.viewPager.currentItem = tab.position
-            }
-        }
-
-        override fun onTabUnselected(tab: TabLayout.Tab?) {
-            tab?.let { return }
-        }
-
-        override fun onTabReselected(tab: TabLayout.Tab?) {
-            return
-        }
-
-    }
+//    private fun setUpTabs() {
+//        binding.viewPager.adapter = ViewPagerAdapter(this)
+//        TabLayoutMediator(
+//            binding.tabLayout, binding.viewPager
+//        ) { tab: TabLayout.Tab, position: Int ->
+//            tab.text = TAB_TITLES[position]
+//        }.attach()
+//
+//        binding.tabLayout.addOnTabSelectedListener(tabSelectedListener)
+//    }
+//
+//    private val tabSelectedListener = object : TabLayout.OnTabSelectedListener {
+//        override fun onTabSelected(tab: TabLayout.Tab?) {
+//            tab?.let {
+//                binding.viewPager.currentItem = tab.position
+//            }
+//        }
+//
+//        override fun onTabUnselected(tab: TabLayout.Tab?) {
+//            tab?.let { return }
+//        }
+//
+//        override fun onTabReselected(tab: TabLayout.Tab?) {
+//            return
+//        }
+//
+//    }
 
 }

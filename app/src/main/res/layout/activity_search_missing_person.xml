@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activities.search.SearchMissingPersonActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/blue_copy"
+        android:layout_height="?attr/actionBarSize"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:weightSum="100">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="85"
+                android:id="@+id/search"
+                android:textSize="@dimen/_12ssp"
+                android:background="@drawable/search_bg"
+                android:hint="@string/type_to_search"
+                android:padding="@dimen/_5sdp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:layout_weight="15"
+                android:padding="@dimen/_5sdp"
+                android:id="@+id/run_face"
+                android:drawableTint="@color/white"
+                android:drawablePadding="@dimen/_5sdp"
+                app:drawableStartCompat="@drawable/ic_face_recognition" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_recyclerview"
+        android:layout_marginTop="@dimen/_5sdp"
+        tools:listitem="@layout/msp_item"/>
+
+</LinearLayout>

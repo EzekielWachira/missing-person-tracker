@@ -4,4 +4,61 @@
     <string name="notifications">Notifications</string>
     <string name="found_people">Found people</string>
     <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="report_missing_person">Report a missing person</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="height">Height</string>
+    <string name="person_status">Status (child, old, adult…)</string>
+    <string name="person_state">Person status</string>
+    <string name="person_description">Person description</string>
+    <string name="next">Next</string>
+    <string name="enter_person_details">Enter person details</string>
+    <string name="select_atleast_3_images">Select atleast 3 images</string>
+    <string name="add_contact_details">Add contact details</string>
+    <string name="contact_name_1">Contact name (1)</string>
+    <string name="contact_name_2">Contact name (2)</string>
+    <string name="contact_phone_number_1">Contact phone number (1)</string>
+    <string name="contact_phone_number_2">Contact phone number (2)</string>
+    <string name="lorem">Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit
+        amet consectur lorem ipsum dolor sit amet consectur amet consectur lorem ipsum dolor sit amet consectur  </string>
+    <string name="lorem_copy">Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit
+        amet consectur lorem ipsum dolor sit amet consectur amet consectur lorem ipsum dolor sit amet consectur
+        Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur amet consectur lorem ipsum dolor sit amet consectur
+    </string>
+    <string name="report">Report</string>
+    <string name="settings">Settings</string>
+    <string name="help_amp_feedback"><![CDATA[Help & Feedback]]></string>
+    <string name="share_this_app">Share this app</string>
+    <string name="rate_us">Rate us</string>
+    <string name="follow_us">Follow us</string>
+    <string name="about">About</string>
+    <string name="open_source_licenses">Open Source Licences</string>
+    <string name="weight">Weight</string>
+    <string name="type_to_search">Type to search…</string>
+    <string name="report_found">Report found</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="town">Town</string>
+    <string name="logout">Logout</string>
+    <string name="search">Search</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="phone">Phone</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_with_google">Sign up with google</string>
+    <string name="sign_in">Sign in</string>
+    <string name="register">Register</string>
+    <string-array name="gender_arr">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="person_type">
+        <item>Child</item>
+        <item>Teenager</item>
+        <item>Adult</item>
+        <item>Old</item>
+    </string-array>
 </resources>

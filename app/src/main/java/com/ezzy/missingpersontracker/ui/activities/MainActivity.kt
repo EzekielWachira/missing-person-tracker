@@ -1,5 +1,6 @@
 package com.ezzy.missingpersontracker.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +9,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.ActivityMainBinding
+import com.ezzy.missingpersontracker.ui.activities.person_details.PersonDetailsActivity
+import com.ezzy.missingpersontracker.ui.activities.search.SearchMissingPersonActivity
 import com.ezzy.missingpersontracker.util.showToast
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +24,19 @@ class MainActivity : AppCompatActivity() {
 
         val navController = this.findNavController(R.id.mainNavHostContainer)
         binding.bottomNavigation.setupWithNavController(navController)
+
+        setUpUI()
+    }
+
+    private fun setUpUI() {
+        binding.fab.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    ReportMissingPersonActivity::class.java
+                )
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -29,9 +45,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.action_search -> this.showToast("Search selected")
-            R.id.action_logout -> this.showToast("Logout selected")
+        when (item.itemId) {
+            R.id.action_search -> startActivity(
+                Intent(
+                    this,
+                    SearchMissingPersonActivity::class.java
+                )
+            )
+            R.id.action_logout -> startActivity(Intent(
+                this, PersonDetailsActivity::class.java
+            ))
         }
         return super.onOptionsItemSelected(item)
     }

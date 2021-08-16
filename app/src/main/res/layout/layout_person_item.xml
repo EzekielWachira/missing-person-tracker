@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_10sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/reporter_image"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/ezzy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="John Doe"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/reporter_image"
+            app:layout_constraintTop_toTopOf="@+id/reporter_image" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="August 1 2021"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toEndOf="@+id/reporter_image"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_more_horiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/descriptionTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:text="@string/lorem"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintTop_toBottomOf="@id/reporter_image" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTxt"
+            app:srcCompat="@drawable/sample" />
+
+        <TextView
+            android:id="@+id/comment_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableStart="@drawable/ic_comment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="3 Comments"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/comment_ic"
+            app:layout_constraintStart_toEndOf="@id/comment_ic"
+            app:layout_constraintTop_toTopOf="@id/comment_ic" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:src="@drawable/ezzy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comment_ic" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/comment_edittext_bg"
+            android:hint="Type your comment"
+            android:inputType="textMultiLine"
+            android:padding="@dimen/_5sdp"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/user_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/user_image"
+            app:layout_constraintTop_toTopOf="@id/user_image" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

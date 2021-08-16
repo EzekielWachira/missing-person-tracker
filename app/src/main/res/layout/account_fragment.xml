@@ -1,13 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.account.AccountFragment">
 
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp">
+
+
+                <TextView
+                    android:id="@+id/settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/settings"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableEndCompat="@drawable/ic_chevron_right"
+                    app:drawableStartCompat="@drawable/ic_settings" />
+
+                <!--                <com.google.android.material.divider.MaterialDivider-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
+                <!--                    app:dividerColor="@color/greyish"-->
+                <!--                    />-->
+
+                <TextView
+                    android:id="@+id/help_feedback"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/help_amp_feedback"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableStartCompat="@drawable/ic_help" />
+
+                <!--                <com.google.android.material.divider.MaterialDivider-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
+                <!--                    app:dividerColor="@color/greyish"-->
+                <!--                    />-->
+
+                <TextView
+                    android:id="@+id/share"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/share_this_app"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableStartCompat="@drawable/ic_share" />
+
+                <!--                <com.google.android.material.divider.MaterialDivider-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
+                <!--                    app:dividerColor="@color/greyish"-->
+                <!--                    />-->
+
+                <TextView
+                    android:id="@+id/rate_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/rate_us"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableStartCompat="@drawable/ic_rate" />
+
+                <!--                <com.google.android.material.divider.MaterialDivider-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
+                <!--                    app:dividerColor="@color/greyish"-->
+                <!--                    />-->
+
+                <TextView
+                    android:id="@+id/follow_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/follow_us"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableStartCompat="@drawable/ic_follow" />
+
+                <!--                <com.google.android.material.divider.MaterialDivider-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
+                <!--                    app:dividerColor="@color/greyish"-->
+                <!--                    />-->
+
+                <TextView
+                    android:id="@+id/about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/about"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableStartCompat="@drawable/ic_information" />
+
+                <!--                <com.google.android.material.divider.MaterialDivider-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
+                <!--                    app:dividerColor="@color/greyish"-->
+                <!--                    />-->
+
+                <TextView
+                    android:id="@+id/licenseTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/open_source_licenses"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableStartCompat="@drawable/ic_licensing" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
