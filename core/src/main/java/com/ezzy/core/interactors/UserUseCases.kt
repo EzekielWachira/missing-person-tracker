@@ -25,3 +25,17 @@ class GetUserDetails(private val repository: UserRepository) {
     ) = repository.getUserDetails(email)
 }
 
+class RegisterUser(private val repository: UserRepository) {
+    suspend operator fun invoke(
+        email: String,
+        password: String
+    ) = repository.registerUser(email, password)
+}
+
+class LoginUser(private val repository: UserRepository) {
+    suspend operator fun invoke(
+        email: String,
+        password: String
+    ) = repository.loginUser(email, password)
+}
+

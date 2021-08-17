@@ -16,4 +16,8 @@ class UserRepository(
     ) = dataSource.addUser(user, address, location)
     suspend fun searchUser(userName: String): Flow<List<User>> = dataSource.searchUser(userName)
     suspend fun getUserDetails(email: String): Flow<User> = dataSource.getUserDetails(email)
+    suspend fun registerUser(email: String, password: String): Boolean =
+        dataSource.registerUser(email, password)
+    suspend fun loginUser(email: String, password: String): Boolean =
+        dataSource.loginUser(email, password)
 }

@@ -9,4 +9,9 @@ object Constants {
     const val CANCEL = "Cancel"
     const val CHOOSE_IMAGE = "Choose an image"
     const val REQUEST_PERMISSION_CODE = 10
+
+    object FIRESTORE_COLLECTIONS {
+        const val USER_COLLECTION = "users"
+    }
+
 }

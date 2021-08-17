@@ -13,4 +13,6 @@ interface UserDataSource {
     )
     suspend fun searchUser(userName: String): Flow<List<User>>
     suspend fun getUserDetails(email: String): Flow<User>
+    suspend fun registerUser(email: String, password: String): Boolean
+    suspend fun loginUser(email: String, password: String): Boolean
 }
