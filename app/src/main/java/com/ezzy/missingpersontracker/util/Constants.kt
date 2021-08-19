@@ -9,6 +9,7 @@ object Constants {
     const val CANCEL = "Cancel"
     const val CHOOSE_IMAGE = "Choose an image"
     const val REQUEST_PERMISSION_CODE = 10
+    const val PREFERENCE_NAME = "user_preference"
 
     @Suppress("SpellCheckingInspection")
     object FIRESTORECOLLECTIONS {

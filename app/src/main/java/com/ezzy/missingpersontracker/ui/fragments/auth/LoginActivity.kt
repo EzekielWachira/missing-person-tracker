@@ -2,6 +2,7 @@ package com.ezzy.missingpersontracker.ui.fragments.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.ActivityLoginBinding
 import com.firebase.ui.auth.AuthUI
@@ -20,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
 
     @Inject lateinit var authUI: AuthUI
     @Inject lateinit var firebaseAuth: FirebaseAuth
+
+    private val authViewModel: AuthViewModel by viewModels()
 
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
@@ -78,6 +81,8 @@ class LoginActivity : AppCompatActivity() {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
             val user = firebaseAuth.currentUser
+            authViewModel.saveUserEmailToDataStore(user?.email!!)
+            authViewModel.saveLoginStatusToDataStore(true)
         }
     }
 
