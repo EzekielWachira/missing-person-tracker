@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ import com.ezzy.missingpersontracker.ui.adapter.PersonImageAdapter
 import com.ezzy.missingpersontracker.util.Constants
 import com.ezzy.missingpersontracker.util.convertToUri
 import com.ezzy.missingpersontracker.util.showToast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -42,8 +44,27 @@ class PersonImagesFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
             if (isGranted) {
                 chooseImage()
+            } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    showPermissionRationale()
+                }
             }
     }
+
+    private fun showPermissionRationale() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.rationale_title))
+            .setMessage(getString(R.string.rationale_description))
+            .setPositiveButton(getString(R.string.pos_text)) { dialog, _ ->
+                permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.neg_text)) { dialog, _ ->
+                dialog.cancel()
+            }
+    }
+
     private val imagePicker = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK && result.data != null) {
