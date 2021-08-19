@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 app:spanCount="3"
+                android:clipToPadding="false"
                 tools:listitem="@layout/image_item"
                 android:id="@+id/photoRecyclerView"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>

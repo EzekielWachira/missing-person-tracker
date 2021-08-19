@@ -51,6 +51,10 @@
     <string name="sign_up_with_google">Sign up with google</string>
     <string name="sign_in">Sign in</string>
     <string name="register">Register</string>
+    <string name="rationale_title">Storage Permission</string>
+    <string name="rationale_description">The app requires your permission to get the image of the missing person</string>
+    <string name="pos_text">Ok</string>
+    <string name="neg_text">Deny</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.ActivityReportMissingPersonBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReportMissingPersonActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReportMissingPersonBinding
