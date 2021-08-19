@@ -10,8 +10,14 @@ object Constants {
     const val CHOOSE_IMAGE = "Choose an image"
     const val REQUEST_PERMISSION_CODE = 10
 
-    object FIRESTORE_COLLECTIONS {
+    @Suppress("SpellCheckingInspection")
+    object FIRESTORECOLLECTIONS {
         const val USER_COLLECTION = "users"
+        const val MISSING_PERSON_COLLLECTION = "missing_person"
+        const val MISSING_PERSON_IMAGES_COLLECTION = "missing_person_images"
+        const val ADDRESS = "address"
+        const val LOCATION = "location"
+        const val ADDITIONAL_CONTACTS = "additional_contacts"
     }
 
 }

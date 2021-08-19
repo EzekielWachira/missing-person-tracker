@@ -3,7 +3,11 @@ package com.ezzy.core.domain
 import java.io.Serializable
 
 data class MissingPerson(
-    val name: String? = null,
+    val firstName: String? = null,
+    val middleName: String? = null,
+    val lastName: String? = null,
+    val color: String? = null,
+    val personStatus: String? = null,
     val age: String? = null,
     val gender: Gender? =  null,
     val height: Long? = null,

@@ -1,9 +1,11 @@
 package com.ezzy.core.interactors
 
 import com.ezzy.core.data.repository.UserRepository
+import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Location
 import com.ezzy.core.domain.User
+import kotlinx.coroutines.flow.Flow
 
 class AddUser(private val userRepository: UserRepository) {
     suspend operator fun invoke (
@@ -29,7 +31,7 @@ class RegisterUser(private val repository: UserRepository) {
     suspend operator fun invoke(
         email: String,
         password: String
-    ) = repository.registerUser(email, password)
+    ): Resource<Flow<Boolean>> = repository.registerUser(email, password)
 }
 
 class LoginUser(private val repository: UserRepository) {

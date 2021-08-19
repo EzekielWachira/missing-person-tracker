@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.ezzy.core.data.resource.Resource
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.SignUpFragmentBinding
 import com.ezzy.missingpersontracker.ui.fragments.auth.AuthViewModel
@@ -43,20 +44,35 @@ class SignUpFragment : Fragment() {
             val userEmail = binding.email.text.toString()
             val password = binding.password.text.toString()
 
-            authViewModel.register(userEmail, password)
+            authViewModel.register(userEmail, password).observe(viewLifecycleOwner) {
+                when(it) {
+                    Resource.Loading -> {
+                        binding.progressIndicator.apply {
+                            show()
+                            isIndeterminate = true
+                        }
+                    }
+                    Resource.Success(it) -> {
+                        binding.progressIndicator.apply {
+                            hide()
+                            isIndeterminate = true
+                        }
+                    }
+                }
+            }
         }
 
     }
 
     private fun subscribeToUI() {
-        authViewModel.isRegistrationSuccess.observe(viewLifecycleOwner) {
-            isRegisterSuccess ->
-            if (isRegisterSuccess!!) {
-                this.showToast("User registered")
-                findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
-            }
-            else this.showToast("An error occurred while registering user")
-        }
+//        authViewModel.isRegistrationSuccess.observe(viewLifecycleOwner) {
+//            isRegisterSuccess ->
+//            if (isRegisterSuccess!!) {
+//                this.showToast("User registered")
+//                findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+//            }
+//            else this.showToast("An error occurred while registering user")
+//        }
     }
 
     override fun onDestroy() {

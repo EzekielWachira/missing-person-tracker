@@ -47,6 +47,9 @@ android {
     buildFeatures {
         viewBinding=true
     }
+    configurations.all {
+        exclude(group = "androidx.paging", module = "paging-runtime-ktx")
+    }
 }
 
 dependencies {
@@ -91,7 +94,7 @@ dependencies {
     implementation(Dependencies.workerKtx)
     implementation(Dependencies.circleImageView)
     implementation(Dependencies.multiDex)
-    implementation("com.google.android.material:material:1.5.0-alpha01")
+    implementation("com.google.android.material:material:1.5.0-alpha02")
 
     implementation(Dependencies.sdpAndroid)
     implementation(Dependencies.sspAndroid)
@@ -113,6 +116,8 @@ dependencies {
     implementation(Dependencies.firebaseStorage)
     implementation(Dependencies.firebaseAuth)
     implementation(Dependencies.firebaseUiAuth)
+//    implementation(Dependencies.firebaseAuthFacebook)
+    implementation(Dependencies.firebaseUiForStorage)
     implementation(Dependencies.firebaseUiForFirestore)
     implementation(Dependencies.coroutinesForFirebase)
 

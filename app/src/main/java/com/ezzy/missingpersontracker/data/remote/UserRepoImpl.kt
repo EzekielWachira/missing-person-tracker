@@ -1,13 +1,17 @@
 package com.ezzy.missingpersontracker.data.remote
 
 import com.ezzy.core.data.datasource.UserDataSource
+import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Location
 import com.ezzy.core.domain.User
-import com.ezzy.missingpersontracker.util.Constants.FIRESTORE_COLLECTIONS.USER_COLLECTION
+import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,21 +21,24 @@ class UserRepoImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : UserDataSource {
 
-    override suspend fun registerUser(email: String, password: String): Boolean {
-        var isRegistrationSuccess = false
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    isRegistrationSuccess = true
-                    val firebaseUser = task.result?.user
-                    Timber.d("$firebaseUser")
-                }
-            }.addOnFailureListener { exception ->
-                isRegistrationSuccess = false
-                Timber.d(exception)
-            }.await()
-
-        return isRegistrationSuccess
+    override suspend fun registerUser(email: String, password: String): Resource<Flow<Boolean>> {
+        return try {
+            var isRegistrationSuccess = false
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        isRegistrationSuccess = true
+                        val firebaseUser = task.result?.user
+                        Timber.d("$firebaseUser")
+                    }
+                }.addOnFailureListener { exception ->
+                    isRegistrationSuccess = false
+                    Timber.d(exception)
+                }.await()
+            Resource.Success(flow { emit(isRegistrationSuccess) })
+        } catch (e: Exception) {
+            Resource.Failure("An exception occurred")
+        }
     }
 
     override suspend fun loginUser(email: String, password: String): Boolean {

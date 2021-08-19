@@ -1,6 +1,7 @@
 package com.ezzy.core.data.repository
 
 import com.ezzy.core.data.datasource.MissingPersonDataSource
+import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.AdditionalContact
 import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Location
@@ -15,8 +16,10 @@ class MissingPersonRepository(
         address: Address,
         location: Location,
         additionalContact: AdditionalContact
-    ) = dataSource.addAMissingPerson(missingPerson, address, location, additionalContact)
-    suspend fun searchMissingPerson(name: String): Flow<List<MissingPerson>> =
+    ): Boolean = dataSource.addAMissingPerson(missingPerson, address, location, additionalContact)
+
+    suspend fun searchMissingPerson(name: String): Resource<Flow<List<MissingPerson>>> =
         dataSource.searchMissingPerson(name)
-    suspend fun getMissingPeople(): Flow<List<MissingPerson>> = dataSource.getMissingPeople()
+
+    suspend fun getMissingPeople(): Resource<Flow<List<MissingPerson>>> = dataSource.getMissingPeople()
 }
