@@ -1,7 +1,9 @@
 package com.ezzy.missingpersontracker.ui.fragments.report
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +11,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.common.getPathFromUri
@@ -19,12 +24,23 @@ import com.ezzy.missingpersontracker.databinding.FragmentPersonImagesBinding
 import com.ezzy.missingpersontracker.util.Constants
 import com.ezzy.missingpersontracker.util.convertToUri
 import com.ezzy.missingpersontracker.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class PersonImagesFragment : Fragment() {
 
     private var _binding: FragmentPersonImagesBinding? = null
     private val binding: FragmentPersonImagesBinding get() = _binding!!
+    private val viewModel: ReportMissingPersonViewModel by viewModels()
+
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
+            if (isGranted) {
+
+            }
+    }
+    
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +59,24 @@ class PersonImagesFragment : Fragment() {
     }
 
     private fun requestPermissions() {
-        if (requestPermission<PersonImagesFragment>(requireActivity())) {
+        /*if (requestPermission<PersonImagesFragment>(requireActivity())) {
             selectImage()
+        }*/
+        if (isPermissionGranted()) {
+
+        } else {
+            permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
+
     }
 
     private fun selectImage() {
         selectPicture<PersonImagesFragment>(requireActivity())
+    }
+    private fun isPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
     override fun onRequestPermissionsResult(
@@ -103,6 +130,7 @@ class PersonImagesFragment : Fragment() {
             }
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
