@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MissingPersonTracker">
         <activity
-            android:name=".ui.fragments.auth.LoginActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
@@ -25,6 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+        </activity>
+        <activity
+            android:name=".ui.fragments.auth.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
         <activity
             android:name=".ui.activities.report_found_person.ReportFoundPersonActivity"
@@ -48,9 +53,7 @@
         <activity
             android:name=".ui.activities.AuthActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
         <activity android:name=".ui.activities.MainActivity" />
     </application>
 

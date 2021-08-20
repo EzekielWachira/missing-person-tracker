@@ -62,6 +62,7 @@ dependencies {
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.test:monitor:1.3.0")
     testImplementation(TestLibraries.jUnit)
+    testImplementation(TestLibraries.truth)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.espresso)
 

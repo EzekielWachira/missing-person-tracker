@@ -38,6 +38,7 @@ object TestLibraries {
     const val jUnit = "junit:junit:${Version.jUnitVersion}"
     const val testRunner = "androidx.test.ext:junit:${Version.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Version.espressoVersion}"
+    const val truth = "com.google.truth:truth:${Versions.truth}"
 
 }
 
@@ -88,6 +89,7 @@ object Dependencies {
     const val sweetAlert2 = "com.github.thomper:sweet-alert-dialog:${Versions.sweetAlertVersion}"
     const val dataStore = "androidx.datastore:datastore-preferences:${Versions.dataStoreVersion}"
     const val typedDataStore = "androidx.datastore:datastore:${Versions.dataStoreVersion}"
+
 
     const val kmProgress = "com.github.krishnanmuthaiahpillai:ProgressBar:${Versions.kmProgressVersion}"
     const val skydoveProgress = "com.github.skydoves:progressview:${Versions.skydoveVersion}"

@@ -17,11 +17,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ezzy.missingpersontracker.R
-import com.ezzy.missingpersontracker.common.getPathFromUri
-import com.ezzy.missingpersontracker.common.imageResult
-import com.ezzy.missingpersontracker.common.requestPermission
-import com.ezzy.missingpersontracker.common.selectPicture
+import com.ezzy.missingpersontracker.common.*
 import com.ezzy.missingpersontracker.data.model.ImageItem
 import com.ezzy.missingpersontracker.databinding.FragmentPersonImagesBinding
 import com.ezzy.missingpersontracker.ui.adapter.PersonImageAdapter
@@ -105,7 +104,13 @@ class PersonImagesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.photoRecyclerView.adapter = personImageAdapter
+        binding.photoRecyclerView
+            .apply {
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                adapter = personImageAdapter
+                addItemDecoration(ItemDecorator(Directions.VERTICAL, 5))
+                addItemDecoration(ItemDecorator(Directions.HORIZONTAL, 5))
+            }
     }
 
     private fun setUpUI() {
