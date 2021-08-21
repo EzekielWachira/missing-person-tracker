@@ -25,7 +25,7 @@ class PersonDetailsFragment : Fragment() {
         return binding.root
     }
 
-    private fun setUpUI(){
+    private fun setUpUI() {
         binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_personDetailsFragment_to_personImagesFragment)
         }
@@ -33,19 +33,19 @@ class PersonDetailsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        context?.let { ctx ->
-            val gender = resources.getStringArray(R.array.gender_arr)
-            val personStatusArray = resources.getStringArray(R.array.person_type)
-            val genderArrayAdapter = ArrayAdapter(ctx, R.layout.dropdown_item, gender)
-            val personStatusAdapter = ArrayAdapter(ctx, R.layout.dropdown_item, personStatusArray)
-            binding.gender.setAdapter(genderArrayAdapter)
-            binding.personStatus.setAdapter(personStatusAdapter)
-        }
+        val gender = resources.getStringArray(R.array.gender_arr)
+        val personStatusArray = resources.getStringArray(R.array.person_type)
+        val genderArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, gender)
+        val personStatusAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_item, personStatusArray)
+        binding.gender.setAdapter(genderArrayAdapter)
+        binding.personStatus.setAdapter(personStatusAdapter)
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding= null
+        _binding = null
     }
 
 }

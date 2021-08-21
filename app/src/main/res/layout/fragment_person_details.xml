@@ -49,6 +49,25 @@
           </com.google.android.material.textfield.TextInputLayout>
 
           <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/middle_name"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:hint="@string/middle_name"
+              app:counterEnabled="true"
+              app:counterMaxLength="50"
+              app:endIconMode="clear_text"
+              app:startIconDrawable="@drawable/ic_file_rename">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/middlename"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionNext" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
               android:id="@+id/last_name"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
@@ -95,7 +114,6 @@
 
               <com.google.android.material.textfield.TextInputEditText
                   android:id="@+id/color"
-                  android:inputType="numberDecimal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:imeOptions="actionNext" />
@@ -136,6 +154,7 @@
                   android:layout_height="wrap_content"
                   android:hint="@string/height"
                   app:endIconMode="clear_text"
+                  app:suffixText="m"
                   app:startIconDrawable="@drawable/ic_height">
 
                   <com.google.android.material.textfield.TextInputEditText
@@ -153,6 +172,7 @@
                   android:layout_marginStart="@dimen/_2sdp"
                   android:layout_height="wrap_content"
                   android:hint="@string/weight"
+                  app:suffixText="kg"
                   app:endIconMode="clear_text"
                   app:startIconDrawable="@drawable/ic_dumbbell">
 

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class CommonRecyclerViewAdapter<T>(
+class CommonAdapter<T>(
     private val viewHolderFactory : ((parent : ViewGroup) -> CommonViewHolder<T>),
 ) : RecyclerView.Adapter<CommonViewHolder<T>>() {
 

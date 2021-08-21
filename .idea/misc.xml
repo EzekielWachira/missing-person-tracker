@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/drawable/circle.xml" value="0.22291666666666668" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/activity_splash.xml" value="0.14175724637681159" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/add_contacts_dialog.xml" value="0.25" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/contact_item.xml" value="0.33" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/fragment_person_contacts.xml" value="0.67" />
+        <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/fragment_person_details.xml" value="0.33" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/fragment_person_images.xml" value="0.16893115942028986" />
         <entry key="..\:/Droid/MissingPersonTrack/app/src/main/res/layout/image_item.xml" value="0.14175724637681159" />
       </map>
