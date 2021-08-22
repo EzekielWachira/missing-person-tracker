@@ -9,13 +9,16 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.view.View
+import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.ezzy.core.domain.MissingPerson
 import com.ezzy.missingpersontracker.R
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -110,6 +113,16 @@ fun View.gone() {
 fun View.visible() {
     visibility = View.VISIBLE
 }
+
+fun TextInputEditText.isEmpty(): Boolean {
+    return this.text!!.isEmpty()
+}
+
+//fun  MissingPerson.isEmpty(): Boolean {
+//    if (this.age == null || this.firstName!!.isEmpty() || this.lastName!!.isEmpty() || this.middleName!!.isEmpty() || this.color )
+//}
+
+fun AutoCompleteTextView.isEmpty(): Boolean = this.text.isEmpty()
 
 fun View.showSnackBar(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG)

@@ -41,7 +41,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/button_bg"
                 android:text="@string/add_contact"
-                app:icon="@drawable/ic_report"
+                app:icon="@drawable/ic_contacts_outline"
                 android:id="@+id/addContactBtn"/>
 
             <LinearLayout

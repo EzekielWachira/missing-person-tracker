@@ -30,7 +30,6 @@
               android:textSize="@dimen/_12ssp"/>
 
           <com.google.android.material.textfield.TextInputLayout
-              android:id="@+id/first_name"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -49,7 +48,6 @@
           </com.google.android.material.textfield.TextInputLayout>
 
           <com.google.android.material.textfield.TextInputLayout
-              android:id="@+id/middle_name"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -68,7 +66,6 @@
           </com.google.android.material.textfield.TextInputLayout>
 
           <com.google.android.material.textfield.TextInputLayout
-              android:id="@+id/last_name"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"

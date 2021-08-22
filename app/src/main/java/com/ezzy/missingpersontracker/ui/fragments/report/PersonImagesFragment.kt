@@ -40,7 +40,7 @@ class PersonImagesFragment : Fragment() {
     private val binding: FragmentPersonImagesBinding get() = _binding!!
     private val viewModel: ReportMissingPersonViewModel by activityViewModels()
     private val personImageAdapter: PersonImageAdapter by lazy { PersonImageAdapter() }
-    private val personImages = mutableListOf<ImageItem>()
+    private var personImages = mutableListOf<ImageItem>()
 
     private val permissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -86,7 +86,7 @@ class PersonImagesFragment : Fragment() {
                         uris.add(image.uri)
                         personImages.add(ImageItem(image.uri))
                     }
-                    viewModel.addPersonImages(personImages)
+//                    viewModel.addPersonImages(personImages)
                 }
             }
             val images = ArrayList<ImageItem>()
@@ -95,7 +95,8 @@ class PersonImagesFragment : Fragment() {
                 images.add(ImageItem(uri))
             }
             Timber.i(" size is ${images.toString()}")
-            personImageAdapter.submitList(images.toList())
+            viewModel.addPersonImages(images.toList())
+//            personImageAdapter.submitList(images.toList())
         } else {
             showToast("Failed! Try again.")
         }
@@ -119,6 +120,15 @@ class PersonImagesFragment : Fragment() {
                 addItemDecoration(ItemDecorator(Directions.VERTICAL, 5))
                 addItemDecoration(ItemDecorator(Directions.HORIZONTAL, 5))
             }
+
+        subscribeToUI()
+    }
+
+    private fun subscribeToUI() {
+        viewModel.personImages.observe(viewLifecycleOwner) {
+            personImageAdapter.submitList(it)
+            personImages = it as MutableList<ImageItem>
+        }
     }
 
     private fun setUpUI() {
