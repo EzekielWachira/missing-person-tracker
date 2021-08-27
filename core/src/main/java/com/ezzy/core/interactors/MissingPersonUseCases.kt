@@ -9,8 +9,15 @@ class AddMissingPerson(private val repository: MissingPersonRepository) {
         missingPerson: MissingPerson,
         address: Address,
         contactList: List<Contact>,
-        missingPersonImages: List<URI>
-    ) = repository.addAMissingPerson(missingPerson, address, contactList, missingPersonImages)
+        missingPersonImages: List<URI>,
+        fileNames: List<String>
+    ) = repository.addAMissingPerson(
+        missingPerson,
+        address,
+        contactList,
+        missingPersonImages,
+        fileNames
+    )
 }
 
 class SearchMissingPerson(private val repository: MissingPersonRepository) {

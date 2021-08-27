@@ -5,13 +5,18 @@ import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Location
 import com.ezzy.core.domain.User
+import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.ADDRESS
+import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.LOCATION
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import javax.inject.Inject
@@ -59,18 +64,85 @@ class UserRepoImpl @Inject constructor(
         return isLoginSuccess
     }
 
-    override suspend fun addUser(user: User, address: Address, location: Location) {
-        try {
+    override suspend fun addUser(
+        user: User,
+        address: Address,
+        location: Location
+    ): Flow<Resource<String>> = flow {
+        emit(Resource.loading())
+        val userRef = firebaseFirestore.collection(USER_COLLECTION).add(user).await().apply {
+            saveUserAddress(address, this.id)
+            saveUserLocation(location, this.id)
+        }
+        emit(Resource.success(userRef.id))
+    }.catch {
+        emit(Resource.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+//    {
+//        try {
+//            firebaseFirestore.collection(USER_COLLECTION)
+//                .add(user)
+//                .addOnSuccessListener {
+////                    if (it.isSuccessful) {
+////                        Timber.d("User saved")
+////                    }
+//                    CoroutineScope(Dispatchers.IO).launch {
+//                        val isUserAddressSaved = saveUserAddress(address, it.id)
+//                        val isUserLocationSaved = saveUserLocation(location, it.id)
+//                    }
+//                }.addOnFailureListener { Timber.d(it) }
+//                .await()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//    }
+
+    private suspend fun saveUserAddress(
+        address: Address,
+        documentId: String
+    ): Flow<Resource<String>> =
+        flow {
+            emit(Resource.loading())
+            val addressRef = firebaseFirestore.collection(USER_COLLECTION)
+                .document(documentId)
+                .collection(ADDRESS)
+                .add(address).await()
+            emit(Resource.success(addressRef.id))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+//        {
+//            return try {
+//                var isUserAddressSaved = false
+//                firebaseFirestore.collection(USER_COLLECTION)
+//                    .document(documentId)
+//                    .collection(ADDRESS)
+//                    .add(address)
+//                    .addOnSuccessListener {
+//                        isUserAddressSaved = true
+//                    }.addOnFailureListener { isUserAddressSaved = false }
+//                    .await()
+//                isUserAddressSaved
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                false
+//            }
+//        }
+
+    private suspend fun saveUserLocation(location: Location, documentId: String): Boolean {
+        return try {
+            var isUserLocationSaved = false
             firebaseFirestore.collection(USER_COLLECTION)
-                .add(user)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        Timber.d("User saved")
-                    }
-                }.addOnFailureListener { Timber.d(it) }
+                .document(documentId)
+                .collection(LOCATION)
+                .add(location)
+                .addOnSuccessListener { isUserLocationSaved = true }
+                .addOnFailureListener { isUserLocationSaved = false }
                 .await()
+            isUserLocationSaved
         } catch (e: Exception) {
             e.printStackTrace()
+            false
         }
     }
 

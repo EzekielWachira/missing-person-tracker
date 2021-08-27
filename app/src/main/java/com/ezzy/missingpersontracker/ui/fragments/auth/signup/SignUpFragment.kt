@@ -44,22 +44,22 @@ class SignUpFragment : Fragment() {
             val userEmail = binding.email.text.toString()
             val password = binding.password.text.toString()
 
-            authViewModel.register(userEmail, password).observe(viewLifecycleOwner) {
-                when(it) {
-                    Resource.Loading -> {
-                        binding.progressIndicator.apply {
-                            show()
-                            isIndeterminate = true
-                        }
-                    }
-                    Resource.Success(it) -> {
-                        binding.progressIndicator.apply {
-                            hide()
-                            isIndeterminate = true
-                        }
-                    }
-                }
-            }
+//            authViewModel.register(userEmail, password).observe(viewLifecycleOwner) {
+//                when(it) {
+//                    Resource.Loading -> {
+//                        binding.progressIndicator.apply {
+//                            show()
+//                            isIndeterminate = true
+//                        }
+//                    }
+//                    Resource.Success(it) -> {
+//                        binding.progressIndicator.apply {
+//                            hide()
+//                            isIndeterminate = true
+//                        }
+//                    }
+//                }
+//            }
         }
 
     }

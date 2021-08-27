@@ -5,7 +5,7 @@ import java.io.Serializable
 class User(
     val firstName: String? = null,
     val lastName: String? = null,
-    val middleName: String? = null,
     val email: String? = null,
-    userName: String? = null
+    val userName: String? = null,
+    val imageSrc: String? = null
 ): Serializable

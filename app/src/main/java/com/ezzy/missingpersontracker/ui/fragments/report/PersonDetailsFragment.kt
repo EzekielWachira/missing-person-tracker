@@ -51,8 +51,8 @@ class PersonDetailsFragment : Fragment() {
                     binding.personStatus.text.toString(),
                     binding.age.text.toString(),
                     binding.gender.text.toString(),
-                    binding.height.text.toString().toLong(),
-                    binding.weight.text.toString().toLong(),
+                    170,
+                    67,
                     binding.description.text.toString()
                 )
                 viewModel.addMissingPersonDetails(missingPerson)

@@ -13,13 +13,20 @@ class MissingPersonRepository(
         missingPerson: MissingPerson,
         address: Address,
         contactList: List<Contact>,
-        missingPersonImages: List<URI>
-    ): Boolean =
-        dataSource.addAMissingPerson(missingPerson, address, contactList, missingPersonImages)
+        missingPersonImages: List<URI>,
+        fileNames: List<String>
+    ): Flow<Resource<String>> =
+        dataSource.addAMissingPerson(
+            missingPerson,
+            address,
+            contactList,
+            missingPersonImages,
+            fileNames
+        )
 
     suspend fun searchMissingPerson(name: String): Resource<Flow<List<MissingPerson>>> =
         dataSource.searchMissingPerson(name)
 
-    suspend fun getMissingPeople(): Resource<Flow<List<MissingPerson>>> =
+    suspend fun getMissingPeople(): Flow<Resource<List<MissingPerson>>> =
         dataSource.getMissingPeople()
 }

@@ -11,7 +11,8 @@ interface MissingPersonDataSource {
         address: Address,
         contactList: List<Contact>,
         missingPersonImages: List<URI>,
-    ): Boolean
+        fileNames: List<String>
+    ): Flow<Resource<String>>
     suspend fun searchMissingPerson(name: String): Resource<Flow<List<MissingPerson>>>
-    suspend fun getMissingPeople(): Resource<Flow<List<MissingPerson>>>
+    suspend fun getMissingPeople(): Flow<Resource<List<MissingPerson>>>
 }

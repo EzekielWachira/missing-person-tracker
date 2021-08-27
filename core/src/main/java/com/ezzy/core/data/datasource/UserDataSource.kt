@@ -11,7 +11,7 @@ interface UserDataSource {
         user: User,
         address: Address,
         location: Location
-    )
+    ): Flow<Resource<String>>
     suspend fun searchUser(userName: String): Flow<List<User>>
     suspend fun getUserDetails(email: String): Flow<User>
     suspend fun registerUser(email: String, password: String): Resource<Flow<Boolean>>

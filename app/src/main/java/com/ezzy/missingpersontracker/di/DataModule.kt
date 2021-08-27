@@ -3,6 +3,7 @@ package com.ezzy.missingpersontracker.di
 import com.ezzy.core.data.repository.MissingPersonRepository
 import com.ezzy.core.data.repository.UserRepository
 import com.ezzy.core.interactors.AddMissingPerson
+import com.ezzy.core.interactors.AddUser
 import com.ezzy.core.interactors.LoginUser
 import com.ezzy.core.interactors.RegisterUser
 import com.ezzy.missingpersontracker.data.remote.MissingPersonRepoImpl
@@ -47,5 +48,9 @@ object DataModule {
     @Singleton
     fun provideAddMissingPerson(repository: MissingPersonRepository) =
         AddMissingPerson(repository)
+
+    @Provides
+    @Singleton
+    fun provideAddUser(repository: UserRepository) = AddUser(repository)
 
 }

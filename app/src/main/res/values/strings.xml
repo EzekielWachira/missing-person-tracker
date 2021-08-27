@@ -65,6 +65,11 @@
     <string name="contact_name_err">Contact name cannot be empty</string>
     <string name="contact_email_err">Contact email cannot be empty</string>
     <string name="country">Country</string>
+    <string name="done_button">Done button</string>
+    <string name="personal_details">PERSONAL DETAILS</string>
+    <string name="address">ADDRESS</string>
+    <string name="username">Username</string>
+    <string name="location">LOCATION</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>

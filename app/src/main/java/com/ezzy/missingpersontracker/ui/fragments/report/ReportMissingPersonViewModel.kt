@@ -4,13 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Contact
 import com.ezzy.core.domain.MissingPerson
 import com.ezzy.core.interactors.AddMissingPerson
 import com.ezzy.missingpersontracker.data.model.ImageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.net.URI
 import javax.inject.Inject
 
@@ -18,6 +23,9 @@ import javax.inject.Inject
 class ReportMissingPersonViewModel @Inject constructor(
     private val addMissingPerson: AddMissingPerson
 ) : ViewModel() {
+
+    private val _addMissingPersonState = MutableStateFlow<Resource<String?>>(Resource.Empty)
+    val addMissingPersonState: StateFlow<Resource<String?>> get() = _addMissingPersonState
 
     private val _readPermissionStatus: MutableLiveData<Boolean> = MutableLiveData()
     val readPermissionStatus: LiveData<Boolean> get() = _readPermissionStatus
@@ -56,11 +64,29 @@ class ReportMissingPersonViewModel @Inject constructor(
         missingPerson: MissingPerson,
         address: Address,
         contactList: List<Contact>,
-        missingPersonImages: List<URI>
+        missingPersonImages: List<URI>,
+        fileNames: List<String>
     ) = viewModelScope.launch {
-        val personSavedStatus =
-            addMissingPerson(missingPerson, address, contactList, missingPersonImages)
-        _isPersonSaved.postValue(personSavedStatus)
-    }
+            addMissingPerson(
+                missingPerson,
+                address,
+                contactList,
+                missingPersonImages,
+                fileNames
+            ).collect { state ->
+                when (state) {
+                    is Resource.Loading -> {
+                        _addMissingPersonState.value = Resource.loading()
+                    }
+                    is Resource.Success -> {
+                        _addMissingPersonState.value = Resource.success(state.data)
+                    }
+                    is Resource.Failure -> {
+                        _addMissingPersonState.value = Resource.failed("Error while saving user")
+                    }
+                }
+            }
+        }
+
 
 }
