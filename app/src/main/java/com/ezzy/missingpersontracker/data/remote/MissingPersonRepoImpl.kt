@@ -102,32 +102,6 @@ class MissingPersonRepoImpl @Inject constructor(
     }.catch { emit(Resource.failed(it.message.toString())) }
         .flowOn(Dispatchers.IO)
 
-//    {
-//        return try {
-//            var isMissingPersonSaved = false
-//            missingPersonCollection.add(missingPerson).addOnSuccessListener { docReference ->
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    val isAddressSaved = saveAddress(docReference.id, address)
-//                    val isContactListSaved = saveContactList(docReference.id, contactList)
-//                    val images = saveMissingPersonImages(
-//                        missingPersonImages,
-//                        missingPerson.reporterId ?: "23"
-//                    )
-//                    val areImagesSaved = saveImageLinks(
-//                        docReference.id,
-//                        images
-//                    )
-//
-//                    if (isAddressSaved && isContactListSaved && areImagesSaved)
-//                        isMissingPersonSaved = true
-//                }
-//            }.addOnFailureListener { isMissingPersonSaved = false }.await()
-//            isMissingPersonSaved
-//        } catch (e: Exception) {
-//            false
-//        }
-//    }
-
     private suspend fun saveImageLinks(
         missingPersonId: String,
         links: List<String>
@@ -142,25 +116,6 @@ class MissingPersonRepoImpl @Inject constructor(
         emit(Resource.success(true))
     }.catch { emit(Resource.failed(it.message.toString())) }
         .flowOn(Dispatchers.IO)
-
-//    {
-//        return try {
-//            var areImageLinksSaved = false
-//            for (link in links) {
-//                firebaseFirestore.collection(MISSING_PERSON_IMAGES_COLLECTION)
-//                    .document(missingPersonId)
-//                    .collection(IMAGES)
-//                    .add(mapOf("image_src" to link))
-//                    .addOnSuccessListener { areImageLinksSaved = true }
-//                    .addOnFailureListener { areImageLinksSaved = false }
-//                    .await()
-//            }
-//            areImageLinksSaved
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//            false
-//        }
-//    }
 
     private suspend fun saveMissingPersonImages(
         missingPersonImages: List<URI>,
@@ -208,30 +163,6 @@ class MissingPersonRepoImpl @Inject constructor(
     }.catch { emit(Resource.failed(it.message.toString())) }
         .flowOn(Dispatchers.IO)
 
-
-//        {
-//            Timber.d("URIs >> $missingPersonImages")
-//            return try {
-//                val missingPersonImagePathList = mutableListOf<String>()
-//                val reference = storageReference.child("images/missing_persons/$reporterId")
-//                missingPersonImages.forEach { mspImageUri ->
-//                    android.net.Uri.parse(imageUri.toString())
-//                    reference.putFile(imageUri)
-//                        .addOnSuccessListener {
-//                            reference.downloadUrl
-//                                .addOnSuccessListener { uri ->
-//                                    missingPersonImagePathList.add(uri.toString())
-//                                }
-//                        }.addOnFailureListener {
-//                            it.printStackTrace()
-//                        }.await()
-//                }
-//                missingPersonImagePathList
-//            } catch (e: Exception) {
-//                emptyList()
-//            }
-//        }
-
     private suspend fun saveContactList(
         documentId: String,
         contactList: List<Contact>
@@ -245,24 +176,6 @@ class MissingPersonRepoImpl @Inject constructor(
         emit(Resource.success(true))
     }.catch { emit(Resource.failed(it.message.toString())) }
         .flowOn(Dispatchers.IO)
-//
-//    {
-//        return try {
-//            var isContactListSaved = false
-//            for (contact in contactList) {
-//                missingPersonCollection.document(documentId)
-//                    .collection(CONTACTS)
-//                    .add(contact)
-//                    .addOnSuccessListener {
-//                        isContactListSaved = true
-//                    }.addOnFailureListener { isContactListSaved = false }
-//                    .await()
-//            }
-//            isContactListSaved
-//        } catch (e: Exception) {
-//            false
-//        }
-//    }
 
     private suspend fun saveAddress(documentId: String, address: Address): Flow<Resource<String>> =
         flow {
@@ -273,25 +186,6 @@ class MissingPersonRepoImpl @Inject constructor(
             emit(Resource.success(addressRef.id))
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
-//        {
-//            return try {
-//                var isAddressSaved = false
-//                missingPersonCollection.document(documentId)
-//                    .collection(ADDRESS)
-//                    .add(address)
-//                    .addOnSuccessListener {
-//                        isAddressSaved = true
-//                    }.addOnFailureListener { isAddressSaved = false }
-//                    .await()
-//                isAddressSaved
-//            } catch (e: Exception) {
-//                false
-//            }
-//        }
-
-    private fun savePersonImages() {
-
-    }
 
     private suspend fun saveLocation(
         documentId: String,
@@ -304,21 +198,6 @@ class MissingPersonRepoImpl @Inject constructor(
         emit(Resource.success(locationSnapshot.id))
     }.catch { emit(Resource.failed(it.message.toString())) }
         .flowOn(Dispatchers.IO)
-//    {
-//        return try {
-//            var isLocationSaved = false
-//            missingPersonCollection.document(documentId)
-//                .collection(LOCATION)
-//                .add(location)
-//                .addOnCompleteListener {
-//                    if (it.isSuccessful) isLocationSaved = true
-//                }.addOnFailureListener { isLocationSaved = false }
-//                .await()
-//            isLocationSaved
-//        } catch (e: Exception) {
-//            false
-//        }
-//    }
 
     private suspend fun saveAdditionalContacts(
         documentId: String,

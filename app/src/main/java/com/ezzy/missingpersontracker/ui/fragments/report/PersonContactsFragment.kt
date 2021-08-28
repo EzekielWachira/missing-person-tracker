@@ -147,6 +147,7 @@ class PersonContactsFragment : Fragment() {
                     }
                     is Resource.Failure -> {
                         hideDialog()
+                        showErrorDialog()
                         showToast("User not saved: ${state.errorMessage}")
                     }
                     is Resource.Empty -> {
@@ -169,6 +170,11 @@ class PersonContactsFragment : Fragment() {
             .setContentText("Person reported successfully")
             .show()
     }
+
+    private fun showErrorDialog() = SweetAlertDialog(requireContext(), SweetAlertDialog.ERROR_TYPE)
+        .setTitleText("Error")
+        .setContentText("An error occurred while saving to online database")
+        .show()
 
     private fun hideDialog() {
         if (progressDialog.isShowing){
