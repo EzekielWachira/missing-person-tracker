@@ -124,7 +124,7 @@ dependencies {
 
     //sweet alert for android
 //    implementation(Dependencies.sweetAlert2)
-    implementation(Dependencies.sweetAlert2)
+    implementation(Dependencies.sweetAlert)
 
     //data store
     implementation(Dependencies.dataStore)

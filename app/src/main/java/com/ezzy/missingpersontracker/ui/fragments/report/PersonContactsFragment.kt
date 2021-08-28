@@ -1,5 +1,6 @@
 package com.ezzy.missingpersontracker.ui.fragments.report
 
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,10 +10,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Contact
 import com.ezzy.core.domain.MissingPerson
+import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.common.CommonAdapter
 import com.ezzy.missingpersontracker.common.Directions
 import com.ezzy.missingpersontracker.common.ItemDecorator
@@ -34,6 +37,7 @@ class PersonContactsFragment : Fragment() {
 
     private val viewModel: ReportMissingPersonViewModel by activityViewModels()
     private lateinit var mAdapter: CommonAdapter<Contact>
+    private lateinit var progressDialog: SweetAlertDialog
 
     private var missingPerson: MissingPerson? = null
     private var address: Address? = null
@@ -46,6 +50,7 @@ class PersonContactsFragment : Fragment() {
     ): View {
         _binding = FragmentPersonContactsBinding.inflate(inflater, container, false)
 
+        initializeDialog()
         subscriber()
         setUpUI()
         setUpRecyclerView()
@@ -59,6 +64,13 @@ class PersonContactsFragment : Fragment() {
         viewModel.personImages.observe(viewLifecycleOwner) { images ->
             images.forEach { Timber.d("IMAGE -> $it") }
         }
+    }
+
+    private fun initializeDialog() {
+        progressDialog = SweetAlertDialog(requireContext(), SweetAlertDialog.PROGRESS_TYPE)
+        progressDialog.titleText = getString(R.string.reporting_msp)
+        progressDialog.progressHelper?.barColor = Color.parseColor("#863B96")
+        progressDialog.setCancelable(false)
     }
 
     private fun subscriber() {
@@ -125,16 +137,42 @@ class PersonContactsFragment : Fragment() {
             viewModel.addMissingPersonState.collect { state ->
                 when (state) {
                     is Resource.Loading -> {
+                        showDialog()
                         showToast("Saving person details")
                     }
                     is Resource.Success -> {
+                        hideDialog()
+                        showSuccessDialog()
                         showToast("Person saved successfully: ${state.data}")
                     }
                     is Resource.Failure -> {
+                        hideDialog()
                         showToast("User not saved: ${state.errorMessage}")
+                    }
+                    is Resource.Empty -> {
+                        hideDialog()
                     }
                 }
             }
+        }
+    }
+
+    private fun showDialog() {
+        if (!progressDialog.isShowing){
+            progressDialog.show()
+        }
+    }
+
+    private fun showSuccessDialog() {
+        SweetAlertDialog(requireContext(), SweetAlertDialog.SUCCESS_TYPE)
+            .setTitleText("Success")
+            .setContentText("Person reported successfully")
+            .show()
+    }
+
+    private fun hideDialog() {
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
         }
     }
 

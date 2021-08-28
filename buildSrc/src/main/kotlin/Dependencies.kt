@@ -85,7 +85,6 @@ object Dependencies {
     const val firebaseUiForFirestore = "com.firebaseui:firebase-ui-firestore:${Versions.firebaseUiVersion}"
     const val firebaseUiForStorage = "com.firebaseui:firebase-ui-storage:${Versions.firebaseUiVersion}"
     const val coroutinesForFirebase = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinesForFirebaseVersion}"
-    const val sweetAlert = "com.github.thomper:sweet-alert-dialog:${Versions.sweetAlertVersion}"
     const val sweetAlert2 = "com.github.thomper:sweet-alert-dialog:${Versions.sweetAlertVersion}"
     const val dataStore = "androidx.datastore:datastore-preferences:${Versions.dataStoreVersion}"
     const val typedDataStore = "androidx.datastore:datastore:${Versions.dataStoreVersion}"
@@ -95,4 +94,5 @@ object Dependencies {
     const val skydoveProgress = "com.github.skydoves:progressview:${Versions.skydoveVersion}"
     const val mpCharts = "com.github.PhilJay:MPAndroidChart:${Versions.mpChartVersion}"
     const val imagePicker = "com.erikagtierrez.multiple_media_picker:multiple-media-picker:1.0.5"
+    const val sweetAlert = "com.github.f0ris.sweetalert:library:${Versions.sweetAlertVersion}"
 }

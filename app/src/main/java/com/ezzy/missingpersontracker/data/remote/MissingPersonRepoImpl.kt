@@ -78,7 +78,19 @@ class MissingPersonRepoImpl @Inject constructor(
                         Timber.i("Saving images")
                     }
                     is Resource.Success -> {
-                        saveImageLinks(this.id, state.data)
+                        saveImageLinks(this.id, state.data).collect { imageState ->
+                            when (imageState) {
+                                is Resource.Loading -> {
+                                    Timber.i("Saving contacts")
+                                }
+                                is Resource.Success -> {
+                                    Timber.i("Image status status: ${imageState.data}")
+                                }
+                                is Resource.Failure -> {
+                                    Timber.e("Contacts not saved")
+                                }
+                            }
+                        }
                     }
                     is Resource.Failure -> {
                         Timber.e("images not saved")
@@ -121,8 +133,6 @@ class MissingPersonRepoImpl @Inject constructor(
         links: List<String>
     ): Flow<Resource<Boolean>> = flow {
         emit(Resource.loading())
-        Timber.d("LINKS: $links")
-        Timber.d("ID: $missingPersonId")
         for (link in links) {
             firebaseFirestore.collection(MISSING_PERSON_IMAGES_COLLECTION)
                 .document(missingPersonId)

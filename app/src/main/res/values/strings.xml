@@ -70,6 +70,7 @@
     <string name="address">ADDRESS</string>
     <string name="username">Username</string>
     <string name="location">LOCATION</string>
+    <string name="reporting_msp">Reporting missing person</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>
