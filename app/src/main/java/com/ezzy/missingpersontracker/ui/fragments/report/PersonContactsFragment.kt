@@ -24,10 +24,12 @@ import com.ezzy.missingpersontracker.databinding.FragmentPersonContactsBinding
 import com.ezzy.missingpersontracker.ui.adapter.ContactViewHolder
 import com.ezzy.missingpersontracker.ui.dialogs.AddContactsDialog
 import com.ezzy.missingpersontracker.util.showToast
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 import java.net.URI
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PersonContactsFragment : Fragment() {
@@ -38,6 +40,8 @@ class PersonContactsFragment : Fragment() {
     private val viewModel: ReportMissingPersonViewModel by activityViewModels()
     private lateinit var mAdapter: CommonAdapter<Contact>
     private lateinit var progressDialog: SweetAlertDialog
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     private var missingPerson: MissingPerson? = null
     private var address: Address? = null
@@ -92,6 +96,7 @@ class PersonContactsFragment : Fragment() {
         viewModel.missingPerson.observe(viewLifecycleOwner) {
             missingPerson = it
         }
+
     }
 
     private fun setUpRecyclerView() {
@@ -134,6 +139,7 @@ class PersonContactsFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenCreated {
+
             viewModel.addMissingPersonState.collect { state ->
                 when (state) {
                     is Resource.Loading -> {
@@ -159,7 +165,7 @@ class PersonContactsFragment : Fragment() {
     }
 
     private fun showDialog() {
-        if (!progressDialog.isShowing){
+        if (!progressDialog.isShowing) {
             progressDialog.show()
         }
     }
@@ -177,7 +183,7 @@ class PersonContactsFragment : Fragment() {
         .show()
 
     private fun hideDialog() {
-        if (progressDialog.isShowing){
+        if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
     }

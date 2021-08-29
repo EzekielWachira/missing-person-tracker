@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.OpenableColumns
@@ -14,11 +15,13 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.ezzy.core.domain.MissingPerson
 import com.ezzy.missingpersontracker.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -52,6 +55,39 @@ fun String.smartTruncate(length: Int): String {
     }
 
     return builder.toString()
+}
+
+fun TextInputLayout.showError(errorMessage: String) {
+    this.error = errorMessage
+}
+
+fun TextInputLayout.clearError() {
+    this.error = null
+}
+
+fun TextInputEditText.takeText(): String {
+    return this.text.toString()
+}
+
+fun Activity.showSuccessDialog(title: String, textContent: String): SweetAlertDialog{
+    return SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).apply {
+        titleText = title
+        contentText = textContent
+    }
+}
+
+fun Activity.showErrorDialog(title: String, textContent: String): SweetAlertDialog {
+    return SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).apply {
+        titleText = title
+        contentText = textContent
+    }
+}
+
+fun Activity.showLoadingDialog(title: String): SweetAlertDialog {
+    return SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).apply {
+        titleText = title
+        progressHelper?.barColor = Color.parseColor("#863B96")
+    }
 }
 
 fun Activity.showToast(message: String) {

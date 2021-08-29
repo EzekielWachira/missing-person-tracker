@@ -10,8 +10,8 @@ data class MissingPerson(
     val personStatus: String? = null,
     val age: String? = null,
     val gender: String? =  null,
-    val height: Long? = null,
-    val weight: Long? = null,
+    val height: Float? = null,
+    val weight: Float? = null,
     val description: String? = null,
     val reporterId: String? = null
 ): Serializable

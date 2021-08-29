@@ -71,6 +71,12 @@
     <string name="username">Username</string>
     <string name="location">LOCATION</string>
     <string name="reporting_msp">Reporting missing person</string>
+    <string name="empty_field_error">This field is required</string>
+    <string name="saving_user_data_error">An error occurred while saving your data</string>
+    <string name="error">Error</string>
+    <string name="user_data_saved">Your data has been saved</string>
+    <string name="saving_data">Saving your data</string>
+    <string name="success">Success</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>

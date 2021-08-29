@@ -41,3 +41,17 @@ class LoginUser(private val repository: UserRepository) {
     ) = repository.loginUser(email, password)
 }
 
+class CheckUser(private val repository: UserRepository) {
+    suspend operator fun invoke(
+        email: String?, phoneNumber: String?
+    ): Flow<Resource<User>> = repository.checkUser(email, phoneNumber)
+}
+
+class GetAuthenticatedUserID(private val repository: UserRepository) {
+    suspend operator fun invoke (
+        email: String?, phoneNumber: String?
+    ): Flow<Resource<String>> = repository.getAuthenticatedUserID(
+        email, phoneNumber
+    )
+}
+

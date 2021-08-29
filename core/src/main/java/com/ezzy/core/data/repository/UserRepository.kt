@@ -21,4 +21,8 @@ class UserRepository(
         dataSource.registerUser(email, password)
     suspend fun loginUser(email: String, password: String): Boolean =
         dataSource.loginUser(email, password)
+    suspend fun checkUser(email: String?, phoneNumber: String?): Flow<Resource<User>> =
+        dataSource.checkUser(email, phoneNumber)
+    suspend fun getAuthenticatedUserID(email: String?, phoneNumber: String?):
+            Flow<Resource<String>> = dataSource.getAuthenticatedUserID(email, phoneNumber)
 }

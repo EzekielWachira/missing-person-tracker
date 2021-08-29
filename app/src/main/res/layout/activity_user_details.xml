@@ -13,8 +13,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@id/btnDone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,8 +51,8 @@
                         android:id="@+id/addImage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Add image"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:text="Add image"
                         app:icon="@drawable/ic_add_photo" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -77,11 +79,13 @@
                     android:padding="@dimen/_10sdp">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/firstNameLyt"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/first_name"
+                        app:errorEnabled="true"
                         app:endIconMode="clear_text"
                         app:startIconDrawable="@drawable/ic_file_rename">
 
@@ -93,12 +97,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/lastNameLyt"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/last_name"
                         app:endIconMode="clear_text"
+                        app:errorEnabled="true"
                         app:startIconDrawable="@drawable/ic_file_rename">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -114,6 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/username"
+                        app:errorEnabled="true"
                         app:endIconMode="clear_text"
                         app:startIconDrawable="@drawable/ic_file_rename">
 
@@ -142,11 +149,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/phoneLyt"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/phone"
+                        app:errorEnabled="true"
                         app:endIconMode="clear_text"
                         app:startIconDrawable="@drawable/ic_phone">
 
@@ -185,11 +194,13 @@
                     android:padding="@dimen/_10sdp">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/countryNameLyt"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/country"
+                        app:errorEnabled="true"
                         app:endIconMode="clear_text"
                         app:startIconDrawable="@drawable/ic_language">
 
@@ -201,10 +212,12 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cityLyt"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
+                        app:errorEnabled="true"
                         android:hint="@string/city"
                         app:endIconMode="clear_text"
                         app:startIconDrawable="@drawable/ic_building_marker">
@@ -217,11 +230,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/stateLyt"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/state"
+                        app:errorEnabled="true"
                         app:endIconMode="clear_text"
                         app:startIconDrawable="@drawable/ic_building_marker">
 
@@ -233,11 +248,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/townLyt"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/town"
+                        app:errorEnabled="true"
                         app:endIconMode="clear_text"
                         app:startIconDrawable="@drawable/ic_building_marker">
 

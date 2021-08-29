@@ -10,6 +10,7 @@ import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.LOCATIO
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +26,48 @@ class UserRepoImpl @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore,
     private val firebaseAuth: FirebaseAuth
 ) : UserDataSource {
+
+    override suspend fun checkUser(email: String?, phoneNumber: String?): Flow<Resource<User>> =
+        flow {
+            emit(Resource.loading())
+            var user: User? = null
+            var snapshot: QuerySnapshot? =  null
+            val userColl = firebaseFirestore.collection(USER_COLLECTION)
+            if (email != null) {
+                snapshot = userColl.whereEqualTo("email", email).get().await()
+            } else if (phoneNumber != null) {
+                snapshot = userColl.whereEqualTo("phoneNumber", phoneNumber).get().await()
+            }
+
+            snapshot?.forEach { snap ->
+                user = snap.toObject(User::class.java)
+            }
+
+            emit(Resource.success(user!!))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+
+    override suspend fun getAuthenticatedUserID(
+        email: String?,
+        phoneNumber: String?
+    ): Flow<Resource<String>> = flow {
+        emit(Resource.loading())
+        var userId: String? = null
+        var snapshot: QuerySnapshot? =  null
+        val userColl = firebaseFirestore.collection(USER_COLLECTION)
+        if (email != null) {
+            snapshot = userColl.whereEqualTo("email", email).get().await()
+        } else if (phoneNumber != null) {
+            snapshot = userColl.whereEqualTo("phoneNumber", phoneNumber).get().await()
+        }
+        snapshot?.forEach { snap ->
+            userId = snap.id
+        }
+        emit(Resource.success(userId!!))
+    }.catch { emit(Resource.failed(it.message.toString())) }
+        .flowOn(Dispatchers.IO)
+
 
     override suspend fun registerUser(email: String, password: String): Resource<Flow<Boolean>> {
         return try {

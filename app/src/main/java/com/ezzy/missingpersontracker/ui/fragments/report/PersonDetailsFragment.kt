@@ -8,14 +8,21 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isEmpty
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.MissingPerson
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.databinding.FragmentPersonContactsBinding
 import com.ezzy.missingpersontracker.databinding.FragmentPersonDetailsBinding
 import com.ezzy.missingpersontracker.util.isEmpty
 import com.ezzy.missingpersontracker.util.showToast
+import com.ezzy.missingpersontracker.util.takeText
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PersonDetailsFragment : Fragment() {
@@ -25,38 +32,84 @@ class PersonDetailsFragment : Fragment() {
 
     private val viewModel: ReportMissingPersonViewModel by activityViewModels()
 
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
+
+    private var userId: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentPersonDetailsBinding.inflate(inflater, container, false)
+        initializeListeners()
         setUpUI()
+        subscribeToUI()
         return binding.root
     }
 
-    private fun setUpUI() {
-        binding.btnNext.setOnClickListener {
+    private fun initializeListeners() {
+        with(firebaseAuth.currentUser) {
+            when {
+                this?.email?.isNotEmpty() == true -> {
+                    viewModel.getAuthUserId(this.email, null)
+                }
+                this?.phoneNumber?.isNotEmpty() == true -> {
+                    viewModel.getAuthUserId(null, this.phoneNumber)
+                }
+                else -> return@with
+            }
+        }
+    }
 
-            if (binding.firstname.isEmpty() || binding.lastname.isEmpty() || binding.middlename.isEmpty()
-                || binding.age.isEmpty() || binding.color.isEmpty() || binding.gender.isEmpty()
-                || binding.personStatus.isEmpty() || binding.description.isEmpty()
-            ) {
-                showToast("Please fill out all the fields")
-            } else {
-                val missingPerson = MissingPerson(
-                    binding.firstname.text.toString(),
-                    binding.middlename.text.toString(),
-                    binding.lastname.text.toString(),
-                    binding.color.text.toString(),
-                    binding.personStatus.text.toString(),
-                    binding.age.text.toString(),
-                    binding.gender.text.toString(),
-                    170,
-                    67,
-                    binding.description.text.toString()
-                )
-                viewModel.addMissingPersonDetails(missingPerson)
-                findNavController().navigate(R.id.action_personDetailsFragment_to_addressFragment)
+    private fun subscribeToUI() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.userId.collect { resourceState ->
+                when (resourceState) {
+                    is Resource.Loading -> {
+                        Timber.i("Loading user id...")
+                    }
+                    is Resource.Success -> {
+                        Timber.d("USER ID: ${resourceState.data}")
+                        userId = resourceState.data
+                    }
+                    is Resource.Failure -> {
+                        Timber.d("Error loading user id: ${resourceState.errorMessage}")
+                    }
+                    is Resource.Empty -> {
+                        Timber.d("Error loading user id")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setUpUI() {
+        with(binding) {
+            binding.btnNext.setOnClickListener {
+
+                if (firstname.isEmpty() || lastname.isEmpty() || middlename.isEmpty()
+                    || age.isEmpty() || color.isEmpty() || gender.isEmpty()
+                    || personStatus.isEmpty() || description.isEmpty()
+                ) {
+                    showToast("Please fill out all the fields")
+                } else {
+                    val missingPerson = MissingPerson(
+                        firstname.takeText(),
+                        middlename.takeText(),
+                        lastname.takeText(),
+                        color.takeText(),
+                        personStatus.text.toString(),
+                        age.takeText(),
+                        gender.text.toString(),
+                        170f,
+                        60f,
+                        description.takeText(),
+                        userId
+                    )
+                    viewModel.addMissingPersonDetails(missingPerson)
+                    findNavController().navigate(R.id.action_personDetailsFragment_to_addressFragment)
+                }
             }
         }
     }

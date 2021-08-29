@@ -7,5 +7,6 @@ class User(
     val lastName: String? = null,
     val email: String? = null,
     val userName: String? = null,
+    val phoneNumber: String? = null,
     val imageSrc: String? = null
 ): Serializable

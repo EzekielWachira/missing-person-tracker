@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class Location(
     val missingPersonId: String? = null,
-    val latitude: Long? = null,
-    val longitude: Long? = null,
+    val latitude: Float? = null,
+    val longitude: Float? = null,
     val locationName: String? = null
 ): Serializable
