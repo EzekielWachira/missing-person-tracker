@@ -1,5 +1,6 @@
 package com.ezzy.missingpersontracker.ui.fragments.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.ezzy.missingpersontracker.common.CommonAdapter
 import com.ezzy.missingpersontracker.common.Directions
 import com.ezzy.missingpersontracker.common.ItemDecorator
 import com.ezzy.missingpersontracker.databinding.HomeFragmentBinding
+import com.ezzy.missingpersontracker.ui.activities.person_details.PersonDetailsActivity
 import com.ezzy.missingpersontracker.util.FakerAdapter
 import com.ezzy.missingpersontracker.util.gone
 import com.ezzy.missingpersontracker.util.showToast
@@ -29,7 +31,8 @@ class HomeFragment : Fragment() {
     private val binding: HomeFragmentBinding get() = _binding!!
 
     private val homeViewModel: HomeViewModel by viewModels()
-//    private lateinit var mAdapter: FakerAdapter
+
+    //    private lateinit var mAdapter: FakerAdapter
     private lateinit var mAdapter: CommonAdapter<Pair<MissingPerson, List<Image>>>
 
     private var missingPersons: List<Pair<MissingPerson, List<Image>>>? = null
@@ -78,7 +81,7 @@ class HomeFragment : Fragment() {
     private fun subscribeToUI() {
         lifecycleScope.launchWhenCreated {
             homeViewModel.missingPeople.collect { resourceState ->
-                when(resourceState) {
+                when (resourceState) {
                     is Resource.Loading -> binding.spinKit.visible()
                     is Resource.Success -> {
                         binding.spinKit.gone()
@@ -107,6 +110,15 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mAdapter.setOnClickListener {
+            startActivity(Intent(requireContext(), PersonDetailsActivity::class.java).apply {
+                putExtra("missingPerson", it?.first)
+                putExtra("images", it?.second?.toTypedArray())
+            })
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

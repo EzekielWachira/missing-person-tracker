@@ -23,6 +23,7 @@ import com.ezzy.missingpersontracker.data.model.ImageItem
 import com.ezzy.missingpersontracker.databinding.FragmentPersonContactsBinding
 import com.ezzy.missingpersontracker.ui.adapter.ContactViewHolder
 import com.ezzy.missingpersontracker.ui.dialogs.AddContactsDialog
+import com.ezzy.missingpersontracker.util.getNameFromUri
 import com.ezzy.missingpersontracker.util.showToast
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -84,7 +85,7 @@ class PersonContactsFragment : Fragment() {
 
         viewModel.personImages.observe(viewLifecycleOwner) { images ->
             for (image in images) {
-                personImages.add(URI.create(image.uri.toString()))
+                personImages.add(URI.create(image.uri.getNameFromUri(requireContext())))
             }
             Timber.d("IMAGES: $personImages")
         }

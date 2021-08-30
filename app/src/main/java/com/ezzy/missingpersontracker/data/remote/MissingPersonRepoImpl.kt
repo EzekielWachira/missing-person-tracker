@@ -12,13 +12,10 @@ import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.IMAGES
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.LOCATION
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.MISSING_PERSON_COLLLECTION
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.MISSING_PERSON_IMAGES_COLLECTION
-import com.ezzy.missingpersontracker.util.getNameFromUri
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import java.net.URI
@@ -269,10 +266,14 @@ class MissingPersonRepoImpl @Inject constructor(
             .flowOn(Dispatchers.IO)
 
 
-    override suspend fun getPersonImages(): Flow<Resource<List<Image>>> =
+    override suspend fun getPersonImages(personId: String): Flow<Resource<List<Image>>> =
         flow {
             emit(Resource.loading())
-            val userImages = missingPersonImages!!
+            val userImages = mutableListOf<Image>()
+            val snapshot = imagesCollection.document(personId).collection(IMAGES).get().await()
+            snapshot.forEach { snap ->
+                userImages.add(snap.toObject(Image::class.java))
+            }
             emit(Resource.success(userImages))
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)

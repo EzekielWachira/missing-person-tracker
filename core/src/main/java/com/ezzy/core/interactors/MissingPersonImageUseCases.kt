@@ -13,6 +13,8 @@ class SaveImage(private val repository: MissingPersonImageRepository) {
 }
 
 class GetPersonImages(private val repository: MissingPersonImageRepository) {
-    suspend operator fun invoke (): Flow<Resource<List<Image>>> = repository.getPersonImages()
+    suspend operator fun invoke (
+        personId: String
+    ): Flow<Resource<List<Image>>> = repository.getPersonImages(personId)
 }
 

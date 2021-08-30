@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MissingPersonImageDataSource {
     suspend fun saveImage(imageUrl: String){}
-    suspend fun getPersonImages(): Flow<Resource<List<Image>>>
+    suspend fun getPersonImages(personId: String): Flow<Resource<List<Image>>>
 }
