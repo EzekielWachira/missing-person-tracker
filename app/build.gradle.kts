@@ -129,12 +129,13 @@ dependencies {
     //data store
     implementation(Dependencies.dataStore)
     implementation(Dependencies.typedDataStore)
+    implementation(Dependencies.spinKit)
 
-    implementation(Dependencies.mpCharts)
+//    implementation(Dependencies.mpCharts)
 
-    implementation(Dependencies.skydoveProgress)
+//    implementation(Dependencies.skydoveProgress)
 
-    implementation(Dependencies.imagePicker)
+//    implementation(Dependencies.imagePicker)
 //    implementation("io.github.ParkSangGwon:tedpermission:x.y.z")
 //    implementation("gun0912.ted:tedbottompicker:x.y.z")
 

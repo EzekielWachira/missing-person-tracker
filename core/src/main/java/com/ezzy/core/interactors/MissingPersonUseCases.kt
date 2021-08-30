@@ -1,7 +1,9 @@
 package com.ezzy.core.interactors
 
 import com.ezzy.core.data.repository.MissingPersonRepository
+import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.*
+import kotlinx.coroutines.flow.Flow
 import java.net.URI
 
 class AddMissingPerson(private val repository: MissingPersonRepository) {
@@ -27,5 +29,6 @@ class SearchMissingPerson(private val repository: MissingPersonRepository) {
 }
 
 class GetMissingPeople(private val repository: MissingPersonRepository) {
-    suspend operator fun invoke() = repository.getMissingPeople()
+    suspend operator fun invoke(): Flow<Resource<List<Pair<MissingPerson, List<Image>>>>> =
+        repository.getMissingPeople()
 }

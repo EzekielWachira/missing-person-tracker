@@ -98,7 +98,6 @@ fun Fragment.showToast(message: String) {
     return Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
-
 fun Bitmap.convertToUri(context: Context): Uri {
     val bytes = ByteArrayOutputStream()
     this.compress(Bitmap.CompressFormat.JPEG, 100, bytes)

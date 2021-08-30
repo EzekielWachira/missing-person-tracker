@@ -1,5 +1,6 @@
 package com.ezzy.missingpersontracker.di
 
+import com.ezzy.core.data.repository.MissingPersonImageRepository
 import com.ezzy.core.data.repository.MissingPersonRepository
 import com.ezzy.core.data.repository.UserRepository
 import com.ezzy.core.interactors.*
@@ -32,6 +33,13 @@ object DataModule {
         firebaseStorage: FirebaseStorage
     ) = MissingPersonRepository(MissingPersonRepoImpl(firebaseFirestore, firebaseStorage))
 
+    @Provides
+    @Singleton
+    fun provideMissingPersonImagesRepo(
+        firebaseFirestore: FirebaseFirestore,
+        firebaseStorage: FirebaseStorage
+    ) = MissingPersonImageRepository(MissingPersonRepoImpl(firebaseFirestore, firebaseStorage))
+
 
     @Provides
     @Singleton
@@ -57,5 +65,14 @@ object DataModule {
     @Provides
     @Singleton
     fun provideGetAuthUserID(repository: UserRepository) = GetAuthenticatedUserID(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetMissingPeople(repository: MissingPersonRepository) = GetMissingPeople(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetMissingPersonImages(repository: MissingPersonImageRepository) =
+        GetPersonImages(repository)
 
 }

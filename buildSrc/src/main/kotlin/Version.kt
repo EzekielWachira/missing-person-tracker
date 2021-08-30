@@ -25,4 +25,5 @@ object Versions {
     const val work_version = "2.5.0"
     const val paging_version = "2.1.2"
     const val truth = "1.1.3"
+    const val spinKitVersion = "1.4.0"
 }

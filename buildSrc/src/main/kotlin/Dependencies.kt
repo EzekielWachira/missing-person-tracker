@@ -95,4 +95,5 @@ object Dependencies {
     const val mpCharts = "com.github.PhilJay:MPAndroidChart:${Versions.mpChartVersion}"
     const val imagePicker = "com.erikagtierrez.multiple_media_picker:multiple-media-picker:1.0.5"
     const val sweetAlert = "com.github.f0ris.sweetalert:library:${Versions.sweetAlertVersion}"
+    const val spinKit = "com.github.ybq:Android-SpinKit:${Versions.spinKitVersion}"
 }

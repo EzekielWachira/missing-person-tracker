@@ -2,6 +2,7 @@ package com.ezzy.missingpersontracker.data.remote
 
 import android.net.Uri
 import com.ezzy.core.data.datasource.MissingPersonDataSource
+import com.ezzy.core.data.datasource.MissingPersonImageDataSource
 import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.*
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.ADDITIONAL_CONTACTS
@@ -27,11 +28,13 @@ import javax.inject.Inject
 class MissingPersonRepoImpl @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore,
     firebaseStorage: FirebaseStorage
-) : MissingPersonDataSource {
+) : MissingPersonDataSource, MissingPersonImageDataSource {
 
     private val missingPersonCollection =
         firebaseFirestore.collection(MISSING_PERSON_COLLLECTION)
     private val storageReference = firebaseStorage.reference
+    private val imagesCollection = firebaseFirestore.collection(MISSING_PERSON_IMAGES_COLLECTION)
+    private var missingPersonImages: List<Image>? = null
 
     override suspend fun addAMissingPerson(
         missingPerson: MissingPerson,
@@ -112,7 +115,7 @@ class MissingPersonRepoImpl @Inject constructor(
             firebaseFirestore.collection(MISSING_PERSON_IMAGES_COLLECTION)
                 .document(missingPersonId)
                 .collection(IMAGES)
-                .add(mapOf("image_src" to link)).await()
+                .add(Image(link)).await()
         }
         emit(Resource.success(true))
     }.catch { emit(Resource.failed(it.message.toString())) }
@@ -229,13 +232,49 @@ class MissingPersonRepoImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getMissingPeople(): Flow<Resource<List<MissingPerson>>> =
-        flow<Resource<List<MissingPerson>>> {
+    override suspend fun getMissingPeople(): Flow<Resource<List<Pair<MissingPerson, List<Image>>>>> =
+        flow {
             emit(Resource.loading())
+            var images: List<Image>? = null
+            val pairList = mutableListOf<Pair<MissingPerson, List<Image>>>()
             val snapshot = missingPersonCollection.get().await()
-            val missingPersons = snapshot.toObjects(MissingPerson::class.java)
-            emit(Resource.success(missingPersons))
-        }.catch {
-            emit(Resource.failed(it.toString()))
-        }.flowOn(Dispatchers.IO)
+            snapshot.forEach { doc ->
+                getImages(doc.id).collect { state ->
+                    when (state) {
+                        is Resource.Loading -> Timber.i("Loading data")
+                        is Resource.Success -> {
+                            images = state.data
+                        }
+                        is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                        is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
+                    }
+                }
+                pairList.add(Pair(doc.toObject(MissingPerson::class.java), images!!))
+            }
+            emit(Resource.success(pairList))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+    private suspend fun getImages(personId: String): Flow<Resource<List<Image>>> =
+        flow {
+            emit(Resource.loading())
+            val userImages = mutableListOf<Image>()
+            val snapshot = imagesCollection.document(personId).collection(IMAGES).get().await()
+            snapshot.forEach { snap ->
+                userImages.add(snap.toObject(Image::class.java))
+            }
+            missingPersonImages = userImages
+            emit(Resource.success(userImages))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+
+    override suspend fun getPersonImages(): Flow<Resource<List<Image>>> =
+        flow {
+            emit(Resource.loading())
+            val userImages = missingPersonImages!!
+            emit(Resource.success(userImages))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
 }
