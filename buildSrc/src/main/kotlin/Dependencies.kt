@@ -80,6 +80,7 @@ object Dependencies {
     const val firebaseFireStore = "com.google.firebase:firebase-firestore-ktx"
     const val firebaseStorage = "com.google.firebase:firebase-storage-ktx"
     const val firebaseAuth = "com.google.firebase:firebase-auth-ktx"
+    const val firebaseCloudMessaging = "com.google.firebase:firebase-messaging-ktx"
     const val firebaseUiAuth = "com.firebaseui:firebase-ui-auth:${Versions.firebaseUiVersion}"
     const val firebaseAuthFacebook = "com.facebook.android:facebook-android-sdk:4.42.0"
     const val firebaseUiForFirestore = "com.firebaseui:firebase-ui-firestore:${Versions.firebaseUiVersion}"

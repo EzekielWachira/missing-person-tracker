@@ -46,8 +46,8 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getAllMissingPeople()
 //        homeViewModel.getPersonAllImages()
-        subscribeToUI()
         setUpRecyclerView()
+        subscribeToUI()
 
 //        mAdapter = FakerAdapter(
 //            listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
                     is Resource.Loading -> binding.spinKit.visible()
                     is Resource.Success -> {
                         binding.spinKit.gone()
-                        missingPersons = resourceState.data
+                        mAdapter.differ.submitList(resourceState.data)
                     }
                     is Resource.Failure -> {
                         binding.spinKit.gone()

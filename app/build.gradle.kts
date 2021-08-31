@@ -116,6 +116,7 @@ dependencies {
     implementation(Dependencies.firebaseFireStore)
     implementation(Dependencies.firebaseStorage)
     implementation(Dependencies.firebaseAuth)
+    implementation(Dependencies.firebaseCloudMessaging)
     implementation(Dependencies.firebaseUiAuth)
 //    implementation(Dependencies.firebaseAuthFacebook)
     implementation(Dependencies.firebaseUiForStorage)
