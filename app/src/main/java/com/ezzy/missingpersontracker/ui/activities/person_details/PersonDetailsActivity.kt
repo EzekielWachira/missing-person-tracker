@@ -39,7 +39,7 @@ class PersonDetailsActivity : AppCompatActivity() {
 //            images = intent.getSerializableExtra("images") as List<Image>
         }
 
-        viewModel.getImages(missin)
+//        viewModel.getImages(missin)
 
         setUpUI()
     }

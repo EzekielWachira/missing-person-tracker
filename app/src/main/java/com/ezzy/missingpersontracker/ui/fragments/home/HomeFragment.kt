@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
 
         homeViewModel.getAllMissingPeople()
-        homeViewModel.getPersonAllImages()
+//        homeViewModel.getPersonAllImages()
         subscribeToUI()
         setUpRecyclerView()
 

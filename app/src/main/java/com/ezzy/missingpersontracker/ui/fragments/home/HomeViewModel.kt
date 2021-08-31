@@ -40,16 +40,16 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getPersonAllImages() = viewModelScope.launch {
-        getPersonImages().collect { resourceState ->
-            when (resourceState) {
-                is Resource.Loading -> _personImages.value = Resource.loading()
-                is Resource.Success -> {
-                    _personImages.value = Resource.success(resourceState.data)
-                }
-                is Resource.Failure -> Timber.e("Could not get missing person images: ${resourceState.errorMessage}")
-                is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
-            }
-        }
-    }
+//    fun getPersonAllImages() = viewModelScope.launch {
+//        getPersonImages().collect { resourceState ->
+//            when (resourceState) {
+//                is Resource.Loading -> _personImages.value = Resource.loading()
+//                is Resource.Success -> {
+//                    _personImages.value = Resource.success(resourceState.data)
+//                }
+//                is Resource.Failure -> Timber.e("Could not get missing person images: ${resourceState.errorMessage}")
+//                is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
+//            }
+//        }
+//    }
 }
