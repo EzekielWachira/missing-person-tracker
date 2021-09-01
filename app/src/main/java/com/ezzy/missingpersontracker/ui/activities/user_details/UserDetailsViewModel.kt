@@ -7,6 +7,7 @@ import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Location
 import com.ezzy.core.domain.User
 import com.ezzy.core.interactors.AddUser
+import com.ezzy.core.interactors.GetMissingPersonReporter
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UserDetailsViewModel @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore,
-    private val addUser: AddUser
+    private val addUser: AddUser,
 ) : ViewModel() {
 
     private var _userId = MutableStateFlow<Resource<String>>(Resource.Empty)

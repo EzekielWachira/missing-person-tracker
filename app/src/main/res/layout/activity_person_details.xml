@@ -66,6 +66,7 @@
 
                         <TextView
                             android:layout_width="0dp"
+                            android:id="@+id/age"
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:layout_weight="40"
@@ -96,6 +97,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:id="@+id/gender"
                             android:layout_gravity="end"
                             android:layout_weight="40"
                             android:gravity="center_vertical"
@@ -124,6 +126,7 @@
 
                         <TextView
                             android:layout_width="0dp"
+                            android:id="@+id/height"
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:layout_weight="40"
@@ -154,6 +157,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:id="@+id/weight"
                             android:layout_gravity="end"
                             android:layout_weight="40"
                             android:gravity="center_vertical"
@@ -185,6 +189,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:layout_weight="40"
+                            android:id="@+id/color"
                             android:gravity="center_vertical"
                             android:text="Brown" />
 
@@ -217,6 +222,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/description"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:text="@string/lorem_copy" />
 
@@ -285,6 +291,7 @@
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/_10sdp"
                         android:text="Jane Goe Doe"
+                        android:id="@+id/reporterName"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         app:drawableStartCompat="@drawable/ic_person_pin" />
@@ -298,6 +305,7 @@
                         android:paddingStart="@dimen/_10sdp"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
+                        android:id="@+id/reporterPhone"
                         app:drawableStartCompat="@drawable/ic_account_phone" />
 
                     <TextView
@@ -309,6 +317,7 @@
                         android:text="janegoedoe@gmail.com"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
+                        android:id="@+id/reporterEmail"
                         app:drawableStartCompat="@drawable/ic_email_outline" />
 
                 </LinearLayout>

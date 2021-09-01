@@ -85,7 +85,7 @@ class PersonContactsFragment : Fragment() {
 
         viewModel.personImages.observe(viewLifecycleOwner) { images ->
             for (image in images) {
-                personImages.add(URI.create(image.uri.getNameFromUri(requireContext())))
+                personImages.add(URI.create(image.uri.toString()))
             }
             Timber.d("IMAGES: $personImages")
         }

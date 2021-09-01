@@ -25,4 +25,6 @@ class UserRepository(
         dataSource.checkUser(email, phoneNumber)
     suspend fun getAuthenticatedUserID(email: String?, phoneNumber: String?):
             Flow<Resource<String>> = dataSource.getAuthenticatedUserID(email, phoneNumber)
+    suspend fun getMissingPersonReporter(userId: String): Flow<Resource<User>> =
+        dataSource.getMissingPersonReporter(userId)
 }

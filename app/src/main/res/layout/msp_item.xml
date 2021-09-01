@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white_copy"
+        android:background="?attr/selectableItemBackground"
         android:padding="@dimen/_10sdp">
 
         <TextView
@@ -32,7 +32,7 @@
         <RelativeLayout
             android:id="@+id/image_lyt"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +51,8 @@
 
             <TextView
                 android:id="@+id/images_count"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -68,35 +70,6 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@id/image_lyt">
 
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Age: 30 Years"
-                app:chipIcon="@drawable/ic_calendar_account_outline" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gender: Male"
-                app:chipIcon="@drawable/ic_gender" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Height: 1.7 Metres"
-                app:chipIcon="@drawable/ic_height" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Weight: 70 Pounds"
-                app:chipIcon="@drawable/ic_dumbbell" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Color: Brown|Chocolate"
-                app:chipIcon="@drawable/ic_color_lens" />
 
         </com.google.android.material.chip.ChipGroup>
 

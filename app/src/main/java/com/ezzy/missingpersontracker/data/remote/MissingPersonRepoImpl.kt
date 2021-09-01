@@ -12,6 +12,7 @@ import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.IMAGES
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.LOCATION
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.MISSING_PERSON_COLLLECTION
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.MISSING_PERSON_IMAGES_COLLECTION
+import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.USER_COLLECTION
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,7 @@ class MissingPersonRepoImpl @Inject constructor(
         firebaseFirestore.collection(MISSING_PERSON_COLLLECTION)
     private val storageReference = firebaseStorage.reference
     private val imagesCollection = firebaseFirestore.collection(MISSING_PERSON_IMAGES_COLLECTION)
+    private val userCollection = firebaseFirestore.collection(USER_COLLECTION)
     private var missingPersonImages: List<Image>? = null
 
     override suspend fun addAMissingPerson(
@@ -159,7 +161,8 @@ class MissingPersonRepoImpl @Inject constructor(
     ): Flow<Resource<String>> = flow {
         emit(Resource.loading())
         val imageUri = Uri.parse(uri.toString())
-        val reference = storageReference.child("images/missing_persons/$reporterId/$fileName")
+        val reference =
+            storageReference.child("images/missing_persons/$reporterId/${System.currentTimeMillis()}_$fileName")
         reference.putFile(imageUri).await()
         val downloadUrl = reference.downloadUrl.await()
         emit(Resource.success(downloadUrl.toString()))
@@ -229,13 +232,15 @@ class MissingPersonRepoImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getMissingPeople(): Flow<Resource<List<Pair<MissingPerson, List<Image>>>>> =
+    override suspend fun getMissingPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
         flow {
             emit(Resource.loading())
             var images: List<Image>? = null
-            val pairList = mutableListOf<Pair<MissingPerson, List<Image>>>()
+            var reporter: User? = null
+            val pairList = mutableListOf<Pair<Pair<MissingPerson, List<Image>>, User>>()
             val snapshot = missingPersonCollection.get().await()
             snapshot.forEach { doc ->
+                val missingPerson = doc.toObject(MissingPerson::class.java)
                 getImages(doc.id).collect { state ->
                     when (state) {
                         is Resource.Loading -> Timber.i("Loading data")
@@ -246,11 +251,31 @@ class MissingPersonRepoImpl @Inject constructor(
                         is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
                     }
                 }
-                pairList.add(Pair(doc.toObject(MissingPerson::class.java), images!!))
+
+                getReporter(missingPerson.reporterId!!).collect { state ->
+                    when (state) {
+                        is Resource.Loading -> Timber.i("Loading data")
+                        is Resource.Success -> {
+                            reporter = state.data
+                        }
+                        is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                        is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
+                    }
+                }
+
+                pairList.add(Pair(Pair(missingPerson, images!!), reporter!!))
             }
             emit(Resource.success(pairList))
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
+
+    private suspend fun getReporter(reporterId: String): Flow<Resource<User>> = flow {
+        emit(Resource.loading())
+        val snapshot = userCollection.document(reporterId).get().await()
+        val user = snapshot.toObject(User::class.java)!!
+        emit(Resource.success(user))
+    }.catch { emit(Resource.failed(it.message.toString())) }
+        .flowOn(Dispatchers.IO)
 
     private suspend fun getImages(personId: String): Flow<Resource<List<Image>>> =
         flow {

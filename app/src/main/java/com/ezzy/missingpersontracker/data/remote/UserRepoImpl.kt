@@ -27,6 +27,8 @@ class UserRepoImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : UserDataSource {
 
+    private val userCollection = firebaseFirestore.collection(USER_COLLECTION)
+
     override suspend fun checkUser(email: String?, phoneNumber: String?): Flow<Resource<User>> =
         flow {
             emit(Resource.loading())
@@ -188,6 +190,15 @@ class UserRepoImpl @Inject constructor(
             false
         }
     }
+
+    override suspend fun getMissingPersonReporter(userId: String): Flow<Resource<User>> =
+        flow {
+            emit(Resource.loading())
+            val snapshot = userCollection.document(userId).get().await()
+            val user = snapshot.toObject(User::class.java)
+            emit(Resource.success(user!!))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
 
     override suspend fun searchUser(userName: String): Flow<List<User>> {
         TODO("Not yet implemented")

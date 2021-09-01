@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Image
 import com.ezzy.core.domain.MissingPerson
+import com.ezzy.core.domain.User
 import com.ezzy.missingpersontracker.databinding.ActivityPersonDetailsBinding
 import com.ezzy.missingpersontracker.ui.activities.report_found_person.ReportFoundPersonActivity
 import com.ezzy.missingpersontracker.util.showToast
@@ -23,6 +24,7 @@ class PersonDetailsActivity : AppCompatActivity() {
 
     private var missingPerson: MissingPerson? = null
     private var images: List<Image>? = null
+    private var reporter: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,19 +38,29 @@ class PersonDetailsActivity : AppCompatActivity() {
 
         if (intent.hasExtra("missingPerson") && intent.hasExtra("images")) {
             missingPerson = intent.getSerializableExtra("missingPerson") as MissingPerson
+            viewModel.getReporter(missingPerson?.reporterId!!)
 //            images = intent.getSerializableExtra("images") as List<Image>
         }
 
 //        viewModel.getImages(missin)
 
         setUpUI()
+        initListeners()
     }
 
     private fun setUpUI() {
 
         with(binding) {
 
-            personName.text = images?.size.toString()
+            personName.text =
+                "${missingPerson?.firstName} ${missingPerson?.middleName} ${missingPerson?.lastName}"
+            description.text = missingPerson?.description
+            age.text = missingPerson?.age + " Years"
+            height.text = missingPerson?.height.toString() + " Metres"
+            weight.text = missingPerson?.weight.toString() + " Pounds"
+            gender.text = missingPerson?.gender
+            color.text = missingPerson?.color
+
 
             reportFoundFab.setOnClickListener {
                 startActivity(
@@ -62,8 +74,23 @@ class PersonDetailsActivity : AppCompatActivity() {
 
     private fun initListeners() {
         lifecycleScope.launchWhenCreated {
+
+            viewModel.reporter.collect { state ->
+                when (state) {
+                    is Resource.Loading -> showToast("Loading reporter")
+                    is Resource.Success -> {
+                        with(binding) {
+                            reporterName.text = "${state.data.firstName} ${state.data.lastName} "
+                            reporterPhone.text = state.data.phoneNumber
+                            reporterEmail.text = state.data.email
+                        }
+                    }
+                    is Resource.Failure -> showToast("Error ${state.errorMessage}")
+                }
+            }
+
             viewModel.personImages.collect { state ->
-                when(state) {
+                when (state) {
                     is Resource.Loading -> showToast("Loading images")
                     is Resource.Success -> images = state.data
                     is Resource.Failure -> showToast("Error ${state.errorMessage}")

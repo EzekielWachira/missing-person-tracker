@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Image
 import com.ezzy.core.domain.MissingPerson
+import com.ezzy.core.domain.User
 import com.ezzy.missingpersontracker.common.CommonAdapter
 import com.ezzy.missingpersontracker.common.Directions
 import com.ezzy.missingpersontracker.common.ItemDecorator
@@ -33,9 +34,9 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     //    private lateinit var mAdapter: FakerAdapter
-    private lateinit var mAdapter: CommonAdapter<Pair<MissingPerson, List<Image>>>
+    private lateinit var mAdapter: CommonAdapter<Pair<Pair<MissingPerson, List<Image>>, User>>
 
-    private var missingPersons: List<Pair<MissingPerson, List<Image>>>? = null
+    private var missingPersons: List<Pair<Pair<MissingPerson, List<Image>>, User>>? = null
     private var missingPersonsImages: List<Image>? = null
 
     override fun onCreateView(
@@ -45,28 +46,15 @@ class HomeFragment : Fragment() {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
 
         homeViewModel.getAllMissingPeople()
-//        homeViewModel.getPersonAllImages()
         setUpRecyclerView()
         subscribeToUI()
-
-//        mAdapter = FakerAdapter(
-//            listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
-//        )
-//
-//        context?.let { ctx ->
-//            binding.missingPpleRecyclerview.apply {
-//                layoutManager = LinearLayoutManager(ctx)
-//                adapter = mAdapter
-//                addItemDecoration(ItemDecorator(Directions.VERTICAL, 5))
-//            }
-//        }
 
         return binding.root
     }
 
     private fun setUpRecyclerView() {
         mAdapter = CommonAdapter {
-            HomeViewHolder(it)
+            HomeViewHolder(it, requireContext())
         }
 
         binding.missingPpleRecyclerview.apply {
@@ -82,14 +70,22 @@ class HomeFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             homeViewModel.missingPeople.collect { resourceState ->
                 when (resourceState) {
-                    is Resource.Loading -> binding.spinKit.visible()
+                    is Resource.Loading -> {
+                        binding.spinKit.visible()
+                        binding.layoutNoData.gone()
+                    }
                     is Resource.Success -> {
                         binding.spinKit.gone()
+                        binding.layoutNoData.gone()
                         mAdapter.differ.submitList(resourceState.data)
                     }
                     is Resource.Failure -> {
                         binding.spinKit.gone()
+                        binding.layoutNoData.gone()
                         showToast(resourceState.errorMessage!!)
+                    }
+                    is Resource.Empty -> {
+                        binding.layoutNoData.visible()
                     }
                 }
             }
@@ -114,8 +110,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mAdapter.setOnClickListener {
             startActivity(Intent(requireContext(), PersonDetailsActivity::class.java).apply {
-                putExtra("missingPerson", it?.first)
-                putExtra("images", it?.second?.toTypedArray())
+                putExtra("missingPerson", it?.first?.first)
+                putExtra("images", it?.first?.second?.toTypedArray())
             })
         }
     }

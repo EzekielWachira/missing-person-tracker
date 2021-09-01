@@ -19,4 +19,5 @@ interface UserDataSource {
     suspend fun checkUser(email: String?, phoneNumber: String?): Flow<Resource<User>>
     suspend fun getAuthenticatedUserID(email: String?, phoneNumber: String?):
             Flow<Resource<String>>
+    suspend fun getMissingPersonReporter(userId: String): Flow<Resource<User>>
 }

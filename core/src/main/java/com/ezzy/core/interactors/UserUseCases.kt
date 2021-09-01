@@ -55,3 +55,8 @@ class GetAuthenticatedUserID(private val repository: UserRepository) {
     )
 }
 
+class GetMissingPersonReporter(private val repository: UserRepository) {
+    suspend operator fun invoke(userId: String):
+            Flow<Resource<User>> = repository.getMissingPersonReporter(userId)
+}
+
