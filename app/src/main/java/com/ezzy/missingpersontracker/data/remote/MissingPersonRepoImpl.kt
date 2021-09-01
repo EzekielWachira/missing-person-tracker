@@ -303,4 +303,38 @@ class MissingPersonRepoImpl @Inject constructor(
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
 
+
+    override suspend fun getMissingPersonId(missingPerson: MissingPerson): Flow<Resource<String>> =
+        flow {
+            emit(Resource.loading())
+            val snapshot = missingPersonCollection.get().await()
+            var mspId: String? = null
+            snapshot.forEach { snap ->
+                if ((snap.toObject(MissingPerson::class.java)) == missingPerson) {
+                    mspId = snap.id
+                }
+            }
+            emit(Resource.success(mspId!!))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+
+    override suspend fun getMissingPersonImages(missingPerson: MissingPerson): Flow<Resource<List<Image>>> =
+        flow {
+            emit(Resource.loading())
+            val snapshot = missingPersonCollection.get().await()
+            var mspId: String? = null
+            snapshot.forEach { snap ->
+                if ((snap.toObject(MissingPerson::class.java)) == missingPerson) {
+                    mspId = snap.id
+                }
+            }
+            val images = mutableListOf<Image>()
+            val imagesSnapshot = imagesCollection.document(mspId!!).collection(IMAGES).get().await()
+            imagesSnapshot.forEach { snap ->
+                images.add(snap.toObject(Image::class.java))
+            }
+            emit(Resource.success(images))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
 }

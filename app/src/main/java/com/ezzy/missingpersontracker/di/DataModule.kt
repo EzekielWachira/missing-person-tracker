@@ -80,4 +80,9 @@ object DataModule {
     fun provideGetMissingPersonReporter(repository: UserRepository) =
         GetMissingPersonReporter(repository)
 
+    @Singleton
+    @Provides
+    fun provideAllGetMissingPersonImages(repository: MissingPersonRepository) =
+        GetMissingPersonImages(repository)
+
 }

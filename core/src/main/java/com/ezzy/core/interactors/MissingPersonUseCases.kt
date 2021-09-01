@@ -32,3 +32,15 @@ class GetMissingPeople(private val repository: MissingPersonRepository) {
     suspend operator fun invoke(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
         repository.getMissingPeople()
 }
+
+class GetMissingPersonId(private val repository: MissingPersonRepository) {
+    suspend operator fun invoke(
+        missingPerson: MissingPerson
+    ): Flow<Resource<String>> = repository.getMissingPersonId(missingPerson)
+}
+
+class GetMissingPersonImages(private val repository: MissingPersonRepository) {
+    suspend operator fun invoke(
+        missingPerson: MissingPerson
+    ): Flow<Resource<List<Image>>> = repository.getMissingPersonImages(missingPerson)
+}

@@ -15,5 +15,7 @@ interface MissingPersonDataSource {
     ): Flow<Resource<String>>
     suspend fun searchMissingPerson(name: String): Resource<Flow<List<MissingPerson>>>
     suspend fun getMissingPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>>
+    suspend fun getMissingPersonId(missingPerson: MissingPerson): Flow<Resource<String>>
+    suspend fun getMissingPersonImages(missingPerson: MissingPerson): Flow<Resource<List<Image>>>
 
 }

@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Image
+import com.ezzy.core.domain.MissingPerson
 import com.ezzy.core.domain.User
+import com.ezzy.core.interactors.GetMissingPersonImages
 import com.ezzy.core.interactors.GetMissingPersonReporter
 import com.ezzy.core.interactors.GetPersonImages
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PersonDetailsViewModel @Inject constructor(
     private val getPersonImages: GetPersonImages,
-    private val getMissingPersonReporter: GetMissingPersonReporter
+    private val getMissingPersonReporter: GetMissingPersonReporter,
+    private val getMissingPersonImages: GetMissingPersonImages
 ): ViewModel() {
 
     private var _personImages = MutableStateFlow<Resource<List<Image>>>(Resource.Empty)
@@ -25,8 +28,8 @@ class PersonDetailsViewModel @Inject constructor(
     val personImages: StateFlow<Resource<List<Image>>> get() = _personImages
     val reporter: StateFlow<Resource<User>> get() = _reporter
 
-    fun getImages(personId: String) = viewModelScope.launch {
-        getPersonImages(personId).collect { resourceState ->
+    fun getImages(missingPerson: MissingPerson) = viewModelScope.launch {
+        getMissingPersonImages(missingPerson).collect { resourceState ->
             when(resourceState) {
                 is Resource.Loading -> _personImages.value = Resource.loading()
                 is Resource.Success -> _personImages.value = Resource.success(resourceState.data)
