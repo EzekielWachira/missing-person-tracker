@@ -12,6 +12,7 @@ import com.ezzy.core.domain.User
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.common.CommonViewHolder
 import com.ezzy.missingpersontracker.util.applyImage
+import com.ezzy.missingpersontracker.util.formatTimeToDate
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -25,6 +26,9 @@ class HomeViewHolder(
     private val chipGroup: ChipGroup = rootView.findViewById(R.id.person_properties_chip_grp)
     private val imageCount: TextView = rootView.findViewById(R.id.images_count)
     private val reporter: TextView = rootView.findViewById(R.id.reporter_text_view)
+    private val location: TextView = rootView.findViewById(R.id.locationTextView)
+    private val postDate: TextView = rootView.findViewById(R.id.post_date)
+
 
     override fun bindItem(item: Pair<Pair<MissingPerson, List<Image>>, User>?) {
         if (item?.first?.second!!.isNotEmpty()) {
@@ -33,6 +37,10 @@ class HomeViewHolder(
         }
         name.text = item.first.first.firstName
         reporter.text = "Reported by: ${item.second.firstName} ${item.second.lastName}"
+        item.first.first.reportTime?.let {
+            postDate.text = it.formatTimeToDate()
+        }
+//        location.text = "%${}"
 
         val ageChip = (LayoutInflater.from(rootView.context)
             .inflate(R.layout.chip_item, null, false) as Chip).apply {

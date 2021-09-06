@@ -20,6 +20,7 @@ object Constants {
         const val CONTACTS = "contacts"
         const val LOCATION = "location"
         const val IMAGES = "images"
+        const val FOUND_PEOPLE_COLLECTION = "found_people"
         const val ADDITIONAL_CONTACTS = "additional_contacts"
     }
 

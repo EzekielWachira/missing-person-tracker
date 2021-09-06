@@ -13,7 +13,9 @@ data class MissingPerson(
     val height: Float? = null,
     val weight: Float? = null,
     val description: String? = null,
-    val reporterId: String? = null
+    val reporterId: String? = null,
+    val foundStatus: Boolean? = null,
+    val reportTime: Long? = null
 ): Serializable
 
 enum class Gender {

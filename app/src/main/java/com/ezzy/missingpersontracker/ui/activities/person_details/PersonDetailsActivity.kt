@@ -16,7 +16,9 @@ import com.ezzy.missingpersontracker.common.Directions
 import com.ezzy.missingpersontracker.common.ItemDecorator
 import com.ezzy.missingpersontracker.databinding.ActivityPersonDetailsBinding
 import com.ezzy.missingpersontracker.ui.activities.report_found_person.ReportFoundPersonActivity
+import com.ezzy.missingpersontracker.util.gone
 import com.ezzy.missingpersontracker.util.showToast
+import com.ezzy.missingpersontracker.util.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
@@ -75,7 +77,7 @@ class PersonDetailsActivity : AppCompatActivity() {
                 startActivity(
                     Intent(
                         this@PersonDetailsActivity, ReportFoundPersonActivity::class.java
-                    )
+                    ).apply { putExtra("missing_person", missingPerson) }
                 )
             }
         }
@@ -86,12 +88,13 @@ class PersonDetailsActivity : AppCompatActivity() {
 
             viewModel.personImages.collect { state ->
                 when (state) {
-                    is Resource.Loading -> showToast("Loading images")
+                    is Resource.Loading -> binding.spinKitImages.visible()
                     is Resource.Success -> {
+                        binding.spinKitImages.gone()
                         Timber.e("IMAGE DATA: ${state.data}")
                         imageAdapter.differ.submitList(state.data)
                     }
-                    is Resource.Failure -> showToast("Error ${state.errorMessage}")
+                    is Resource.Failure -> binding.spinKitImages.gone()
                 }
             }.also {
                 viewModel.reporter.collect { state ->

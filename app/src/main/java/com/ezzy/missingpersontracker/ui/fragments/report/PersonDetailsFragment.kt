@@ -105,7 +105,9 @@ class PersonDetailsFragment : Fragment() {
                         170f,
                         60f,
                         description.takeText(),
-                        userId
+                        userId,
+                        false,
+                        System.currentTimeMillis()
                     )
                     viewModel.addMissingPersonDetails(missingPerson)
                     findNavController().navigate(R.id.action_personDetailsFragment_to_addressFragment)

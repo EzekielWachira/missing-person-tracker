@@ -23,6 +23,8 @@ android {
             useSupportLibrary = true
         }
 
+        ndkVersion = "23.0.7599858"
+
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
 
@@ -46,6 +48,7 @@ android {
 
     buildFeatures {
         viewBinding=true
+        mlModelBinding = true
     }
     configurations.all {
         exclude(group = "androidx.paging", module = "paging-runtime-ktx")
@@ -61,6 +64,9 @@ dependencies {
     implementation(Dependencies.materialComponents)
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.test:monitor:1.3.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
     testImplementation(TestLibraries.jUnit)
     testImplementation(TestLibraries.truth)
     androidTestImplementation(TestLibraries.testRunner)

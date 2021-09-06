@@ -77,6 +77,8 @@
     <string name="user_data_saved">Your data has been saved</string>
     <string name="saving_data">Saving your data</string>
     <string name="success">Success</string>
+    <string name="tell_us_where_you_found_the_person">Tell us where you found the person</string>
+    <string name="add_current_location">Add current location</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>

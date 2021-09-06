@@ -35,4 +35,7 @@ class MissingPersonRepository(
 
     suspend fun getMissingPersonImages(missingPerson: MissingPerson): Flow<Resource<List<Image>>> =
         dataSource.getMissingPersonImages(missingPerson)
+
+    suspend fun reportFoundPerson(missingPerson: MissingPerson, address: Address): Flow<Resource<String>> =
+        dataSource.reportFoundPerson(missingPerson, address)
 }

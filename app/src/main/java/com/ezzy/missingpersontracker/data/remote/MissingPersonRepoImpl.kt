@@ -8,6 +8,7 @@ import com.ezzy.core.domain.*
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.ADDITIONAL_CONTACTS
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.ADDRESS
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.CONTACTS
+import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.FOUND_PEOPLE_COLLECTION
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.IMAGES
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.LOCATION
 import com.ezzy.missingpersontracker.util.Constants.FIRESTORECOLLECTIONS.MISSING_PERSON_COLLLECTION
@@ -33,6 +34,8 @@ class MissingPersonRepoImpl @Inject constructor(
     private val storageReference = firebaseStorage.reference
     private val imagesCollection = firebaseFirestore.collection(MISSING_PERSON_IMAGES_COLLECTION)
     private val userCollection = firebaseFirestore.collection(USER_COLLECTION)
+    private val foundPeopleCollection = firebaseFirestore.collection(FOUND_PEOPLE_COLLECTION)
+
     private var missingPersonImages: List<Image>? = null
 
     override suspend fun addAMissingPerson(
@@ -336,5 +339,25 @@ class MissingPersonRepoImpl @Inject constructor(
             }
             emit(Resource.success(images))
         }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+
+    override suspend fun reportFoundPerson(
+        missingPerson: MissingPerson,
+        address: Address
+    ): Flow<Resource<String>> =
+        flow {
+            emit(Resource.loading())
+            val snapshot = missingPersonCollection.get().await()
+            var mspId: String? = null
+            snapshot.forEach { snap ->
+                if ((snap.toObject(MissingPerson::class.java)) == missingPerson) {
+                    mspId = snap.id
+                    missingPersonCollection.document(snap.id).update("foundStatus", true).await()
+                }
+            }
+           foundPeopleCollection.document(mspId!!).collection(ADDRESS).add(address).await()
+           emit(Resource.success(mspId!!))
+        }.catch{ emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
 }

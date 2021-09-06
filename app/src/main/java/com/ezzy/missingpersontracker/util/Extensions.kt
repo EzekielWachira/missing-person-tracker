@@ -191,3 +191,10 @@ fun Long.formatTimeToDate(): String {
     val format = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
     return format.format(date)
 }
+
+@SuppressLint("SimpleDateFormat")
+fun Long.formatTimeToSmallDate(): String {
+    val date = Date(this)
+    val format = SimpleDateFormat("d MMM, yyyy", Locale.getDefault())
+    return format.format(date)
+}

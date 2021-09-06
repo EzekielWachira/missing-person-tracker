@@ -240,12 +240,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:padding="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Images"
+                        android:layout_gravity="start"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold" />
 
@@ -256,6 +258,19 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="3" />
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/spin_kit_images"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:visibility="gone"
+                        style="@style/SpinKitView.Circle"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        app:SpinKit_Color="@color/blue"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

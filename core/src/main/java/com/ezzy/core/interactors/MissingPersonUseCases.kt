@@ -44,3 +44,10 @@ class GetMissingPersonImages(private val repository: MissingPersonRepository) {
         missingPerson: MissingPerson
     ): Flow<Resource<List<Image>>> = repository.getMissingPersonImages(missingPerson)
 }
+
+class ReportFoundPerson(private val repository: MissingPersonRepository) {
+    suspend operator fun invoke(
+        missingPerson: MissingPerson,
+        address: Address
+    ): Flow<Resource<String>> = repository.reportFoundPerson(missingPerson, address)
+}
