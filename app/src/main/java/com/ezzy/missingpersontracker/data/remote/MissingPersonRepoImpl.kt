@@ -244,29 +244,70 @@ class MissingPersonRepoImpl @Inject constructor(
             val snapshot = missingPersonCollection.get().await()
             snapshot.forEach { doc ->
                 val missingPerson = doc.toObject(MissingPerson::class.java)
-                getImages(doc.id).collect { state ->
-                    when (state) {
-                        is Resource.Loading -> Timber.i("Loading data")
-                        is Resource.Success -> {
-                            images = state.data
+                if (missingPerson.foundStatus == false) {
+                    getImages(doc.id).collect { state ->
+                        when (state) {
+                            is Resource.Loading -> Timber.i("Loading data")
+                            is Resource.Success -> {
+                                images = state.data
+                            }
+                            is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                            is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
                         }
-                        is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
-                        is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
                     }
-                }
 
-                getReporter(missingPerson.reporterId!!).collect { state ->
-                    when (state) {
-                        is Resource.Loading -> Timber.i("Loading data")
-                        is Resource.Success -> {
-                            reporter = state.data
+                    getReporter(missingPerson.reporterId!!).collect { state ->
+                        when (state) {
+                            is Resource.Loading -> Timber.i("Loading data")
+                            is Resource.Success -> {
+                                reporter = state.data
+                            }
+                            is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                            is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
                         }
-                        is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
-                        is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
                     }
-                }
 
-                pairList.add(Pair(Pair(missingPerson, images!!), reporter!!))
+                    pairList.add(Pair(Pair(missingPerson, images!!), reporter!!))
+                }
+            }
+            emit(Resource.success(pairList))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+    override suspend fun getFoundPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
+        flow {
+            emit(Resource.loading())
+            var images: List<Image>? = null
+            var reporter: User? = null
+            val pairList = mutableListOf<Pair<Pair<MissingPerson, List<Image>>, User>>()
+            val snapshot = missingPersonCollection.get().await()
+            snapshot.forEach { doc ->
+                val missingPerson = doc.toObject(MissingPerson::class.java)
+                if (missingPerson.foundStatus == true) {
+                    getImages(doc.id).collect { state ->
+                        when (state) {
+                            is Resource.Loading -> Timber.i("Loading data")
+                            is Resource.Success -> {
+                                images = state.data
+                            }
+                            is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                            is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
+                        }
+                    }
+
+                    getReporter(missingPerson.reporterId!!).collect { state ->
+                        when (state) {
+                            is Resource.Loading -> Timber.i("Loading data")
+                            is Resource.Success -> {
+                                reporter = state.data
+                            }
+                            is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                            is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
+                        }
+                    }
+
+                    pairList.add(Pair(Pair(missingPerson, images!!), reporter!!))
+                }
             }
             emit(Resource.success(pairList))
         }.catch { emit(Resource.failed(it.message.toString())) }

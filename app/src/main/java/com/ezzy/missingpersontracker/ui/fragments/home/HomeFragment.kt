@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
             addItemDecoration(ItemDecorator(Directions.VERTICAL, 5))
         }
 
-        mAdapter.differ.submitList(missingPersons)
+//        mAdapter.differ.submitList(missingPersons)
     }
 
     private fun subscribeToUI() {
