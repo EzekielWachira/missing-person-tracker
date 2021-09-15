@@ -41,7 +41,6 @@ class FoundPersonsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FoundPersonsFragmentBinding.inflate(inflater, container, false)
-
         viewModel.getAllFoundPeople()
         setUpRecyclerView()
         subscribeToUI()

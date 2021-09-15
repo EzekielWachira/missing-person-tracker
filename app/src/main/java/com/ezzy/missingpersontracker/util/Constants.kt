@@ -22,6 +22,8 @@ object Constants {
         const val IMAGES = "images"
         const val FOUND_PEOPLE_COLLECTION = "found_people"
         const val ADDITIONAL_CONTACTS = "additional_contacts"
+        const val CHATS = "chats"
+        const val MESSAGES = "messages"
     }
 
 }

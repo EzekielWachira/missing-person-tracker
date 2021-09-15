@@ -26,4 +26,5 @@ object Versions {
     const val paging_version = "2.1.2"
     const val truth = "1.1.3"
     const val spinKitVersion = "1.4.0"
+    val camerax_version = "1.0.1"
 }

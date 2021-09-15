@@ -1,9 +1,11 @@
 package com.ezzy.missingpersontracker.di
 
+import com.ezzy.core.data.repository.ChatRepository
 import com.ezzy.core.data.repository.MissingPersonImageRepository
 import com.ezzy.core.data.repository.MissingPersonRepository
 import com.ezzy.core.data.repository.UserRepository
 import com.ezzy.core.interactors.*
+import com.ezzy.missingpersontracker.data.remote.ChatRepoImpl
 import com.ezzy.missingpersontracker.data.remote.MissingPersonRepoImpl
 import com.ezzy.missingpersontracker.data.remote.UserRepoImpl
 import com.google.firebase.auth.FirebaseAuth
@@ -39,6 +41,12 @@ object DataModule {
         firebaseFirestore: FirebaseFirestore,
         firebaseStorage: FirebaseStorage
     ) = MissingPersonImageRepository(MissingPersonRepoImpl(firebaseFirestore, firebaseStorage))
+
+    @Provides
+    @Singleton
+    fun provideChatRepo(
+        firebaseFirestore: FirebaseFirestore
+    ) = ChatRepository(ChatRepoImpl(firebaseFirestore))
 
 
     @Provides
@@ -94,5 +102,26 @@ object DataModule {
     @Singleton
     fun provideReportFoundPerson(repository: MissingPersonRepository) =
         ReportFoundPerson(repository)
+
+    @Provides
+    @Singleton
+    fun provideAddChat(repository: ChatRepository) = AddChat(repository)
+
+    @Provides
+    @Singleton
+    fun provideSendMessage(repository: ChatRepository) = SendMessage(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetChatMessages(repository: ChatRepository) =
+        GetChatMessages(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetChats(repository: ChatRepository) = GetChats(repository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteChat(repository: ChatRepository) = DeleteChat(repository)
 
 }

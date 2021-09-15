@@ -11,7 +11,7 @@ buildscript {
         classpath(BuildPlugins.hiltPlugin)
         classpath(BuildPlugins.safeArgsPlugins)
         classpath(BuildPlugins.googleServices)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
     }
 }
 

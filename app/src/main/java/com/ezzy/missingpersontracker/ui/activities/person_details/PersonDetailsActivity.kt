@@ -15,6 +15,7 @@ import com.ezzy.missingpersontracker.common.CommonAdapter
 import com.ezzy.missingpersontracker.common.Directions
 import com.ezzy.missingpersontracker.common.ItemDecorator
 import com.ezzy.missingpersontracker.databinding.ActivityPersonDetailsBinding
+import com.ezzy.missingpersontracker.ui.activities.ChatActivity
 import com.ezzy.missingpersontracker.ui.activities.report_found_person.ReportFoundPersonActivity
 import com.ezzy.missingpersontracker.util.gone
 import com.ezzy.missingpersontracker.util.showToast
@@ -79,6 +80,10 @@ class PersonDetailsActivity : AppCompatActivity() {
                         this@PersonDetailsActivity, ReportFoundPersonActivity::class.java
                     ).apply { putExtra("missing_person", missingPerson) }
                 )
+            }
+
+            messageReporter.setOnClickListener {
+                startActivity(Intent(this@PersonDetailsActivity, ChatActivity::class.java))
             }
         }
     }

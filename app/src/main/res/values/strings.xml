@@ -79,6 +79,10 @@
     <string name="success">Success</string>
     <string name="tell_us_where_you_found_the_person">Tell us where you found the person</string>
     <string name="add_current_location">Add current location</string>
+    <string name="type_message">Type message</string>
+    <string name="chats">Chats</string>
+    <string name="click_a_missing_person_then_click_on_n_chat_with_reporter">Click a missing person then click on \n chat with reporter</string>
+    <string name="you_have_no_chats">You have no chats</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>

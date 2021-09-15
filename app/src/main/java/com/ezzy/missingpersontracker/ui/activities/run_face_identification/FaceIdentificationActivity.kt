@@ -1,9 +1,8 @@
 package com.ezzy.missingpersontracker.ui.activities.run_face_identification
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.ezzy.missingpersontracker.databinding.ActivityFaceIdentificationBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 class FaceIdentificationActivity : AppCompatActivity() {
 
@@ -19,4 +18,5 @@ class FaceIdentificationActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
     }
+
 }

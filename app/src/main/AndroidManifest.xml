@@ -15,6 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MissingPersonTracker">
         <activity
+            android:name=".ui.activities.ChatActivity"
+            android:parentActivityName=".ui.activities.person_details.PersonDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.run_face_identification.CameraActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.camera.CameraActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activities.user_details.UserDetailsActivity"
             android:exported="true" />
         <activity
@@ -30,7 +40,7 @@
         <activity
             android:name=".ui.fragments.auth.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".ui.activities.report_found_person.ReportFoundPersonActivity"
             android:exported="true" />
