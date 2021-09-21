@@ -1,3 +1,5 @@
+import TestLibraries.Version.roboelectic_version
+
 const val kotlinVersion = "1.5.10"
 const val hilt_version = "2.35"
 
@@ -34,12 +36,14 @@ object TestLibraries {
         const val jUnitVersion = "4.13.1"
         const val espressoVersion = "3.3.0"
         const val testRunner = "1.1.2"
+        const val roboelectic_version = "4.6.1"
     }
     const val jUnit = "junit:junit:${Version.jUnitVersion}"
     const val testRunner = "androidx.test.ext:junit:${Version.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Version.espressoVersion}"
     const val truth = "com.google.truth:truth:${Versions.truth}"
-
+    const val hiltTest = "com.google.dagger:hilt-android-testing:$hilt_version"
+    const val roboelectric = "org.robolectric:robolectric:$roboelectic_version"
 }
 
 object Dependencies {

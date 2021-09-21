@@ -5,6 +5,10 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * This is a common generic adapter which will be reused when we
+ * create or add a recyclerview in the application
+ * */
 class CommonAdapter<T>(
     private val viewHolderFactory : ((parent : ViewGroup) -> CommonViewHolder<T>),
 ) : RecyclerView.Adapter<CommonViewHolder<T>>() {

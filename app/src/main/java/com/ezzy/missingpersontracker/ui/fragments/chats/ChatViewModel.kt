@@ -7,6 +7,7 @@ import com.ezzy.core.domain.Chat
 import com.ezzy.core.domain.ChatMessage
 import com.ezzy.core.domain.User
 import com.ezzy.core.interactors.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@HiltViewModel
 class ChatViewModel @Inject constructor(
     private val addChat: AddChat,
     private val sendMessage: SendMessage,
@@ -113,7 +115,10 @@ class ChatViewModel @Inject constructor(
         getAuthenticatedUserID(email, phoneNumber).collect { resourceState ->
             when(resourceState) {
                 is Resource.Loading -> _authUserId.value = Resource.loading()
-                is Resource.Success -> _authUserId.value = Resource.success(resourceState.data)
+                is Resource.Success -> {
+                    Timber.d("USERID: ${resourceState.data}")
+                    _authUserId.value = Resource.success(resourceState.data)
+                }
                 is Resource.Failure -> _authUserId.value = Resource.failed(resourceState.errorMessage!!)
             }
         }

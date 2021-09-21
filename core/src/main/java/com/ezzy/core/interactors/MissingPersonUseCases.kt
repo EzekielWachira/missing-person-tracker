@@ -6,6 +6,11 @@ import com.ezzy.core.domain.*
 import kotlinx.coroutines.flow.Flow
 import java.net.URI
 
+/**
+ * Add missing person single usecase
+ * @param repository
+ * A usecase is a single operation a user can conduct for example adding a missing person
+ * */
 class AddMissingPerson(private val repository: MissingPersonRepository) {
     suspend operator fun invoke(
         missingPerson: MissingPerson,
@@ -22,6 +27,10 @@ class AddMissingPerson(private val repository: MissingPersonRepository) {
     )
 }
 
+/**
+ * search missing person usecase
+ * @param repository
+ * */
 class SearchMissingPerson(private val repository: MissingPersonRepository) {
     suspend operator fun invoke(
         name: String

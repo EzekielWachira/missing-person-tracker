@@ -21,6 +21,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataModule {
 
+    /**
+    * this function provides user repository as a dependency that can later be injected
+     * in any file in the application source code
+    * */
     @Provides
     @Singleton
     fun provideUserRepository(
@@ -28,6 +32,10 @@ object DataModule {
         firebaseAuth: FirebaseAuth
     ) = UserRepository(UserRepoImpl(firebaseFirestore, firebaseAuth))
 
+    /**
+     * this function provides missing person repository as a dependency that can later be injected
+     * in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideMissingPersonRepo(
@@ -35,6 +43,10 @@ object DataModule {
         firebaseStorage: FirebaseStorage
     ) = MissingPersonRepository(MissingPersonRepoImpl(firebaseFirestore, firebaseStorage))
 
+    /**
+     * this function provides missing person image repository as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideMissingPersonImagesRepo(
@@ -42,6 +54,10 @@ object DataModule {
         firebaseStorage: FirebaseStorage
     ) = MissingPersonImageRepository(MissingPersonRepoImpl(firebaseFirestore, firebaseStorage))
 
+    /**
+     * this function provides missing chat repository as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideChatRepo(
@@ -49,27 +65,51 @@ object DataModule {
     ) = ChatRepository(ChatRepoImpl(firebaseFirestore))
 
 
+    /**
+     * this function provides register user usecase as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideRegisterUsers(repository: UserRepository) = RegisterUser(repository)
 
+    /**
+     * this function provides login user usecase as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideLoginUser(repository: UserRepository) = LoginUser(repository)
 
+    /**
+     * this function provides add missing person usecase as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideAddMissingPerson(repository: MissingPersonRepository) =
         AddMissingPerson(repository)
 
+    /**
+     * this function provides add user usecase as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideAddUser(repository: UserRepository) = AddUser(repository)
 
+    /**
+     * this function provides check user usecase as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideCheckUser(repository: UserRepository) = CheckUser(repository)
 
+    /**
+     * this function provides get auth user id usecase as a dependency that can later be
+     * injected in any file in the application source code
+     * */
     @Provides
     @Singleton
     fun provideGetAuthUserID(repository: UserRepository) = GetAuthenticatedUserID(repository)

@@ -67,10 +67,6 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
-    testImplementation(TestLibraries.jUnit)
-    testImplementation(TestLibraries.truth)
-    androidTestImplementation(TestLibraries.testRunner)
-    androidTestImplementation(TestLibraries.espresso)
 
     //dependency injection hilt
     implementation(Dependencies.daggerHilt)
@@ -158,5 +154,15 @@ dependencies {
 //    implementation(Dependencies.imagePicker)
 //    implementation("io.github.ParkSangGwon:tedpermission:x.y.z")
 //    implementation("gun0912.ted:tedbottompicker:x.y.z")
+
+    testImplementation(TestLibraries.jUnit)
+    testImplementation(TestLibraries.truth)
+    testImplementation(TestLibraries.hiltTest)
+    testImplementation(TestLibraries.roboelectric)
+    kaptTest(Dependencies.daggerKtxCompiler)
+    testImplementation(TestLibraries.truth)
+    androidTestImplementation(TestLibraries.testRunner)
+    androidTestImplementation(TestLibraries.espresso)
+
 
 }

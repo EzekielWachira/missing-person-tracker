@@ -16,6 +16,10 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * This viewmodel is attched to the HomeFragment class which displays a list
+ * of missing people. it implements observer by StateFLows
+ * */
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getMissingPeople: GetMissingPeople,

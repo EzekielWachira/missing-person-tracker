@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,7 +48,9 @@ class ChatHomeFragment : Fragment() {
         getAuthUserId()
         getAuthenticatedUser()
 
-        chatViewModel.getAllChats(userId!!)
+        userId?.let {
+            chatViewModel.getAllChats(it)
+        }
 
         subscribeToUI()
         setUpRecycleView()
@@ -71,7 +74,9 @@ class ChatHomeFragment : Fragment() {
             chatViewModel.userId.collect { state ->
                 when(state) {
                     is Resource.Loading -> showToast("Checking your details")
-                    is Resource.Success -> userId = state.data
+                    is Resource.Success -> {
+                        userId = state.data
+                    }
                     is Resource.Failure -> showToast(state.errorMessage!!)
                 }
             }
@@ -88,6 +93,9 @@ class ChatHomeFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        lifecycleScope.launch {
             chatViewModel.chats.collect { state ->
                 when(state) {
                     is Resource.Loading -> {
@@ -113,9 +121,11 @@ class ChatHomeFragment : Fragment() {
         with(firebaseAuth.currentUser) {
             when {
                 this?.email?.isNotEmpty() == true -> {
+                    Timber.d("EMAIL AVAILABLE: ${this.email}")
                     chatViewModel.getAuthUserId(this.email, null)
                 }
                 this?.phoneNumber?.isNotEmpty() == true -> {
+                    Timber.d("PHONE AVAILABLE: ${this.phoneNumber}")
                     chatViewModel.getAuthUserId(null, this.phoneNumber)
                 }
                 else -> return@with

@@ -50,6 +50,9 @@ class UserRepoImpl @Inject constructor(
             .flowOn(Dispatchers.IO)
 
 
+    /**
+     * Register user to firestore cloud storage
+     * */
     override suspend fun getAuthenticatedUserID(
         email: String?,
         phoneNumber: String?
@@ -71,6 +74,9 @@ class UserRepoImpl @Inject constructor(
         .flowOn(Dispatchers.IO)
 
 
+    /**
+     * Register user to firestore cloud storage
+     * */
     override suspend fun registerUser(email: String, password: String): Resource<Flow<Boolean>> {
         return try {
             var isRegistrationSuccess = false
@@ -91,6 +97,9 @@ class UserRepoImpl @Inject constructor(
         }
     }
 
+    /**
+     * login user
+     * */
     override suspend fun loginUser(email: String, password: String): Boolean {
         var isLoginSuccess = false
         try {

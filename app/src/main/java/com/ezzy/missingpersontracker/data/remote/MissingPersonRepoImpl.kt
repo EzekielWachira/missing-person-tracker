@@ -274,6 +274,9 @@ class MissingPersonRepoImpl @Inject constructor(
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
 
+    /**
+     * Get found people
+     * */
     override suspend fun getFoundPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
         flow {
             emit(Resource.loading())
@@ -383,6 +386,10 @@ class MissingPersonRepoImpl @Inject constructor(
             .flowOn(Dispatchers.IO)
 
 
+    /**
+     * By making this function suspend, all the execution happens in the background thread
+     * to ensure maximum user experience
+     * */
     override suspend fun reportFoundPerson(
         missingPerson: MissingPerson,
         address: Address
@@ -394,7 +401,8 @@ class MissingPersonRepoImpl @Inject constructor(
             snapshot.forEach { snap ->
                 if ((snap.toObject(MissingPerson::class.java)) == missingPerson) {
                     mspId = snap.id
-                    missingPersonCollection.document(snap.id).update("foundStatus", true).await()
+                    missingPersonCollection.document(snap.id).update("foundStatus", true)
+                        .await()
                 }
             }
            foundPeopleCollection.document(mspId!!).collection(ADDRESS).add(address).await()

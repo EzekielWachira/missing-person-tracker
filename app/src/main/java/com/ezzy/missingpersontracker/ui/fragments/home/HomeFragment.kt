@@ -66,6 +66,11 @@ class HomeFragment : Fragment() {
 //        mAdapter.differ.submitList(missingPersons)
     }
 
+    /**
+     * this functions observer data from the viewmodel and pass it to the
+     * recyclerview adapter to be displayed on the screen.
+     * Observer design pattern implementation
+     * */
     private fun subscribeToUI() {
         lifecycleScope.launchWhenCreated {
             homeViewModel.missingPeople.collect { resourceState ->
