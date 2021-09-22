@@ -24,7 +24,7 @@ class MissingPersonRepository(
             fileNames
         )
 
-    suspend fun searchMissingPerson(name: String): Resource<Flow<List<MissingPerson>>> =
+    suspend fun searchMissingPerson(name: String): Flow<Resource<List<MissingPerson>>> =
         dataSource.searchMissingPerson(name)
 
     suspend fun getMissingPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =

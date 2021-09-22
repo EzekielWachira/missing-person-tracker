@@ -34,7 +34,7 @@ class AddMissingPerson(private val repository: MissingPersonRepository) {
 class SearchMissingPerson(private val repository: MissingPersonRepository) {
     suspend operator fun invoke(
         name: String
-    ) = repository.searchMissingPerson(name)
+    ): Flow<Resource<List<MissingPerson>>> = repository.searchMissingPerson(name)
 }
 
 class GetMissingPeople(private val repository: MissingPersonRepository) {

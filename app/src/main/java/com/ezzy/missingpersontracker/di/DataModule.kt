@@ -164,4 +164,9 @@ object DataModule {
     @Singleton
     fun provideDeleteChat(repository: ChatRepository) = DeleteChat(repository)
 
+    @Provides
+    @Singleton
+    fun provideSearchMissingPerson(repository: MissingPersonRepository) =
+        SearchMissingPerson(repository)
+
 }

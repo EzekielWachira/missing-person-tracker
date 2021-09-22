@@ -11,7 +11,7 @@ import java.net.URI
 interface MissingPersonDataSource {
 
     /**
-     * this function is the logic for adding a missin person
+     * this function is the logic for adding a missing person
      * @param address
      * @param contactList
      * @param missingPersonImages
@@ -29,7 +29,7 @@ interface MissingPersonDataSource {
      * Search a missing person
      * @param name
      * */
-    suspend fun searchMissingPerson(name: String): Resource<Flow<List<MissingPerson>>>
+    suspend fun searchMissingPerson(name: String): Flow<Resource<List<MissingPerson>>>
 
     /**
      * get missing people

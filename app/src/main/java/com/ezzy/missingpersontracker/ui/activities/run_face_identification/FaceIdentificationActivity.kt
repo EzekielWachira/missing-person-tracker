@@ -6,12 +6,20 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import cn.pedant.SweetAlert.SweetAlertDialog
+import com.ezzy.core.data.resource.Resource
+import com.ezzy.core.domain.MissingPerson
 import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.data.model.ImageItem
 import com.ezzy.missingpersontracker.databinding.ActivityFaceIdentificationBinding
+import com.ezzy.missingpersontracker.ui.activities.person_details.PersonDetailsActivity
+import com.ezzy.missingpersontracker.util.showErrorDialog
+import com.ezzy.missingpersontracker.util.showLoadingDialog
 import com.ezzy.missingpersontracker.util.showToast
 import com.ezzy.missingpersontracker.util.visible
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -20,15 +28,24 @@ import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
+@AndroidEntryPoint
 class FaceIdentificationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFaceIdentificationBinding
+    private lateinit var progressDialog: SweetAlertDialog
+    private lateinit var errorDialog: SweetAlertDialog
     private var imageUri: Uri? = null
+    private var missingPerson: MissingPerson? = null
+
+    private val identificationViewModel: FaceIdentificationViewModel by viewModels()
 
     val localModel = LocalModel.Builder()
         .setAssetFilePath("model/model-export_icn_tflite-missing_person_16_20210921101644-2021-09-22T09_07_42.523520Z_model.tflite")
@@ -60,17 +77,61 @@ class FaceIdentificationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.apply {
-            title = "Run face scanner"
+            title = "Run image scanner"
             setDisplayHomeAsUpEnabled(true)
         }
 
+        progressDialog = showLoadingDialog("Searching person in the cloud server...")
+        errorDialog = showErrorDialog("Error", "Person not found in the servers")
+
         setUpUI()
+        subscribeToUI()
     }
 
     private fun setUpUI() {
         with(binding) {
             takePhotoBtn.setOnClickListener {
                 requestPermissions()
+            }
+
+            processPhotoBtn.setOnClickListener {
+                if (missingPerson != null) {
+                    startActivity(
+                        Intent(
+                            this@FaceIdentificationActivity, PersonDetailsActivity::class.java
+                        ).apply {
+                            putExtra("missingPerson", missingPerson)
+                        }
+                    )
+                } else errorDialog.show()
+            }
+        }
+    }
+
+    private fun subscribeToUI() {
+        val intent = Intent(this, PersonDetailsActivity::class.java)
+        lifecycleScope.launch {
+            identificationViewModel.missingPersons.collect { state ->
+                when (state) {
+                    is Resource.Loading -> progressDialog.show()
+                    is Resource.Success -> {
+                        missingPerson = state.data[0]
+                        progressDialog.hide()
+//                        if (state.data.isNotEmpty()) {
+//                            startActivity(
+//                                Intent(
+//                                    this@FaceIdentificationActivity, PersonDetailsActivity::class.java
+//                                ).apply {
+//                                    putExtra("missingPerson", state.data[0])
+//                                }
+//                            )
+//                        }
+                    }
+                    is Resource.Failure -> {
+                        progressDialog.hide()
+                        errorDialog.show()
+                    }
+                }
             }
         }
     }
@@ -92,11 +153,13 @@ class FaceIdentificationActivity : AppCompatActivity() {
                             nameTextView.text = text
                             accuracyTextView.text = percentage.toString() + "%"
                         }
-                        Snackbar.make(
-                            binding.layoutMain,
-                            "Name: $text, Accuracy: $percentage%",
-                            Snackbar.LENGTH_LONG
-                        ).show()
+
+                        if (text.isNotEmpty()) {
+                            identificationViewModel.searchMissingPerson(text)
+                        } else {
+                            errorDialog.show()
+                        }
+
                     }
                 }
                 .addOnFailureListener { e ->

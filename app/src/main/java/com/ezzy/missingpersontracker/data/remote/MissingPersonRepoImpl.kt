@@ -231,9 +231,17 @@ class MissingPersonRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun searchMissingPerson(name: String): Resource<Flow<List<MissingPerson>>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun searchMissingPerson(name: String): Flow<Resource<List<MissingPerson>>> =
+        flow {
+            emit(Resource.loading())
+            var missingPerson = mutableListOf<MissingPerson>()
+            val snapshot = missingPersonCollection.whereEqualTo("firstName", name).get().await()
+            snapshot.forEach { snap ->
+                missingPerson.add(snap.toObject(MissingPerson::class.java))
+            }
+            emit(Resource.success(missingPerson))
+        }.catch { exception -> emit(Resource.failed(exception.message.toString())) }
+            .flowOn(Dispatchers.IO)
 
     override suspend fun getMissingPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
         flow {
@@ -405,8 +413,8 @@ class MissingPersonRepoImpl @Inject constructor(
                         .await()
                 }
             }
-           foundPeopleCollection.document(mspId!!).collection(ADDRESS).add(address).await()
-           emit(Resource.success(mspId!!))
-        }.catch{ emit(Resource.failed(it.message.toString())) }
+            foundPeopleCollection.document(mspId!!).collection(ADDRESS).add(address).await()
+            emit(Resource.success(mspId!!))
+        }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
 }

@@ -35,6 +35,7 @@ class PersonDetailsActivity : AppCompatActivity() {
     private var missingPerson: MissingPerson? = null
     private var images: List<Image>? = null
     private var reporter: User? = null
+    private var personName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +47,9 @@ class PersonDetailsActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        if (intent.hasExtra("missingPerson") && intent.hasExtra("images")) {
+        if (intent.hasExtra("missingPerson")) {
             missingPerson = intent.getSerializableExtra("missingPerson") as MissingPerson
+            Timber.d("PERSON DETAILS: $missingPerson")
             viewModel.getReporter(missingPerson?.reporterId!!)
             viewModel.getImages(missingPerson!!)
 //            images = intent.getSerializableExtra("images") as List<Image>
