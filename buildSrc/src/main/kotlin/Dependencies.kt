@@ -101,4 +101,7 @@ object Dependencies {
     const val imagePicker = "com.erikagtierrez.multiple_media_picker:multiple-media-picker:1.0.5"
     const val sweetAlert = "com.github.f0ris.sweetalert:library:${Versions.sweetAlertVersion}"
     const val spinKit = "com.github.ybq:Android-SpinKit:${Versions.spinKitVersion}"
+
+    const val firebaseImageLabeling = "com.google.mlkit:image-labeling-custom:16.3.1"
+    const val linkFirebase = "com.google.mlkit:linkfirebase:16.1.0"
 }

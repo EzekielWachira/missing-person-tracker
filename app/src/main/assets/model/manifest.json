@@ -1,0 +1,5 @@
+{
+  "modelType": "IMAGE_LABELING",
+  "modelFile": "model-export_icn_tflite-missing_person_16_20210921101644-2021-09-22T09_07_42.523520Z_model.tflite",
+  "labelsFile": "model-export_icn_tflite-missing_person_16_20210921101644-2021-09-22T09_07_42.523520Z_dict.txt"
+}

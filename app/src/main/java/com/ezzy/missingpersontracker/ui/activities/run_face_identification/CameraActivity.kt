@@ -36,6 +36,18 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //    private fun allPermissionsGranted(): Boolean = REQUIRED_PERMISSIONS.all {
 //        ContextCompat.checkSelfPermission(

@@ -50,6 +50,11 @@ android {
         viewBinding=true
         mlModelBinding = true
     }
+
+    aaptOptions {
+        noCompress("tflite")
+    }
+
     configurations.all {
         exclude(group = "androidx.paging", module = "paging-runtime-ktx")
     }
@@ -67,6 +72,8 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
+    implementation("org.tensorflow:tensorflow-lite:2.4.0")
+    implementation("com.google.firebase:firebase-ml-modeldownloader-ktx")
 
     //dependency injection hilt
     implementation(Dependencies.daggerHilt)
@@ -124,6 +131,8 @@ dependencies {
     implementation(Dependencies.firebaseUiForStorage)
     implementation(Dependencies.firebaseUiForFirestore)
     implementation(Dependencies.coroutinesForFirebase)
+    implementation(Dependencies.firebaseImageLabeling)
+    implementation(Dependencies.linkFirebase)
 
     //sweet alert for android
 //    implementation(Dependencies.sweetAlert2)
