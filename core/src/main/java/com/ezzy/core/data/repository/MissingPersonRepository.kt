@@ -24,8 +24,13 @@ class MissingPersonRepository(
             fileNames
         )
 
-    suspend fun searchMissingPerson(name: String): Flow<Resource<List<MissingPerson>>> =
+    suspend fun searchMissingPerson(
+        name: String
+    ): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
         dataSource.searchMissingPerson(name)
+
+    suspend fun searchMissingPersonByFirstName(name: String): Flow<Resource<List<MissingPerson>>> =
+        dataSource.searchMissingPersonByFirstName(name)
 
     suspend fun getMissingPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
         dataSource.getMissingPeople()
@@ -39,6 +44,9 @@ class MissingPersonRepository(
     suspend fun getMissingPersonImages(missingPerson: MissingPerson): Flow<Resource<List<Image>>> =
         dataSource.getMissingPersonImages(missingPerson)
 
-    suspend fun reportFoundPerson(missingPerson: MissingPerson, address: Address): Flow<Resource<String>> =
+    suspend fun reportFoundPerson(
+        missingPerson: MissingPerson,
+        address: Address
+    ): Flow<Resource<String>> =
         dataSource.reportFoundPerson(missingPerson, address)
 }

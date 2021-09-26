@@ -27,8 +27,18 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/button_bg"
         android:text="Select photo"
-        app:icon="@drawable/ic_add_photo"
+        app:icon="@drawable/ic_baseline_image"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+    <Button
+        android:id="@+id/capture_photo_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/button_bg"
+        android:text="Take photo"
+        app:icon="@drawable/ic_add_photo"
+        app:layout_constraintTop_toBottomOf="@id/take_photo_btn" />
 
     <Button
         android:id="@+id/process_photo_btn"
@@ -38,7 +48,7 @@
         android:background="@drawable/button_bg"
         android:text="Run scan"
         app:icon="@drawable/ic_face_recognition"
-        app:layout_constraintTop_toBottomOf="@id/take_photo_btn" />
+        app:layout_constraintTop_toBottomOf="@id/capture_photo_btn" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

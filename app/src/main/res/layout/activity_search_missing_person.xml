@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,50 +9,96 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
         android:id="@+id/toolbar"
-        android:background="@color/blue_copy"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        >
+        android:background="@color/blue_copy">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:weightSum="100">
 
             <EditText
+                android:id="@+id/search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="85"
-                android:id="@+id/search"
-                android:textSize="@dimen/_12ssp"
                 android:background="@drawable/search_bg"
                 android:hint="@string/type_to_search"
-                android:padding="@dimen/_5sdp"/>
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_12ssp" />
 
             <TextView
+                android:id="@+id/run_face"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
                 android:layout_weight="15"
-                android:padding="@dimen/_5sdp"
-                android:id="@+id/run_face"
-                android:drawableTint="@color/white"
+                android:background="?attr/selectableItemBackground"
                 android:drawablePadding="@dimen/_5sdp"
+                android:drawableTint="@color/white"
+                android:padding="@dimen/_5sdp"
                 app:drawableStartCompat="@drawable/ic_face_recognition" />
 
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search_recyclerview"
         android:layout_marginTop="@dimen/_5sdp"
-        tools:listitem="@layout/msp_item"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recyclerview"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/msp_item" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Circle"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_no_data"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_130sdp"
+                app:srcCompat="@drawable/ic_search_" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="No data found"
+                android:textSize="@dimen/_16ssp" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

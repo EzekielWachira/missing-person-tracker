@@ -29,7 +29,8 @@ interface MissingPersonDataSource {
      * Search a missing person
      * @param name
      * */
-    suspend fun searchMissingPerson(name: String): Flow<Resource<List<MissingPerson>>>
+    suspend fun searchMissingPerson(name: String): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>>
+    suspend fun searchMissingPersonByFirstName(name: String): Flow<Resource<List<MissingPerson>>>
 
     /**
      * get missing people

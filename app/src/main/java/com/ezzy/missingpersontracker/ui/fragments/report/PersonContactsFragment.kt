@@ -175,6 +175,7 @@ class PersonContactsFragment : Fragment() {
         SweetAlertDialog(requireContext(), SweetAlertDialog.SUCCESS_TYPE)
             .setTitleText("Success")
             .setContentText("Person reported successfully")
+            .setConfirmClickListener { requireActivity().finish() }
             .show()
     }
 

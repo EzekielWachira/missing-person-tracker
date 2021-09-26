@@ -169,4 +169,9 @@ object DataModule {
     fun provideSearchMissingPerson(repository: MissingPersonRepository) =
         SearchMissingPerson(repository)
 
+    @Provides
+    @Singleton
+    fun provideSearchMissingPersonByFirstName(repository: MissingPersonRepository) =
+        SearchMissingPersonByFirstName(repository)
+
 }

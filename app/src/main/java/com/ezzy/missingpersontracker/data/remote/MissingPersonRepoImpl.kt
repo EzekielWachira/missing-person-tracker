@@ -231,7 +231,56 @@ class MissingPersonRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun searchMissingPerson(name: String): Flow<Resource<List<MissingPerson>>> =
+    /**
+     * Search missing people by their names
+     * @param name
+     * @return List<Pair<Pair<MissingPerson, List<Image>>, User>>
+     * */
+    override suspend fun searchMissingPerson(
+        name: String
+    ): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
+        flow {
+            emit(Resource.loading())
+            var images: List<Image>? = null
+            var reporter: User? = null
+            val missingPersonPairList =
+                mutableListOf<Pair<Pair<MissingPerson, List<Image>>, User>>()
+            val snapshot = missingPersonCollection.whereEqualTo("firstName", name).get().await()
+            snapshot.forEach { snap ->
+                val missingPerson = snap.toObject(MissingPerson::class.java)
+                getImages(snap.id).collect { state ->
+                    when (state) {
+                        is Resource.Loading -> Timber.i("Loading data")
+                        is Resource.Success -> {
+                            images = state.data
+                        }
+                        is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                        is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
+                    }
+                }
+
+                getReporter(missingPerson.reporterId!!).collect { state ->
+                    when (state) {
+                        is Resource.Loading -> Timber.i("Loading data")
+                        is Resource.Success -> {
+                            reporter = state.data
+                        }
+                        is Resource.Failure -> Timber.e("Error getting missing people: ${state.errorMessage}")
+                        is Resource.Empty -> Timber.e("Could not get missing person images: EMPTY!!")
+                    }
+                }
+
+                missingPersonPairList.add(Pair(Pair(missingPerson, images!!), reporter!!))
+            }
+            emit(Resource.success(missingPersonPairList))
+        }.catch { exception -> emit(Resource.failed(exception.message.toString())) }
+            .flowOn(Dispatchers.IO)
+
+    /**
+     * Search missing person by their firstname
+     * @param name
+     * */
+    override suspend fun searchMissingPersonByFirstName(name: String): Flow<Resource<List<MissingPerson>>> =
         flow {
             emit(Resource.loading())
             var missingPerson = mutableListOf<MissingPerson>()
@@ -243,6 +292,10 @@ class MissingPersonRepoImpl @Inject constructor(
         }.catch { exception -> emit(Resource.failed(exception.message.toString())) }
             .flowOn(Dispatchers.IO)
 
+
+    /**
+     * Get all missing people
+     * */
     override suspend fun getMissingPeople(): Flow<Resource<List<Pair<Pair<MissingPerson, List<Image>>, User>>>> =
         flow {
             emit(Resource.loading())
@@ -374,6 +427,10 @@ class MissingPersonRepoImpl @Inject constructor(
             .flowOn(Dispatchers.IO)
 
 
+    /**
+     * get images of a missing person from the cloud storage
+     * @param missingPerson
+     * */
     override suspend fun getMissingPersonImages(missingPerson: MissingPerson): Flow<Resource<List<Image>>> =
         flow {
             emit(Resource.loading())

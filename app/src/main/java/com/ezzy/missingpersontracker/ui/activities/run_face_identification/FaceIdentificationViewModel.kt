@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.MissingPerson
 import com.ezzy.core.interactors.SearchMissingPerson
+import com.ezzy.core.interactors.SearchMissingPersonByFirstName
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,14 +16,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FaceIdentificationViewModel @Inject constructor(
-    private val searchMspPerson: SearchMissingPerson
+    private val searchMissingPersonByFirstName: SearchMissingPersonByFirstName
 ): ViewModel() {
 
     private var _missingPersons = MutableStateFlow<Resource<List<MissingPerson>>>(Resource.Empty)
     val missingPersons : StateFlow<Resource<List<MissingPerson>>> get() = _missingPersons
 
-    fun searchMissingPerson(name: String) = viewModelScope.launch {
-        searchMspPerson(name).collect { state ->
+    fun searchMissingPersonByName(name: String) = viewModelScope.launch {
+        searchMissingPersonByFirstName(name).collect { state ->
             when(state) {
                 is Resource.Loading -> _missingPersons.value = Resource.loading()
                 is Resource.Success ->{

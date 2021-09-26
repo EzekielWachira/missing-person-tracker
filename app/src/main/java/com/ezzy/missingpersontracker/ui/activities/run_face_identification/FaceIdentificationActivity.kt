@@ -155,7 +155,7 @@ class FaceIdentificationActivity : AppCompatActivity() {
                         }
 
                         if (text.isNotEmpty()) {
-                            identificationViewModel.searchMissingPerson(text)
+                            identificationViewModel.searchMissingPersonByName(text)
                         } else {
                             errorDialog.show()
                         }
@@ -182,6 +182,20 @@ class FaceIdentificationActivity : AppCompatActivity() {
             .setNegativeButton(getString(R.string.neg_text)) { dialog, _ ->
                 dialog.cancel()
             }
+    }
+
+    private val imageFromCamera = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if (it) {
+            imageUri?.let { uri ->
+                binding.imageView.setImageURI(uri)
+            }
+        }
+    }
+
+    private fun takeImage() {
+        lifecycleScope.launchWhenStarted {
+
+        }
     }
 
     private val imagePicker = registerForActivityResult(

@@ -1,6 +1,7 @@
 package com.ezzy.missingpersontracker.ui.activities.person_details
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -55,6 +56,10 @@ class PersonDetailsActivity : AppCompatActivity() {
 //            images = intent.getSerializableExtra("images") as List<Image>
         }
 
+        if (missingPerson?.foundStatus!!) {
+            binding.reportFoundFab.hide()
+        }
+
 //        viewModel.getImages(missin)
 
         setUpRecyclerView()
@@ -87,6 +92,27 @@ class PersonDetailsActivity : AppCompatActivity() {
             messageReporter.setOnClickListener {
                 startActivity(Intent(this@PersonDetailsActivity, ChatActivity::class.java))
             }
+
+            reporterPhone.setOnClickListener {
+                val callIntent: Intent = Uri.parse("tel: ${reporterPhone.text}").let { number ->
+                    Intent(Intent.ACTION_DIAL, number)
+                }
+                startActivity(callIntent)
+            }
+
+            reporterEmail.setOnClickListener {
+                val email = reporterEmail.text.toString()
+                val emailIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("ezekielwachira048@gmail.com"))
+                    putExtra(
+                        Intent.EXTRA_SUBJECT,
+                        missingPerson?.firstName + " " + missingPerson?.lastName
+                    )
+                    putExtra(Intent.EXTRA_TEXT, "")
+                }
+                startActivity(emailIntent)
+            }
         }
     }
 
@@ -103,31 +129,35 @@ class PersonDetailsActivity : AppCompatActivity() {
                     }
                     is Resource.Failure -> binding.spinKitImages.gone()
                 }
-            }.also {
-                viewModel.reporter.collect { state ->
-                    when (state) {
-                        is Resource.Loading -> showToast("Loading reporter")
-                        is Resource.Success -> {
-                            with(binding) {
-                                reporterName.text =
-                                    "${state.data.firstName} ${state.data.lastName} "
-                                reporterPhone.text = state.data.phoneNumber
-                                reporterEmail.text = state.data.email
-                            }
-                        }
-                        is Resource.Failure -> showToast("Error ${state.errorMessage}")
-                    }
-                }
             }
 
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.reporter.collect { state ->
+                when (state) {
+                    is Resource.Loading -> showToast("Loading reporter")
+                    is Resource.Success -> {
+                        with(binding) {
+                            reporterName.text =
+                                "${state.data.firstName} ${state.data.lastName} "
+                            reporterPhone.text = state.data.phoneNumber
+                            reporterEmail.text = state.data.email
+                        }
+                    }
+                    is Resource.Failure -> showToast("Error ${state.errorMessage}")
+                }
+            }
         }
     }
 
     private fun setUpRecyclerView() {
         imageAdapter = CommonAdapter { ImageViewHolder(it) }
         binding.photoRecyclerView.apply {
-            layoutManager = GridLayoutManager(this@PersonDetailsActivity,
-                2)
+            layoutManager = GridLayoutManager(
+                this@PersonDetailsActivity,
+                2
+            )
             addItemDecoration(ItemDecorator(Directions.VERTICAL, 3))
             addItemDecoration(ItemDecorator(Directions.HORIZONTAL, 3))
             adapter = imageAdapter
