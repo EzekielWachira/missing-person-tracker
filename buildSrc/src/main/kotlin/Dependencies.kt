@@ -1,3 +1,5 @@
+import TestLibraries.Version.roboelectic_version
+
 const val kotlinVersion = "1.5.10"
 const val hilt_version = "2.35"
 
@@ -34,11 +36,14 @@ object TestLibraries {
         const val jUnitVersion = "4.13.1"
         const val espressoVersion = "3.3.0"
         const val testRunner = "1.1.2"
+        const val roboelectic_version = "4.6.1"
     }
     const val jUnit = "junit:junit:${Version.jUnitVersion}"
     const val testRunner = "androidx.test.ext:junit:${Version.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Version.espressoVersion}"
-
+    const val truth = "com.google.truth:truth:${Versions.truth}"
+    const val hiltTest = "com.google.dagger:hilt-android-testing:$hilt_version"
+    const val roboelectric = "org.robolectric:robolectric:$roboelectic_version"
 }
 
 object Dependencies {
@@ -79,16 +84,24 @@ object Dependencies {
     const val firebaseFireStore = "com.google.firebase:firebase-firestore-ktx"
     const val firebaseStorage = "com.google.firebase:firebase-storage-ktx"
     const val firebaseAuth = "com.google.firebase:firebase-auth-ktx"
+    const val firebaseCloudMessaging = "com.google.firebase:firebase-messaging-ktx"
     const val firebaseUiAuth = "com.firebaseui:firebase-ui-auth:${Versions.firebaseUiVersion}"
+    const val firebaseAuthFacebook = "com.facebook.android:facebook-android-sdk:4.42.0"
     const val firebaseUiForFirestore = "com.firebaseui:firebase-ui-firestore:${Versions.firebaseUiVersion}"
+    const val firebaseUiForStorage = "com.firebaseui:firebase-ui-storage:${Versions.firebaseUiVersion}"
     const val coroutinesForFirebase = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinesForFirebaseVersion}"
-    const val sweetAlert = "com.github.thomper:sweet-alert-dialog:${Versions.sweetAlertVersion}"
     const val sweetAlert2 = "com.github.thomper:sweet-alert-dialog:${Versions.sweetAlertVersion}"
     const val dataStore = "androidx.datastore:datastore-preferences:${Versions.dataStoreVersion}"
     const val typedDataStore = "androidx.datastore:datastore:${Versions.dataStoreVersion}"
+
 
     const val kmProgress = "com.github.krishnanmuthaiahpillai:ProgressBar:${Versions.kmProgressVersion}"
     const val skydoveProgress = "com.github.skydoves:progressview:${Versions.skydoveVersion}"
     const val mpCharts = "com.github.PhilJay:MPAndroidChart:${Versions.mpChartVersion}"
     const val imagePicker = "com.erikagtierrez.multiple_media_picker:multiple-media-picker:1.0.5"
+    const val sweetAlert = "com.github.f0ris.sweetalert:library:${Versions.sweetAlertVersion}"
+    const val spinKit = "com.github.ybq:Android-SpinKit:${Versions.spinKitVersion}"
+
+    const val firebaseImageLabeling = "com.google.mlkit:image-labeling-custom:16.3.1"
+    const val linkFirebase = "com.google.mlkit:linkfirebase:16.1.0"
 }

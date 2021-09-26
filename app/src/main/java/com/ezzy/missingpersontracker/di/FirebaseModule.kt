@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import dagger.Module
@@ -31,4 +32,9 @@ object FirebaseModule {
     @Provides
     @Singleton
     fun provideFirebaseStorage() : FirebaseStorage = Firebase.storage
+
+    @Provides
+    @Singleton
+    fun provideFirebaseModelDownloader(): FirebaseModelDownloader =
+        FirebaseModelDownloader.getInstance()
 }

@@ -18,6 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp"
             android:orientation="vertical">
 
             <TextView
@@ -28,11 +29,27 @@
                 android:text="@string/add_contact_details"
                 android:textSize="@dimen/_12ssp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/contactRecyclerView"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/button_bg"
+                android:text="@string/add_contact"
+                app:icon="@drawable/ic_contacts_outline"
+                android:id="@+id/addContactBtn"/>
+
             <LinearLayout
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:background="@drawable/comtact_stroke"
                 android:padding="@dimen/_5sdp">
 
@@ -73,6 +90,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -122,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/button_bg"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:text="@string/report"
                 app:icon="@drawable/ic_report"
                 android:id="@+id/btnReport"/>

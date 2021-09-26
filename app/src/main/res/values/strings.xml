@@ -9,6 +9,7 @@
     <string name="report_missing_person">Report a missing person</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="middle_name">Middle name</string>
     <string name="age">Age</string>
     <string name="gender">Gender</string>
     <string name="height">Height</string>
@@ -51,6 +52,37 @@
     <string name="sign_up_with_google">Sign up with google</string>
     <string name="sign_in">Sign in</string>
     <string name="register">Register</string>
+    <string name="rationale_title">Storage Permission</string>
+    <string name="rationale_description">The app requires your permission to get the image of the missing person</string>
+    <string name="pos_text">Ok</string>
+    <string name="neg_text">Deny</string>
+    <string name="save">SAVE</string>
+    <string name="add_contact">Add contact</string>
+    <string name="contact_type">Contact type</string>
+    <string name="email">Email</string>
+    <string name="contact_name">Contact name</string>
+    <string name="contact_phone_err">Contact phone cannot be empty</string>
+    <string name="contact_name_err">Contact name cannot be empty</string>
+    <string name="contact_email_err">Contact email cannot be empty</string>
+    <string name="country">Country</string>
+    <string name="done_button">Done button</string>
+    <string name="personal_details">PERSONAL DETAILS</string>
+    <string name="address">ADDRESS</string>
+    <string name="username">Username</string>
+    <string name="location">LOCATION</string>
+    <string name="reporting_msp">Reporting missing person</string>
+    <string name="empty_field_error">This field is required</string>
+    <string name="saving_user_data_error">An error occurred while saving your data</string>
+    <string name="error">Error</string>
+    <string name="user_data_saved">Your data has been saved</string>
+    <string name="saving_data">Saving your data</string>
+    <string name="success">Success</string>
+    <string name="tell_us_where_you_found_the_person">Tell us where you found the person</string>
+    <string name="add_current_location">Add current location</string>
+    <string name="type_message">Type message</string>
+    <string name="chats">Chats</string>
+    <string name="click_a_missing_person_then_click_on_n_chat_with_reporter">Click a missing person then click on \n chat with reporter</string>
+    <string name="you_have_no_chats">You have no chats</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>
@@ -60,5 +92,9 @@
         <item>Teenager</item>
         <item>Adult</item>
         <item>Old</item>
+    </string-array>
+    <string-array name="contact_type">
+        <item>Phone</item>
+        <item>Email</item>
     </string-array>
 </resources>

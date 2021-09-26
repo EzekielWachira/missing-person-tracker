@@ -44,10 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:spanCount="3"
-                tools:listitem="@layout/image_item"
-                android:id="@+id/photoRecyclerView"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+                android:clipToPadding="false"
+                android:id="@+id/photoRecyclerView" />
 
             <Button
                 android:layout_width="match_parent"

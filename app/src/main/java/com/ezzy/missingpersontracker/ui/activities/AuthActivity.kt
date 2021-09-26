@@ -10,7 +10,9 @@ import com.ezzy.missingpersontracker.databinding.ActivityAuthBinding
 import com.ezzy.missingpersontracker.util.Constants.TAB_TITLES
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding

@@ -30,8 +30,7 @@
               android:textSize="@dimen/_12ssp"/>
 
           <com.google.android.material.textfield.TextInputLayout
-              android:id="@+id/first_name"
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_5sdp"
@@ -49,8 +48,25 @@
           </com.google.android.material.textfield.TextInputLayout>
 
           <com.google.android.material.textfield.TextInputLayout
-              android:id="@+id/last_name"
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:hint="@string/middle_name"
+              app:counterEnabled="true"
+              app:counterMaxLength="50"
+              app:endIconMode="clear_text"
+              app:startIconDrawable="@drawable/ic_file_rename">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/middlename"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionNext" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_5sdp"
@@ -68,7 +84,7 @@
           </com.google.android.material.textfield.TextInputLayout>
 
           <com.google.android.material.textfield.TextInputLayout
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_5sdp"
@@ -85,7 +101,7 @@
           </com.google.android.material.textfield.TextInputLayout>
 
           <com.google.android.material.textfield.TextInputLayout
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_5sdp"
@@ -95,7 +111,6 @@
 
               <com.google.android.material.textfield.TextInputEditText
                   android:id="@+id/color"
-                  android:inputType="numberDecimal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:imeOptions="actionNext" />
@@ -103,7 +118,7 @@
 
           <com.google.android.material.textfield.TextInputLayout
               android:id="@+id/projectStageHolder"
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_10sdp"
@@ -129,13 +144,14 @@
               android:layout_marginTop="@dimen/_10sdp">
 
               <com.google.android.material.textfield.TextInputLayout
-                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                   android:layout_width="0dp"
                   android:layout_weight="50"
                   android:layout_marginEnd="@dimen/_2sdp"
                   android:layout_height="wrap_content"
                   android:hint="@string/height"
                   app:endIconMode="clear_text"
+                  app:suffixText="m"
                   app:startIconDrawable="@drawable/ic_height">
 
                   <com.google.android.material.textfield.TextInputEditText
@@ -147,12 +163,13 @@
               </com.google.android.material.textfield.TextInputLayout>
 
               <com.google.android.material.textfield.TextInputLayout
-                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                   android:layout_width="0dp"
                   android:layout_weight="50"
                   android:layout_marginStart="@dimen/_2sdp"
                   android:layout_height="wrap_content"
                   android:hint="@string/weight"
+                  app:suffixText="kg"
                   app:endIconMode="clear_text"
                   app:startIconDrawable="@drawable/ic_dumbbell">
 
@@ -167,7 +184,7 @@
           </LinearLayout>
 
           <com.google.android.material.textfield.TextInputLayout
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_10sdp"
@@ -186,7 +203,7 @@
           </com.google.android.material.textfield.TextInputLayout>
 
           <com.google.android.material.textfield.TextInputLayout
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_5sdp"

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whear"
     tools:context=".ui.fragments.account.AccountFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -20,162 +21,287 @@
             android:orientation="vertical"
             android:padding="@dimen/_5sdp">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp">
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
 
-
-                <TextView
-                    android:id="@+id/settings"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:clickable="true"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/settings"
-                    android:textSize="@dimen/_12ssp"
-                    app:drawableEndCompat="@drawable/ic_chevron_right"
-                    app:drawableStartCompat="@drawable/ic_settings" />
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/_15sdp"
+                    android:paddingBottom="@dimen/_15sdp"
+                    android:orientation="vertical">
 
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
-                <!--                    app:dividerColor="@color/greyish"-->
-                <!--                    />-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:src="@drawable/ezzy"
+                        app:civ_border_width="@dimen/_1sdp"
+                        app:civ_border_color="@color/blue"/>
 
-                <TextView
-                    android:id="@+id/help_feedback"
-                    android:paddingStart="@dimen/_5sdp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_14ssp"
+                        android:text="John Goe Doe"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/grey"
+                        android:text="janegoedoe@gmail.com"
+                        android:layout_marginTop="@dimen/_5sdp"/>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_height="@dimen/_1sdp" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="100"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editTxt"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:clickable="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:padding="@dimen/_5sdp"
+                            android:background="?attr/selectableItemBackground"
+                            app:drawableStartCompat="@drawable/ic_edit" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@id/editTxt"
+                            app:layout_constraintEnd_toStartOf="@id/txtDelete"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:padding="@dimen/_5sdp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:id="@+id/textNotification"
+                            app:drawableStartCompat="@drawable/ic_notifications" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtDelete"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:padding="@dimen/_5sdp"
+                            android:clickable="true"
+                            android:background="?attr/selectableItemBackground"
+                            app:drawableStartCompat="@drawable/ic_delete" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="GENERAL" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/help_amp_feedback"
-                    android:textSize="@dimen/_12ssp"
-                    app:drawableStartCompat="@drawable/ic_help" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
-                <!--                    app:dividerColor="@color/greyish"-->
-                <!--                    />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/settings"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableStartCompat="@drawable/ic_settings" />
 
-                <TextView
-                    android:id="@+id/share"
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/help_amp_feedback"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableStartCompat="@drawable/ic_help" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SHARING" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/share_this_app"
-                    android:textSize="@dimen/_12ssp"
-                    app:drawableStartCompat="@drawable/ic_share" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
-                <!--                    app:dividerColor="@color/greyish"-->
-                <!--                    />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/share_this_app"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableStartCompat="@drawable/ic_share" />
 
-                <TextView
-                    android:id="@+id/rate_us"
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/rate_us"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableStartCompat="@drawable/ic_rate" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/follow_us"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableStartCompat="@drawable/ic_follow" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OTHERS" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/rate_us"
-                    android:textSize="@dimen/_12ssp"
-                    app:drawableStartCompat="@drawable/ic_rate" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
-                <!--                    app:dividerColor="@color/greyish"-->
-                <!--                    />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/about"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableStartCompat="@drawable/ic_information" />
 
-                <TextView
-                    android:id="@+id/follow_us"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/follow_us"
-                    android:textSize="@dimen/_12ssp"
-                    app:drawableStartCompat="@drawable/ic_follow" />
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp" />
 
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
-                <!--                    app:dividerColor="@color/greyish"-->
-                <!--                    />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/open_source_licenses"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableStartCompat="@drawable/ic_licensing" />
 
-                <TextView
-                    android:id="@+id/about_us"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/about"
-                    android:textSize="@dimen/_12ssp"
-                    app:drawableStartCompat="@drawable/ic_information" />
+                </LinearLayout>
 
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    app:dividerInsetStart="@dimen/_30sdp"-->
-                <!--                    app:dividerColor="@color/greyish"-->
-                <!--                    />-->
-
-                <TextView
-                    android:id="@+id/licenseTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/open_source_licenses"
-                    android:textSize="@dimen/_12ssp"
-                    app:drawableStartCompat="@drawable/ic_licensing" />
-
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

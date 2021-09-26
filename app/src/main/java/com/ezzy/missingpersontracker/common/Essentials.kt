@@ -10,14 +10,11 @@ import android.net.Uri
 import android.os.Build
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatActivity.*
+import androidx.appcompat.app.AppCompatActivity.RESULT_CANCELED
+import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.test.platform.app.InstrumentationRegistry
-import com.erikagtierrez.multiple_media_picker.Gallery
 import com.ezzy.missingpersontracker.util.Constants.CANCEL
 import com.ezzy.missingpersontracker.util.Constants.CHOOSE_IMAGE
 import com.ezzy.missingpersontracker.util.Constants.PICK_FROM_GALLERY
@@ -27,7 +24,6 @@ import com.ezzy.missingpersontracker.util.Constants.TAKE_IMAGE_REQUEST_CODE
 import com.ezzy.missingpersontracker.util.Constants.TAKE_PHOTO
 import com.ezzy.missingpersontracker.util.convertToUri
 import timber.log.Timber
-import java.lang.Exception
 
 fun <T> selectPicture(activity: Activity) {
     val options = arrayOf(TAKE_PHOTO, PICK_FROM_GALLERY, CANCEL)

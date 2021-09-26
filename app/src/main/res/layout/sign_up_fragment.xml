@@ -4,8 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ui.fragments.auth.signup.SignUpFragment">
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressIndicator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +25,7 @@
         app:layout_constraintBottom_toTopOf="@id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/progressIndicator">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,8 +41,7 @@
             android:layout_marginStart="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_2sdp"
-            android:layout_marginBottom="@dimen/_2sdp"
-            >
+            android:layout_marginBottom="@dimen/_2sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,10 +92,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
-                        android:inputType="textEmailAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email" />
+                        android:hint="Email"
+                        android:inputType="textEmailAddress" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -101,10 +108,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/phone"
-                        android:inputType="textPhonetic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/phone" />
+                        android:hint="@string/phone"
+                        android:inputType="textPhonetic" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -117,10 +124,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
-                        android:inputType="textPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password" />
+                        android:hint="Password"
+                        android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -133,10 +140,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/repeat_password"
-                        android:inputType="textPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/repeat_password" />
+                        android:hint="@string/repeat_password"
+                        android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -153,36 +160,36 @@
                         android:text="Already have an account?" />
 
                     <TextView
+                        android:id="@+id/sign_in_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="@string/sign_in"
-                        android:id="@+id/sign_in_txt"
                         android:textColor="@color/blue"
                         android:textStyle="bold" />
 
                     />
                 </LinearLayout>
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="OR"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:textStyle="bold"/>-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="OR"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_marginTop="@dimen/_10sdp"-->
+                <!--                    android:textStyle="bold"/>-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="?attr/actionBarSize"-->
-<!--                    android:background="@drawable/textview_bg"-->
-<!--                    android:paddingStart="@dimen/_10sdp"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:drawablePadding="@dimen/_10sdp"-->
-<!--                    android:text="@string/sign_up_with_google"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:drawableStartCompat="@drawable/ic_google" />-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="?attr/actionBarSize"-->
+                <!--                    android:background="@drawable/textview_bg"-->
+                <!--                    android:paddingStart="@dimen/_10sdp"-->
+                <!--                    android:layout_marginTop="@dimen/_10sdp"-->
+                <!--                    android:drawablePadding="@dimen/_10sdp"-->
+                <!--                    android:text="@string/sign_up_with_google"-->
+                <!--                    android:gravity="center_vertical"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    app:drawableStartCompat="@drawable/ic_google" />-->
 
             </LinearLayout>
 
