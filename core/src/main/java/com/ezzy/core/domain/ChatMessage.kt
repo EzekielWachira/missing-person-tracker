@@ -6,7 +6,7 @@ import java.io.Serializable
  * chat message object class
  * */
 data class ChatMessage(
-    private val message: String? = null,
-    private val messageTime: Long? = null,
-    private val readStatus: Boolean? = null
+    val message: String? = null,
+    val messageTime: Long? = null,
+    val readStatus: Boolean? = null
 ): Serializable

@@ -9,9 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface ChatDataSource {
     suspend fun addChat(
         userId: String,
-        senderId: String,
         chat: Chat,
-        chatMessage: ChatMessage
     ): Flow<Resource<String>>
 
     suspend fun sendMessage(userId: String, chatId: String, chatMessage: ChatMessage): Flow<Resource<Boolean>>

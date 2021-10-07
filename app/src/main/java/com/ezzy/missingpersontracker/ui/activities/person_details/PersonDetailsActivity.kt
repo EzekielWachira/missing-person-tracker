@@ -17,6 +17,7 @@ import com.ezzy.missingpersontracker.common.Directions
 import com.ezzy.missingpersontracker.common.ItemDecorator
 import com.ezzy.missingpersontracker.databinding.ActivityPersonDetailsBinding
 import com.ezzy.missingpersontracker.ui.activities.ChatActivity
+import com.ezzy.missingpersontracker.ui.activities.chats.ChatMessageActivity
 import com.ezzy.missingpersontracker.ui.activities.report_found_person.ReportFoundPersonActivity
 import com.ezzy.missingpersontracker.util.gone
 import com.ezzy.missingpersontracker.util.showToast
@@ -37,6 +38,7 @@ class PersonDetailsActivity : AppCompatActivity() {
     private var images: List<Image>? = null
     private var reporter: User? = null
     private var personName: String? = null
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +92,14 @@ class PersonDetailsActivity : AppCompatActivity() {
             }
 
             messageReporter.setOnClickListener {
-                startActivity(Intent(this@PersonDetailsActivity, ChatActivity::class.java))
+                startActivity(
+                    Intent(
+                        this@PersonDetailsActivity,
+                        ChatMessageActivity::class.java
+                    ).apply {
+                        putExtra("user", user)
+                    }
+                )
             }
 
             reporterPhone.setOnClickListener {
@@ -138,6 +147,7 @@ class PersonDetailsActivity : AppCompatActivity() {
                 when (state) {
                     is Resource.Loading -> showToast("Loading reporter")
                     is Resource.Success -> {
+                        user = state.data
                         with(binding) {
                             reporterName.text =
                                 "${state.data.firstName} ${state.data.lastName} "

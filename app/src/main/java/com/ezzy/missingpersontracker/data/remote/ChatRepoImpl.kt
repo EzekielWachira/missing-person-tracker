@@ -22,33 +22,25 @@ class ChatRepoImpl @Inject constructor(
     private val chatCollection = firebaseFirestore.collection(CHATS)
     private val userCollection = firebaseFirestore.collection(USER_COLLECTION)
 
-    override suspend fun addChat(
-        userId: String,
-        senderId: String,
-        chat: Chat,
-        chatMessage: ChatMessage
-    ): Flow<Resource<String>> = flow {
+    override suspend fun addChat(userId: String, chat: Chat): Flow<Resource<String>> = flow {
         emit(Resource.loading())
         val chatSnapshot = chatCollection.document(userId)
             .collection(CHATS)
-            .add(chat).await().also {
-                saveChatMessage(userId, it.id, chatMessage)
-            }
+            .add(chat).await()
         emit(Resource.success(chatSnapshot.id))
     }.catch { emit(Resource.failed(it.message.toString())) }
         .flowOn(Dispatchers.IO)
 
     private suspend fun saveChatMessage(
         userId: String,
-        chatId: String,
         chatMessage: ChatMessage
     ): Flow<Resource<String>> =
         flow {
             emit(Resource.loading())
             val messageSnapshot = chatCollection.document(userId)
-                .collection(CHATS)
-                .document(chatId)
                 .collection(MESSAGES)
+//                .document(chatId)
+//                .collection(MESSAGES)
                 .add(chatMessage).await()
             emit(Resource.success(messageSnapshot.id))
         }.catch { emit(Resource.failed(it.message.toString())) }

@@ -1,12 +1,16 @@
 package com.ezzy.missingpersontracker.ui.fragments.chats
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ezzy.core.data.resource.Resource
 import com.ezzy.core.domain.Chat
@@ -34,8 +38,10 @@ class ChatHomeFragment : Fragment() {
 
     private val chatViewModel: ChatViewModel by activityViewModels()
 
-    private lateinit var mAdapter: CommonAdapter<Chat>
-    @Inject lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var mAdapter: CommonAdapter<User>
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
     private var user: User? = null
     private var userId: String? = null
 
@@ -52,6 +58,8 @@ class ChatHomeFragment : Fragment() {
             chatViewModel.getAllChats(it)
         }
 
+        chatViewModel.getUsers()
+        setUpUI()
         subscribeToUI()
         setUpRecycleView()
 
@@ -60,7 +68,7 @@ class ChatHomeFragment : Fragment() {
 
     private fun setUpRecycleView() {
         with(binding) {
-            mAdapter = CommonAdapter { ChatViewHolder(it, requireContext()) }
+            mAdapter = CommonAdapter { ChatListViewHolder(it, requireContext()) }
             chatRecyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = mAdapter
@@ -72,8 +80,8 @@ class ChatHomeFragment : Fragment() {
     private fun subscribeToUI() {
         lifecycleScope.launch {
             chatViewModel.userId.collect { state ->
-                when(state) {
-                    is Resource.Loading -> showToast("Checking your details")
+                when (state) {
+                    is Resource.Loading -> Timber.d("Checking user details")
                     is Resource.Success -> {
                         userId = state.data
                     }
@@ -96,13 +104,15 @@ class ChatHomeFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            chatViewModel.chats.collect { state ->
-                when(state) {
+            chatViewModel.users.collect { state ->
+                when (state) {
                     is Resource.Loading -> {
                         binding.spinKit.visible()
+                        binding.layoutNoChats.gone()
                     }
                     is Resource.Success -> {
                         binding.spinKit.gone()
+                        binding.layoutNoChats.gone()
                         mAdapter.differ.submitList(state.data)
                     }
                     is Resource.Failure -> {
@@ -144,6 +154,39 @@ class ChatHomeFragment : Fragment() {
                 }
                 else -> return@with
             }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mAdapter.setOnClickListener { user ->
+            val bundle = bundleOf("user" to user)
+            findNavController().navigate(R.id.action_chatHomeFragment_to_chatFragment, bundle)
+        }
+    }
+
+    private fun setUpUI() {
+        with(binding) {
+            search.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) { }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (search.text.toString().isNotEmpty()) {
+                        chatViewModel.searchUsers(search.text.toString())
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (search.text.toString().isNotEmpty()) {
+                        chatViewModel.searchUsers(s.toString())
+                    }
+                }
+            })
         }
     }
 

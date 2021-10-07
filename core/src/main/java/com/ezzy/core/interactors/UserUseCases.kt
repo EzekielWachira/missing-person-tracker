@@ -60,3 +60,15 @@ class GetMissingPersonReporter(private val repository: UserRepository) {
             Flow<Resource<User>> = repository.getMissingPersonReporter(userId)
 }
 
+class GetAllUsers(private val repository: UserRepository) {
+    suspend operator fun invoke(): Flow<Resource<List<User>>> =
+        repository.getAllUser()
+}
+
+class GetReporterId(private val repository: UserRepository) {
+    suspend operator fun invoke(
+        email: String?,
+        phoneNumber: String?
+    ): Flow<Resource<String>> = repository.getReporterId(email, phoneNumber)
+}
+
