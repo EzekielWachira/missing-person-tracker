@@ -14,9 +14,11 @@ interface ChatDataSource {
 
     suspend fun sendMessage(userId: String, chatId: String, chatMessage: ChatMessage): Flow<Resource<Boolean>>
 
-    suspend fun getChatMessages(userId: String, chatId: String): Flow<Resource<Pair<User, List<ChatMessage>>>>
+    suspend fun getChatMessages(userId: String, chatId: String): Flow<Resource<List<ChatMessage>>>
 
     suspend fun getChats(userId: String): Flow<Resource<List<Chat>>>
 
     suspend fun deleteChat(userId: String, chatId: String): Flow<Resource<Boolean>>
+
+    suspend fun getChatId(userId: String): Flow<Resource<String>>
 }

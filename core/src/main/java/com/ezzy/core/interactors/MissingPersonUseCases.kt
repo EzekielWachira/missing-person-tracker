@@ -74,3 +74,9 @@ class ReportFoundPerson(private val repository: MissingPersonRepository) {
         address: Address
     ): Flow<Resource<String>> = repository.reportFoundPerson(missingPerson, address)
 }
+
+class GetFoundPersonAddress(private val repository: MissingPersonRepository) {
+    suspend operator fun invoke(
+        missingPersonId: String
+    ): Flow<Resource<Address>> = repository.getFoundPersonAddress(missingPersonId)
+}

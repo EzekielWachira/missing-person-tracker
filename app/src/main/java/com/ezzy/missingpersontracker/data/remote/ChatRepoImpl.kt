@@ -39,12 +39,21 @@ class ChatRepoImpl @Inject constructor(
             emit(Resource.loading())
             val messageSnapshot = chatCollection.document(userId)
                 .collection(MESSAGES)
-//                .document(chatId)
-//                .collection(MESSAGES)
                 .add(chatMessage).await()
             emit(Resource.success(messageSnapshot.id))
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
+
+    override suspend fun getChatId(userId: String): Flow<Resource<String>> = flow {
+        emit(Resource.loading())
+        val snapshot = chatCollection.document(userId)
+            .collection(CHATS)
+            .get().await()
+        var snaps = mutableListOf<String>()
+        snapshot.forEach { snaps.add(it.id) }
+        emit(Resource.success(snaps[0]))
+    }.catch { emit(Resource.failed(it.message.toString())) }
+        .flowOn(Dispatchers.IO)
 
     override suspend fun sendMessage(
         userId: String,
@@ -65,7 +74,7 @@ class ChatRepoImpl @Inject constructor(
     override suspend fun getChatMessages(
         userId: String,
         chatId: String
-    ): Flow<Resource<Pair<User, List<ChatMessage>>>> =
+    ): Flow<Resource<List<ChatMessage>>> =
         flow {
             emit(Resource.loading())
             val chatMessages = mutableListOf<ChatMessage>()
@@ -96,7 +105,7 @@ class ChatRepoImpl @Inject constructor(
                 }
             }
 
-            emit(Resource.success(Pair(sender!!, chatMessages)))
+            emit(Resource.success(chatMessages))
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
 

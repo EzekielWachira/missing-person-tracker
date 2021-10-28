@@ -26,11 +26,12 @@ class ChatMainViewModel @Inject constructor(
     private val getAuthenticatedUserID: GetAuthenticatedUserID,
     private val getAllUsers: GetAllUsers,
     private val searchUser: SearchUser,
-    private val getReporterId: GetReporterId
+    private val getReporterId: GetReporterId,
+    private val getChatId: GetChatId
 ): ViewModel() {
 
     private var _chatMessages =
-        MutableStateFlow<Resource<Pair<User, List<ChatMessage>>>>(Resource.Empty)
+        MutableStateFlow<Resource<List<ChatMessage>>>(Resource.Empty)
     private var _chats = MutableStateFlow<Resource<List<Chat>>>(Resource.Empty)
     private var _chatId = MutableStateFlow<Resource<String>>(Resource.Empty)
     private var _chatMessageId = MutableStateFlow<Resource<String>>(Resource.Empty)
@@ -44,7 +45,7 @@ class ChatMainViewModel @Inject constructor(
     val user: StateFlow<Resource<User>> get() = _user
     val userId: StateFlow<Resource<String>> get() = _authUserId
     val reporterId: StateFlow<Resource<String>> get() = _reporterId
-    val chatMessages: StateFlow<Resource<Pair<User, List<ChatMessage>>>> get() = _chatMessages
+    val chatMessages: StateFlow<Resource<List<ChatMessage>>> get() = _chatMessages
     val chats: StateFlow<Resource<List<Chat>>> get() = _chats
     val chatId: StateFlow<Resource<String>> get() = _chatId
     val chatMessageId: StateFlow<Resource<String>> get() = _chatMessageId
@@ -87,7 +88,7 @@ class ChatMainViewModel @Inject constructor(
     ) = viewModelScope.launch {
         getChatMessages(userId, chatId).collect { resourceState ->
             when (resourceState) {
-                is Resource.Loading -> Resource.loading<Pair<User, List<ChatMessage>>>()
+                is Resource.Loading -> Resource.loading<List<ChatMessage>>()
                 is Resource.Success -> _chatMessages.value = Resource.success(resourceState.data)
                 is Resource.Failure -> _chatMessages.value =
                     Resource.failed(resourceState.errorMessage!!)

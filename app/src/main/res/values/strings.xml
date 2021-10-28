@@ -83,6 +83,7 @@
     <string name="chats">Chats</string>
     <string name="click_a_missing_person_then_click_on_n_chat_with_reporter">Click a missing person then click on \n chat with reporter</string>
     <string name="you_have_no_chats">You have no chats</string>
+    <string name="found_location">Found location</string>
     <string-array name="gender_arr">
         <item>Male</item>
         <item>Female</item>

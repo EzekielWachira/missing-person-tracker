@@ -142,6 +142,16 @@ object DataModule {
 
     @Provides
     @Singleton
+    fun provideGetMissingPersonId(repository: MissingPersonRepository) =
+        GetMissingPersonId(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetFoundPersonAddress(repository: MissingPersonRepository) =
+        GetFoundPersonAddress(repository)
+
+    @Provides
+    @Singleton
     fun provideGetMissingPersonReporter(repository: UserRepository) =
         GetMissingPersonReporter(repository)
 
@@ -171,6 +181,10 @@ object DataModule {
     @Provides
     @Singleton
     fun provideGetChats(repository: ChatRepository) = GetChats(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetChatId(repository: ChatRepository) = GetChatId(repository)
 
     @Provides
     @Singleton

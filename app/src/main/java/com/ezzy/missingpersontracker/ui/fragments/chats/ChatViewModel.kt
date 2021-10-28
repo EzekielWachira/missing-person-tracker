@@ -29,7 +29,7 @@ class ChatViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var _chatMessages =
-        MutableStateFlow<Resource<Pair<User, List<ChatMessage>>>>(Resource.Empty)
+        MutableStateFlow<Resource<List<ChatMessage>>>(Resource.Empty)
     private var _chats = MutableStateFlow<Resource<List<Chat>>>(Resource.Empty)
     private var _chatId = MutableStateFlow<Resource<String>>(Resource.Empty)
     private var _chatMessageId = MutableStateFlow<Resource<String>>(Resource.Empty)
@@ -41,7 +41,7 @@ class ChatViewModel @Inject constructor(
     private var _searchedUsers = MutableStateFlow<Resource<List<User>>>(Resource.Empty)
     val user: StateFlow<Resource<User>> get() = _user
     val userId: StateFlow<Resource<String>> get() = _authUserId
-    val chatMessages: StateFlow<Resource<Pair<User, List<ChatMessage>>>> get() = _chatMessages
+    val chatMessages: StateFlow<Resource<List<ChatMessage>>> get() = _chatMessages
     val chats: StateFlow<Resource<List<Chat>>> get() = _chats
     val chatId: StateFlow<Resource<String>> get() = _chatId
     val chatMessageId: StateFlow<Resource<String>> get() = _chatMessageId
