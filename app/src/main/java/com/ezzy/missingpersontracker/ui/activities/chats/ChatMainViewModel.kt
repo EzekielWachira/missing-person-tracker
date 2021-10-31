@@ -1,4 +1,4 @@
-package com.ezzy.missingpersontracker.ui.fragments.chats
+package com.ezzy.missingpersontracker.ui.activities.chats
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatViewModel @Inject constructor(
+class ChatMainViewModel @Inject constructor(
     private val addChat: AddChat,
     private val sendMessage: SendMessage,
     private val getChatMessages: GetChatMessages,
@@ -25,8 +25,10 @@ class ChatViewModel @Inject constructor(
     private val checkUser: CheckUser,
     private val getAuthenticatedUserID: GetAuthenticatedUserID,
     private val getAllUsers: GetAllUsers,
-    private val searchUser: SearchUser
-) : ViewModel() {
+    private val searchUser: SearchUser,
+    private val getReporterId: GetReporterId,
+    private val getChatId: GetChatId
+): ViewModel() {
 
     private var _chatMessages =
         MutableStateFlow<Resource<List<ChatMessage>>>(Resource.Empty)
@@ -36,11 +38,13 @@ class ChatViewModel @Inject constructor(
     private var _isMessageSent = MutableStateFlow<Resource<Boolean>>(Resource.Empty)
     private var _isChatDeleted = MutableStateFlow<Resource<Boolean>>(Resource.Empty)
     private var _authUserId = MutableStateFlow<Resource<String>>(Resource.Empty)
+    private var _reporterId = MutableStateFlow<Resource<String>>(Resource.Empty)
     private var _user = MutableStateFlow<Resource<User>>(Resource.Empty)
     private var _users = MutableStateFlow<Resource<List<User>>>(Resource.Empty)
     private var _searchedUsers = MutableStateFlow<Resource<List<User>>>(Resource.Empty)
     val user: StateFlow<Resource<User>> get() = _user
     val userId: StateFlow<Resource<String>> get() = _authUserId
+    val reporterId: StateFlow<Resource<String>> get() = _reporterId
     val chatMessages: StateFlow<Resource<List<ChatMessage>>> get() = _chatMessages
     val chats: StateFlow<Resource<List<Chat>>> get() = _chats
     val chatId: StateFlow<Resource<String>> get() = _chatId
@@ -52,9 +56,7 @@ class ChatViewModel @Inject constructor(
 
     fun chatAdd(
         userId: String,
-        senderId: String,
-        chat: Chat,
-        chatMessage: ChatMessage
+        chat: Chat
     ) = viewModelScope.launch {
         addChat(userId, chat).collect { resourceState ->
             when (resourceState) {
@@ -86,7 +88,7 @@ class ChatViewModel @Inject constructor(
     ) = viewModelScope.launch {
         getChatMessages(userId, chatId).collect { resourceState ->
             when (resourceState) {
-                is Resource.Loading -> Resource.loading<Pair<User, List<ChatMessage>>>()
+                is Resource.Loading -> Resource.loading<List<ChatMessage>>()
                 is Resource.Success -> _chatMessages.value = Resource.success(resourceState.data)
                 is Resource.Failure -> _chatMessages.value =
                     Resource.failed(resourceState.errorMessage!!)
@@ -126,6 +128,19 @@ class ChatViewModel @Inject constructor(
                     _authUserId.value = Resource.success(resourceState.data)
                 }
                 is Resource.Failure -> _authUserId.value = Resource.failed(resourceState.errorMessage!!)
+            }
+        }
+    }
+
+    fun getReporterID(email: String?, phoneNumber: String?)  = viewModelScope.launch {
+        getReporterId(email, phoneNumber).collect { resourceState ->
+            when(resourceState) {
+                is Resource.Loading -> _reporterId.value = Resource.loading()
+                is Resource.Success -> {
+                    Timber.d("USERID: ${resourceState.data}")
+                    _reporterId.value = Resource.success(resourceState.data)
+                }
+                is Resource.Failure -> _reporterId.value = Resource.failed(resourceState.errorMessage!!)
             }
         }
     }

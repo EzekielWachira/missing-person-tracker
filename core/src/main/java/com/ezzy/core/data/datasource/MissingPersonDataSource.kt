@@ -61,4 +61,11 @@ interface MissingPersonDataSource {
      * */
     suspend fun reportFoundPerson(missingPerson: MissingPerson, address: Address): Flow<Resource<String>>
 
+
+    /**
+     * get found person address
+     * @param missingPersonId
+     * */
+    suspend fun getFoundPersonAddress(missingPersonId: String): Flow<Resource<Address>>
+
 }

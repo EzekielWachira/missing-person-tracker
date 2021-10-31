@@ -474,4 +474,18 @@ class MissingPersonRepoImpl @Inject constructor(
             emit(Resource.success(mspId!!))
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
+
+
+    override suspend fun getFoundPersonAddress(missingPersonId: String): Flow<Resource<Address>> =
+        flow {
+            emit(Resource.loading())
+            val addresses = mutableListOf<Address>()
+            val snapshot = foundPeopleCollection.document(missingPersonId)
+                .collection(ADDRESS).get().await()
+            for (snap in snapshot) {
+                addresses.add(snap.toObject(Address::class.java))
+            }
+            emit(Resource.success(addresses[0]))
+        }.catch { emit(Resource.failed(it.message.toString())) }
+            .flowOn(Dispatchers.IO)
 }

@@ -98,6 +98,10 @@ object DataModule {
     @Singleton
     fun provideAddUser(repository: UserRepository) = AddUser(repository)
 
+    @Provides
+    @Singleton
+    fun provideGetReporterId(repository: UserRepository) = GetReporterId(repository)
+
     /**
      * this function provides check user usecase as a dependency that can later be
      * injected in any file in the application source code
@@ -105,6 +109,14 @@ object DataModule {
     @Provides
     @Singleton
     fun provideCheckUser(repository: UserRepository) = CheckUser(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetUsers(repository: UserRepository) = GetAllUsers(repository)
+
+    @Provides
+    @Singleton
+    fun provideSearchUser(repository: UserRepository) = SearchUser(repository)
 
     /**
      * this function provides get auth user id usecase as a dependency that can later be
@@ -127,6 +139,16 @@ object DataModule {
     @Singleton
     fun provideGetMissingPersonImages(repository: MissingPersonImageRepository) =
         GetPersonImages(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetMissingPersonId(repository: MissingPersonRepository) =
+        GetMissingPersonId(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetFoundPersonAddress(repository: MissingPersonRepository) =
+        GetFoundPersonAddress(repository)
 
     @Provides
     @Singleton
@@ -159,6 +181,10 @@ object DataModule {
     @Provides
     @Singleton
     fun provideGetChats(repository: ChatRepository) = GetChats(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetChatId(repository: ChatRepository) = GetChatId(repository)
 
     @Provides
     @Singleton

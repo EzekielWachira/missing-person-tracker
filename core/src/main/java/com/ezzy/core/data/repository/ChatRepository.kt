@@ -10,19 +10,20 @@ import kotlinx.coroutines.flow.Flow
 class ChatRepository(private val dataSource: ChatDataSource) {
     suspend fun addChat(
         userId: String,
-        senderId: String,
         chat: Chat,
-        chatMessage: ChatMessage
-    ): Flow<Resource<String>> = dataSource.addChat(userId, senderId, chat,chatMessage)
+    ): Flow<Resource<String>> = dataSource.addChat(userId, chat)
 
-    suspend fun sendMessage(userId: String, chatId: String, chatMessage: ChatMessage): Flow<Resource<Boolean>> =
-        dataSource.sendMessage(userId, chatId, chatMessage)
+    suspend fun sendMessage(userId: String, chatId: String,chatMessage: ChatMessage): Flow<Resource<Boolean>> =
+        dataSource.sendMessage(userId, chatId,chatMessage)
 
-    suspend fun getChatMessages(userId: String, chatId: String): Flow<Resource<Pair<User, List<ChatMessage>>>> =
+    suspend fun getChatMessages(userId: String, chatId: String): Flow<Resource<List<ChatMessage>>> =
         dataSource.getChatMessages(userId, chatId)
 
     suspend fun getChats(userId: String): Flow<Resource<List<Chat>>> = dataSource.getChats(userId)
 
     suspend fun deleteChat(userId: String, chatId: String): Flow<Resource<Boolean>> =
         dataSource.deleteChat(userId, chatId)
+
+    suspend fun getChatId(userId: String): Flow<Resource<String>> =
+        dataSource.getChatId(userId)
 }

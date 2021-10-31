@@ -18,10 +18,7 @@ import com.ezzy.missingpersontracker.R
 import com.ezzy.missingpersontracker.data.model.ImageItem
 import com.ezzy.missingpersontracker.databinding.ActivityFaceIdentificationBinding
 import com.ezzy.missingpersontracker.ui.activities.person_details.PersonDetailsActivity
-import com.ezzy.missingpersontracker.util.showErrorDialog
-import com.ezzy.missingpersontracker.util.showLoadingDialog
-import com.ezzy.missingpersontracker.util.showToast
-import com.ezzy.missingpersontracker.util.visible
+import com.ezzy.missingpersontracker.util.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.common.model.LocalModel
@@ -71,6 +68,11 @@ class FaceIdentificationActivity : AppCompatActivity() {
             }
         }
 
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+        binding.imageView.setImageBitmap(it)
+        processImage(it.convertToUri(this))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFaceIdentificationBinding.inflate(layoutInflater)
@@ -93,6 +95,8 @@ class FaceIdentificationActivity : AppCompatActivity() {
             takePhotoBtn.setOnClickListener {
                 requestPermissions()
             }
+
+            capturePhotoBtn.setOnClickListener { takePicture.launch(null) }
 
             processPhotoBtn.setOnClickListener {
                 if (missingPerson != null) {
@@ -117,15 +121,6 @@ class FaceIdentificationActivity : AppCompatActivity() {
                     is Resource.Success -> {
                         missingPerson = state.data[0]
                         progressDialog.hide()
-//                        if (state.data.isNotEmpty()) {
-//                            startActivity(
-//                                Intent(
-//                                    this@FaceIdentificationActivity, PersonDetailsActivity::class.java
-//                                ).apply {
-//                                    putExtra("missingPerson", state.data[0])
-//                                }
-//                            )
-//                        }
                     }
                     is Resource.Failure -> {
                         progressDialog.hide()
@@ -136,6 +131,10 @@ class FaceIdentificationActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * process image for image recognition
+     * @param imageUri
+     * */
     private fun processImage(imageUri: Uri) {
         val image: InputImage
         try {
@@ -198,6 +197,9 @@ class FaceIdentificationActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * select an image from gallery
+     * */
     private val imagePicker = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->

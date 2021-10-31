@@ -15,9 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MissingPersonTracker">
         <activity
-            android:name=".ui.activities.ChatActivity"
-            android:parentActivityName=".ui.activities.person_details.PersonDetailsActivity"
+            android:name=".ui.activities.chats.ChatMessageActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.activities.chats.ChatMainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.ChatActivity"
+            android:exported="true"
+            android:parentActivityName=".ui.activities.person_details.PersonDetailsActivity" />
         <activity
             android:name=".ui.activities.run_face_identification.CameraActivity"
             android:exported="true" />

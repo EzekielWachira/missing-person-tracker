@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_main"
@@ -9,118 +9,150 @@
     android:padding="@dimen/_10sdp"
     tools:context=".ui.activities.run_face_identification.FaceIdentificationActivity">
 
-
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/placeholder" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/take_photo_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/button_bg"
-        android:text="Select photo"
-        app:icon="@drawable/ic_baseline_image"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
-
-    <Button
-        android:id="@+id/capture_photo_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/button_bg"
-        android:text="Take photo"
-        app:icon="@drawable/ic_add_photo"
-        app:layout_constraintTop_toBottomOf="@id/take_photo_btn" />
-
-    <Button
-        android:id="@+id/process_photo_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/button_bg"
-        android:text="Run scan"
-        app:icon="@drawable/ic_face_recognition"
-        app:layout_constraintTop_toBottomOf="@id/capture_photo_btn" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_2sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/process_photo_btn">
-
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/display"
-            android:padding="@dimen/_10sdp">
+            android:layout_height="@dimen/_230sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:orientation="horizontal"
-                android:weightSum="100">
+                android:layout_height="match_parent"
+                android:padding="@dimen/_5sdp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    android:text="Name:"
-                    android:textSize="@dimen/_14ssp" />
-
-                <TextView
-                    android:id="@+id/nameTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:gravity="center_vertical"
-                    android:text="Name:"
-                    android:textSize="@dimen/_14ssp" />
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/placeholder" />
 
             </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/cardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:orientation="horizontal"
-                android:weightSum="100">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical"
-                    android:text="Accuracy:"
-                    android:textSize="@dimen/_14ssp" />
 
-                <TextView
-                    android:id="@+id/accuracyTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:gravity="center_vertical"
-                    android:text="Name:"
-                    android:textSize="@dimen/_14ssp" />
+                <Button
+                    android:id="@+id/take_photo_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+
+                    android:text="Select photo"
+                    app:icon="@drawable/ic_baseline_image"
+                    app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+                <Button
+                    android:id="@+id/capture_photo_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Take photo"
+                    app:icon="@drawable/ic_add_photo"
+                    app:layout_constraintTop_toBottomOf="@id/take_photo_btn" />
+
+                <Button
+                    android:id="@+id/process_photo_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="search with captured image"
+                    app:icon="@drawable/ic_account_search_outline"
+                    app:layout_constraintTop_toBottomOf="@id/capture_photo_btn" />
 
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            >
 
+            <LinearLayout
+                android:id="@+id/display"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50"
+                        android:gravity="center_vertical"
+                        android:text="Name:"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/nameTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50"
+                        android:gravity="center_vertical"
+                        android:text="Name:"
+                        android:textSize="@dimen/_14ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50"
+                        android:gravity="center_vertical"
+                        android:text="Accuracy:"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/accuracyTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50"
+                        android:gravity="center_vertical"
+                        android:text="Name:"
+                        android:textSize="@dimen/_14ssp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

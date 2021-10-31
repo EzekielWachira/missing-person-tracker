@@ -12,12 +12,14 @@ interface UserDataSource {
         address: Address,
         location: Location
     ): Flow<Resource<String>>
-    suspend fun searchUser(userName: String): Flow<List<User>>
+    suspend fun searchUser(userName: String): Flow<Resource<List<User>>>
     suspend fun getUserDetails(email: String): Flow<User>
     suspend fun registerUser(email: String, password: String): Resource<Flow<Boolean>>
     suspend fun loginUser(email: String, password: String): Boolean
     suspend fun checkUser(email: String?, phoneNumber: String?): Flow<Resource<User>>
     suspend fun getAuthenticatedUserID(email: String?, phoneNumber: String?):
             Flow<Resource<String>>
+    suspend fun getReporterId(email: String?, phoneNumber: String?): Flow<Resource<String>>
     suspend fun getMissingPersonReporter(userId: String): Flow<Resource<User>>
+    suspend fun getAllUser(): Flow<Resource<List<User>>>
 }

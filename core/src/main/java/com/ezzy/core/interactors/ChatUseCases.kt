@@ -10,23 +10,21 @@ import kotlinx.coroutines.flow.Flow
 class AddChat(private val repository: ChatRepository) {
     suspend operator fun invoke(
         userId: String,
-        senderId: String,
         chat: Chat,
-        chatMessage: ChatMessage
-    ): Flow<Resource<String>> = repository.addChat(userId, senderId, chat,chatMessage)
+    ): Flow<Resource<String>> = repository.addChat(userId, chat)
 }
 
 class SendMessage(private val repository: ChatRepository) {
     suspend operator fun invoke(
-        userId: String, chatId: String, chatMessage: ChatMessage
-    ): Flow<Resource<Boolean>> = repository.sendMessage(userId, chatId, chatMessage)
+        userId: String, chatId: String,chatMessage: ChatMessage
+    ): Flow<Resource<Boolean>> = repository.sendMessage(userId, chatId,chatMessage)
 }
 
 class GetChatMessages(private val repository: ChatRepository) {
     suspend operator fun invoke(
         userId: String,
         chatId: String
-    ): Flow<Resource<Pair<User, List<ChatMessage>>>> = repository.getChatMessages(userId, chatId)
+    ): Flow<Resource<List<ChatMessage>>> = repository.getChatMessages(userId, chatId)
 }
 
 class GetChats(private val repository: ChatRepository) {
@@ -40,4 +38,10 @@ class DeleteChat(private val repository: ChatRepository) {
         userId: String,
         chatId: String
     ): Flow<Resource<Boolean>> = repository.deleteChat(userId, chatId)
+}
+
+class GetChatId(private val repository: ChatRepository) {
+    suspend operator fun invoke(
+        userId: String
+    ): Flow<Resource<String>> = repository.getChatId(userId)
 }

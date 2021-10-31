@@ -74,6 +74,26 @@ class UserRepoImpl @Inject constructor(
         .flowOn(Dispatchers.IO)
 
 
+    override suspend fun getReporterId(
+        email: String?,
+        phoneNumber: String?
+    ): Flow<Resource<String>> = flow {
+        emit(Resource.loading())
+        var userId: String? = null
+        var snapshot: QuerySnapshot? =  null
+        val userColl = firebaseFirestore.collection(USER_COLLECTION)
+        if (email != null) {
+            snapshot = userColl.whereEqualTo("email", email).get().await()
+        } else if (phoneNumber != null) {
+            snapshot = userColl.whereEqualTo("phoneNumber", phoneNumber).get().await()
+        }
+        snapshot?.forEach { snap ->
+            userId = snap.id
+        }
+        emit(Resource.success(userId!!))
+    }.catch { error -> emit(Resource.failed(error.message.toString())) }
+        .flowOn(Dispatchers.IO)
+
     /**
      * Register user to firestore cloud storage
      * */
@@ -209,9 +229,28 @@ class UserRepoImpl @Inject constructor(
         }.catch { emit(Resource.failed(it.message.toString())) }
             .flowOn(Dispatchers.IO)
 
-    override suspend fun searchUser(userName: String): Flow<List<User>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAllUser(): Flow<Resource<List<User>>> = flow {
+        emit(Resource.loading())
+        val snapshot = userCollection.get().await()
+        val users = mutableListOf<User>()
+        snapshot.forEach { snap ->
+            users.add(snap.toObject(User::class.java))
+        }
+        emit(Resource.success(users))
+    }.catch { emit(Resource.failed(it.message.toString())) }
+        .flowOn(Dispatchers.IO)
+
+    override suspend fun searchUser(userName: String): Flow<Resource<List<User>>> =
+        flow {
+            emit(Resource.loading())
+            val snapshot = userCollection.whereEqualTo("firstName", userName).get().await()
+            val users = mutableListOf<User>()
+            for (snap in snapshot) {
+                users.add(snap.toObject(User::class.java))
+            }
+            emit(Resource.success(users))
+        }.catch { e -> emit(Resource.failed(e.message.toString())) }
+            .flowOn(Dispatchers.IO)
 
     override suspend fun getUserDetails(email: String): Flow<User> {
         TODO("Not yet implemented")

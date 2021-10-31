@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ezzy.core.data.resource.Resource
+import com.ezzy.core.domain.Address
 import com.ezzy.core.domain.Image
 import com.ezzy.core.domain.MissingPerson
 import com.ezzy.core.domain.User
@@ -17,6 +18,7 @@ import com.ezzy.missingpersontracker.common.Directions
 import com.ezzy.missingpersontracker.common.ItemDecorator
 import com.ezzy.missingpersontracker.databinding.ActivityPersonDetailsBinding
 import com.ezzy.missingpersontracker.ui.activities.ChatActivity
+import com.ezzy.missingpersontracker.ui.activities.chats.ChatMessageActivity
 import com.ezzy.missingpersontracker.ui.activities.report_found_person.ReportFoundPersonActivity
 import com.ezzy.missingpersontracker.util.gone
 import com.ezzy.missingpersontracker.util.showToast
@@ -37,6 +39,9 @@ class PersonDetailsActivity : AppCompatActivity() {
     private var images: List<Image>? = null
     private var reporter: User? = null
     private var personName: String? = null
+    private var user: User? = null
+    private var missingPersonId: String? = null
+    private var foundPersonAddress: Address? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +58,7 @@ class PersonDetailsActivity : AppCompatActivity() {
             Timber.d("PERSON DETAILS: $missingPerson")
             viewModel.getReporter(missingPerson?.reporterId!!)
             viewModel.getImages(missingPerson!!)
+            viewModel.getMissingPersonID(missingPerson!!)
 //            images = intent.getSerializableExtra("images") as List<Image>
         }
 
@@ -65,6 +71,34 @@ class PersonDetailsActivity : AppCompatActivity() {
         setUpRecyclerView()
         setUpUI()
         initListeners()
+        subscriber()
+    }
+
+    private fun subscriber() {
+        if (missingPersonId != null) {
+            viewModel.getFoundPersonAdd(missingPersonId!!)
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.foundPersonAddress.collect { state->
+                when(state) {
+                    is Resource.Loading -> Timber.d("Loading person address...")
+                    is Resource.Success -> {
+                        foundPersonAddress = state.data
+                        showToast("$foundPersonAddress")
+                        with(binding) {
+                            country.text = state.data.country
+                            city.text = state.data.city
+                            stateTxt.text = state.data.state
+                            street.text = state.data.street
+
+                            addressCardView.visible()
+                        }
+                    }
+                    is Resource.Failure -> Timber.e("Error loading person id...")
+                }
+            }
+        }
     }
 
     private fun setUpUI() {
@@ -90,7 +124,14 @@ class PersonDetailsActivity : AppCompatActivity() {
             }
 
             messageReporter.setOnClickListener {
-                startActivity(Intent(this@PersonDetailsActivity, ChatActivity::class.java))
+                startActivity(
+                    Intent(
+                        this@PersonDetailsActivity,
+                        ChatMessageActivity::class.java
+                    ).apply {
+                        putExtra("user", user)
+                    }
+                )
             }
 
             reporterPhone.setOnClickListener {
@@ -138,6 +179,7 @@ class PersonDetailsActivity : AppCompatActivity() {
                 when (state) {
                     is Resource.Loading -> showToast("Loading reporter")
                     is Resource.Success -> {
+                        user = state.data
                         with(binding) {
                             reporterName.text =
                                 "${state.data.firstName} ${state.data.lastName} "
@@ -146,6 +188,19 @@ class PersonDetailsActivity : AppCompatActivity() {
                         }
                     }
                     is Resource.Failure -> showToast("Error ${state.errorMessage}")
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.missingPersonId.collect { state ->
+                when(state) {
+                    is Resource.Loading -> Timber.d("Loading person id...")
+                    is Resource.Success -> {
+                        missingPersonId = state.data
+                        viewModel.getFoundPersonAdd(state.data)
+                    }
+                    is Resource.Failure -> Timber.e("Error loading person id...")
                 }
             }
         }

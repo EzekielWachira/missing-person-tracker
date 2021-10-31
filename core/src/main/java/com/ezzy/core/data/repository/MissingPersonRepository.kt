@@ -49,4 +49,11 @@ class MissingPersonRepository(
         address: Address
     ): Flow<Resource<String>> =
         dataSource.reportFoundPerson(missingPerson, address)
+
+    /**
+     * get found person address
+     * @param missingPersonId
+     * */
+    suspend fun getFoundPersonAddress(missingPersonId: String): Flow<Resource<Address>> =
+        dataSource.getFoundPersonAddress(missingPersonId)
 }
